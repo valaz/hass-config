@@ -1,0 +1,4 @@
+  - platform: xiaomi_miio
+    host: 192.168.1.51
+    token: 7053426d643477425a376d7a5762465a
+    name: "Roborock S5"

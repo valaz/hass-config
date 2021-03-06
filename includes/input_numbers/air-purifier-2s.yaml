@@ -1,0 +1,8 @@
+  # Xiaomi Air Purifier 2S
+  xiaomi_airpurifier_favorite_level:
+    name: "Favorite level"
+    initial: 0
+    min: 0
+    max: 14
+    step: 1
+    icon: "mdi:weather-windy"
