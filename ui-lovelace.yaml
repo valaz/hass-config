@@ -261,7 +261,6 @@ views:
                   extrema: true
                   fill: false
                 align_state: center
-            
           - type: custom:mini-graph-card
             name: Уровень PM2.5
             entities:
@@ -273,19 +272,6 @@ views:
               extrema: true
               fill: true
             align_state: center
-          - type: entities
-            show_header_toggle: false
-            entities:
-              - entity: sensor.xiaomi_airpurifier_air_quality_pm25
-              - entity: fan.xiaomi_miio_device
-              - entity: input_select.xiaomi_airpurifier_mode
-              - entity: input_number.xiaomi_airpurifier_favorite_level
-              - entity: switch.xiaomi_airpurifier_child_lock
-              - entity: switch.xiaomi_airpurifier_led
-              - entity: sensor.xiaomi_airpurifier_speed
-              - entity: sensor.xiaomi_airpurifier_filter_remaining
-            theme: default
-            title: Air Purifier
             
     
                 
@@ -318,6 +304,12 @@ views:
                 entities:
                  - sensor.last_clean_custom
                  - vacuum.roborock_s5
+          - type: custom:vertical-stack-in-card
+            title: Гардероб
+            cards:
+              - type: entities
+                entities:
+                 - light.0x158d00052b3ad9_light
                
       - type: vertical-stack
         cards:
@@ -357,7 +349,7 @@ views:
                     entities:
                       - sensor.0x158d0005800735_temperature
                       - sensor.0x158d0005800735_humidity
-    
+            
   - title: Devices
     icon: mdi:sitemap
     cards:

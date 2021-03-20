@@ -38,6 +38,7 @@ recorder: !include includes/recorder.yaml
 vacuum: !include includes/vacuum.yaml
 fan: !include includes/fan.yaml
 remote: !include includes/remote.yaml
+media_player: !include includes/media_player.yaml
 
 
 # Вынос во внешние папки

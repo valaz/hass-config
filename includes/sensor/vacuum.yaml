@@ -4,6 +4,11 @@
         friendly_name: "Время последней уборки"
         value_template: "{{ state_attr('vacuum.roborock_s5', 'clean_start') }}"
         device_class: "timestamp"
+      roborock_s5_battery:
+        friendly_name: "Уровень заряда"
+        value_template: "{{ state_attr('vacuum.roborock_s5', 'battery_level') | round(0) }}"
+        unit_of_measurement: "%"
+
         
         
  
