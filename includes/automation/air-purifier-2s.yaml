@@ -35,3 +35,52 @@
     entity_id: input_number.xiaomi_airpurifier_favorite_level
     data_template:
       value: '{{ states.fan.xiaomi_miio_device.attributes.favorite_level }}'
+      
+      
+# Автовыключение
+- alias: air_putifier_auto_off
+  initial_state: true
+  trigger:
+    - platform: numeric_state
+      entity_id: sensor.xiaomi_airpurifier_air_quality_pm25
+      below: 2
+  condition:
+    - condition: state
+      entity_id: fan.xiaomi_miio_device
+      state: 'on'
+  action:
+    - service: system_log.write
+      data_template:
+        level: info
+        logger: my_info
+        message: "Air is good!!"
+    - service: system_log.write
+      data:
+        message: "Air is good!"
+        level: info
+    - service: homeassistant.turn_off
+      entity_id: fan.xiaomi_miio_device
+      
+# Автовключение
+- alias: air_putifier_auto_on
+  initial_state: true
+  trigger:
+    - platform: numeric_state
+      entity_id: sensor.xiaomi_airpurifier_air_quality_pm25
+      above: 5
+  condition:
+    - condition: state
+      entity_id: fan.xiaomi_miio_device
+      state: 'off'
+  action:
+    - service: system_log.write
+      data_template:
+        level: info
+        logger: my_info
+        message: "Air is bad!!"
+    - service: system_log.write
+      data:
+        message: "Air is bad!"
+        level: warn
+    - service: homeassistant.turn_on
+      entity_id: fan.xiaomi_miio_device

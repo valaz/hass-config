@@ -30,9 +30,8 @@ tts:
   - platform: google_translate
 
 # Вынос во внешние файлы
+timer: !include includes/timer.yaml
 group: !include includes/groups.yaml
-# automation: !include includes/automations.yaml
-# script: !include includes/scripts.yaml
 scene: !include includes/scenes.yaml
 recorder: !include includes/recorder.yaml
 vacuum: !include includes/vacuum.yaml
@@ -78,7 +77,7 @@ influxdb:
       override_measurement: humidity
     sensor.*temperature:
       override_measurement: temperature
-    sensor.*battery:
+    sensor.*battery*:
       override_measurement: battery
   tags_attributes:
     - room
