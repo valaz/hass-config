@@ -4,19 +4,27 @@
     entity_id: input_select.xiaomi_airpurifier_mode
     platform: state
   action:
-    service: fan.set_speed
-    data_template:
-      entity_id: fan.xiaomi_miio_device
-      speed: '{{ states.input_select.xiaomi_airpurifier_mode.state }}'
+    - service: fan.set_preset_mode
+      target:
+        entity_id: fan.xiaomi_miio_device
+      data:
+        preset_mode: '{{ states.input_select.xiaomi_airpurifier_mode.state }}'
 - alias: Air Purifier mode changed
   trigger:
     platform: state
     entity_id: fan.xiaomi_miio_device
+  condition:
+    alias: "airpurifier preset_mode in Unknown"
+    condition: not
+    conditions:
+        - condition: state
+          entity_id: sensor.xiaomi_airpurifier_preset_mode
+          state: "unknown"
   action:
     service: input_select.select_option
     entity_id: input_select.xiaomi_airpurifier_mode
     data_template:
-      option: '{{ states.fan.xiaomi_miio_device.attributes.speed }}'
+      option: '{{ states.fan.xiaomi_miio_device.attributes.preset_mode }}'
 - alias: Air Purifier favorite level change
   trigger:
     entity_id: input_number.xiaomi_airpurifier_favorite_level
@@ -41,23 +49,28 @@
 - alias: air_putifier_auto_off
   initial_state: true
   trigger:
-    - platform: numeric_state
-      entity_id: sensor.xiaomi_airpurifier_air_quality_pm25
-      below: 2
+    platform: state
+    entity_id: fan.xiaomi_miio_device
   condition:
-    - condition: state
-      entity_id: fan.xiaomi_miio_device
-      state: 'on'
+    - condition: and
+      conditions:
+        - condition: state
+          entity_id: fan.xiaomi_miio_device
+          state: 'on'
+        - condition: numeric_state
+          entity_id: sensor.xiaomi_airpurifier_air_quality_pm25
+          below: 2
   action:
     - service: system_log.write
       data_template:
         level: info
-        logger: my_info
+        logger: automation_air-purifier-2s
         message: "Air is good!!"
-    - service: system_log.write
+    - service: fan.set_preset_mode
+      target:
+        entity_id: fan.xiaomi_miio_device
       data:
-        message: "Air is good!"
-        level: info
+        preset_mode: 'Auto'
     - service: homeassistant.turn_off
       entity_id: fan.xiaomi_miio_device
       
@@ -65,22 +78,25 @@
 - alias: air_putifier_auto_on
   initial_state: true
   trigger:
-    - platform: numeric_state
-      entity_id: sensor.xiaomi_airpurifier_air_quality_pm25
-      above: 5
+    platform: state
+    entity_id: fan.xiaomi_miio_device
   condition:
-    - condition: state
-      entity_id: fan.xiaomi_miio_device
-      state: 'off'
+    - condition: and
+      conditions:
+        - condition: state
+          entity_id: fan.xiaomi_miio_device
+          state: 'off'
+        - condition: numeric_state
+          entity_id: sensor.xiaomi_airpurifier_air_quality_pm25
+          above: 5
   action:
     - service: system_log.write
       data_template:
         level: info
-        logger: my_info
+        logger: automation_air-purifier-2s
         message: "Air is bad!!"
-    - service: system_log.write
-      data:
-        message: "Air is bad!"
-        level: warn
     - service: homeassistant.turn_on
       entity_id: fan.xiaomi_miio_device
+      
+      
+      

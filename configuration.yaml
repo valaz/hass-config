@@ -24,7 +24,9 @@ lovelace:
         type: module
       - url: /hacsfiles/lovelace-swipe-navigation/swipe-navigation.js
         type: module
-
+logger:
+  default: info
+  
 # Text to speech
 tts:
   - platform: google_translate

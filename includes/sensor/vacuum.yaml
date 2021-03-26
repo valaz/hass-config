@@ -14,7 +14,7 @@
  
   - platform: template
     sensors:
-# Время с последней перезагрузки
+# Время с последней уборки
       last_clean_custom:
         friendly_name: "Последняя уборка"
         value_template: >

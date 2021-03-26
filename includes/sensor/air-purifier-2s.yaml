@@ -26,3 +26,7 @@
         value_template: "{{ state_attr('fan.xiaomi_miio_device', 'filter_life_remaining') }}"
         unit_of_measurement: "%"
         icon_template: "mdi:heart-outline"
+      xiaomi_airpurifier_preset_mode:
+        friendly_name: "Preset mode"
+        value_template: "{{ state_attr('fan.xiaomi_miio_device', 'preset_mode') }}"
+        icon_template: "mdi:select-place"

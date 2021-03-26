@@ -15,7 +15,7 @@
       arg: /
       
   - platform: sql
-    db_url: mysql://hass:hass@core-mariadb/homeassistant?charset=utf8
+    db_url: !secret recorder_db_url
     queries:
       - name: Maria DB size
         query: 'SELECT table_schema "database", Round(Sum(data_length + index_length) / 1048576, 2) "value" FROM information_schema.tables WHERE table_schema="homeassistant" GROUP BY table_schema;'
@@ -24,11 +24,10 @@
         
   - platform: uptime
     name: online
-    unit_of_measurement: minutes
+    # unit_of_measurement: minutes
     
   - platform: template
     sensors:
-       
       online_custom:
          friendly_name: "Home Assistant в онлайне"
          value_template: >
