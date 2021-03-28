@@ -297,6 +297,43 @@ views:
                 entities:
                  - fan.xiaomi_miio_device
                  - media_player.android_tv
+              - type: glance
+                show_name: false
+                entities:
+                  - entity: remote.xiaomi_ir_remote
+                    icon: mdi:volume-low
+                    tap_action:
+                      action: call-service
+                      service: script.call_sven_vol_down_32
+                  - entity: remote.xiaomi_ir_remote
+                    icon: mdi:volume-minus
+                    tap_action:
+                      action: call-service
+                      service: script.call_sven_vol_down
+                  - entity: remote.xiaomi_ir_remote
+                    icon: mdi:volume-mute
+                    tap_action:
+                      action: call-service
+                      service: script.call_sven_mute
+                  - entity: remote.xiaomi_ir_remote
+                    name: Тищина
+                    icon: mdi:volume-plus
+                    tap_action:
+                      action: call-service
+                      service: script.call_sven_vol_up
+                  - entity: remote.xiaomi_ir_remote
+                    icon: mdi:volume-high
+                    name: Громкость
+                    tap_action:
+                      action: call-service
+                      service: script.call_sven_vol_up_32
+              - type: button
+                name: 'Сканировать сигнал'
+                tap_action:
+                  action: call-service
+                  service: xiaomi_miio.remote_learn_command
+                  service_data:
+                    entity_id: remote.xiaomi_ir_remote
           - type: custom:vertical-stack-in-card
             title: Коридор
             cards:
@@ -307,11 +344,17 @@ views:
           - type: custom:vertical-stack-in-card
             title: Гардероб
             cards:
-              - type: entities
+              - type: glance
+                show_name: false
                 entities:
-                 - light.0x158d00052b3ad9_light
-                 - binary_sensor.0x158d00054cd813_motion
-                 - timer.wardrobe_light
+                 - entity: light.0x158d00052b3ad9_light
+                   name: Лампа
+                   double_tap_action:
+                     action: toggle
+                 - entity: sensor.0x158d00054cd813_illuminance
+                   name: Освещение
+                 - entity: binary_sensor.0x158d00054cd813_motion
+                   name: Движение
                
       - type: vertical-stack
         cards:

@@ -1,0 +1,91 @@
+  - platform: xiaomi_miio
+    name: "xiaomi_ir_remote"
+    friendly_name: "Пульт IR Xiaomi"
+    host: 192.168.1.53
+    token: 6f43019e3bb7248dd5e4a50f3e92c310
+    slot: 1
+    timeout: 30
+    commands:
+      sven_vol_up:
+        command:
+          - raw:nMwmswlk0msymEsms2ADKbgDrMZtOAENAHyaAH0AWc5AXkDhQEHmYCFApQARwDXgEJNpgCdYFdg4IBC4L5BEQGMQHPhc+D94LfgNfMJZMIAA
+      sven_vol_down:
+        command:
+          - raw:nMwmswlk0msxmEsms2ADKbgDrMZtOAENAHgC0gD/ms5APaaAcOAg8zAQoFKACOAa8IfwK/Ar8Cv5hLJtMAi7AQoANAmzDE4ErwEJmEAA
+      sven_mute:
+        command:
+          - raw:nMwnMwlk0mk4mEsm0wmEsmszAHWYzaaAIbNQAymwBZADnNQLCms2AXoDjwKHAQwFKACOAa8Aj5uEBoTMhI0FT4VPhpeDH4NngIxMIAA=
+      sven_on_off:
+        command:
+          - raw:nMwmswlk0msymEsms2ADKbgDrMZtOAENAHiaAH8B6U1nIA7AcQAgYEBgWEAhAKUAEcA14L3yyagJmC8wT/hD+E/ALfgEeFFEzAr8CvJhAA==
+      sven_mode:
+        command:
+          - raw:nMwm0wlk0msxmEsmoBBTWbgDrMZtOAEKADOaABlOQB2AooBfwOFAQ8BAwUoAI4BqAUSAa8G/wb+CbcLDwKLBS4GSAdvD+8AhZhAA
+      sven_vol_up_32:
+        command:
+          - raw:nMwmswlk0msymEsms2ADKbgDrMZtOAENAHyaAH0AWc5AXkDhQEHmYCFApQARwDXgEJNpgCdYFdg4IBC4L5BEQGMQHPhc+D94LfgNfMJZMIAA
+          - raw:nMwmswlk0msymEsms2ADKbgDrMZtOAENAHyaAH0AWc5AXkDhQEHmYCFApQARwDXgEJNpgCdYFdg4IBC4L5BEQGMQHPhc+D94LfgNfMJZMIAA
+          - raw:nMwmswlk0msymEsms2ADKbgDrMZtOAENAHyaAH0AWc5AXkDhQEHmYCFApQARwDXgEJNpgCdYFdg4IBC4L5BEQGMQHPhc+D94LfgNfMJZMIAA
+          - raw:nMwmswlk0msymEsms2ADKbgDrMZtOAENAHyaAH0AWc5AXkDhQEHmYCFApQARwDXgEJNpgCdYFdg4IBC4L5BEQGMQHPhc+D94LfgNfMJZMIAA
+          - raw:nMwmswlk0msymEsms2ADKbgDrMZtOAENAHyaAH0AWc5AXkDhQEHmYCFApQARwDXgEJNpgCdYFdg4IBC4L5BEQGMQHPhc+D94LfgNfMJZMIAA
+          - raw:nMwmswlk0msymEsms2ADKbgDrMZtOAENAHyaAH0AWc5AXkDhQEHmYCFApQARwDXgEJNpgCdYFdg4IBC4L5BEQGMQHPhc+D94LfgNfMJZMIAA
+          - raw:nMwmswlk0msymEsms2ADKbgDrMZtOAENAHyaAH0AWc5AXkDhQEHmYCFApQARwDXgEJNpgCdYFdg4IBC4L5BEQGMQHPhc+D94LfgNfMJZMIAA
+          - raw:nMwmswlk0msymEsms2ADKbgDrMZtOAENAHyaAH0AWc5AXkDhQEHmYCFApQARwDXgEJNpgCdYFdg4IBC4L5BEQGMQHPhc+D94LfgNfMJZMIAA
+          - raw:nMwmswlk0msymEsms2ADKbgDrMZtOAENAHyaAH0AWc5AXkDhQEHmYCFApQARwDXgEJNpgCdYFdg4IBC4L5BEQGMQHPhc+D94LfgNfMJZMIAA
+          - raw:nMwmswlk0msymEsms2ADKbgDrMZtOAENAHyaAH0AWc5AXkDhQEHmYCFApQARwDXgEJNpgCdYFdg4IBC4L5BEQGMQHPhc+D94LfgNfMJZMIAA
+          - raw:nMwmswlk0msymEsms2ADKbgDrMZtOAENAHyaAH0AWc5AXkDhQEHmYCFApQARwDXgEJNpgCdYFdg4IBC4L5BEQGMQHPhc+D94LfgNfMJZMIAA
+          - raw:nMwmswlk0msymEsms2ADKbgDrMZtOAENAHyaAH0AWc5AXkDhQEHmYCFApQARwDXgEJNpgCdYFdg4IBC4L5BEQGMQHPhc+D94LfgNfMJZMIAA
+          - raw:nMwmswlk0msymEsms2ADKbgDrMZtOAENAHyaAH0AWc5AXkDhQEHmYCFApQARwDXgEJNpgCdYFdg4IBC4L5BEQGMQHPhc+D94LfgNfMJZMIAA
+          - raw:nMwmswlk0msymEsms2ADKbgDrMZtOAENAHyaAH0AWc5AXkDhQEHmYCFApQARwDXgEJNpgCdYFdg4IBC4L5BEQGMQHPhc+D94LfgNfMJZMIAA
+          - raw:nMwmswlk0msymEsms2ADKbgDrMZtOAENAHyaAH0AWc5AXkDhQEHmYCFApQARwDXgEJNpgCdYFdg4IBC4L5BEQGMQHPhc+D94LfgNfMJZMIAA
+          - raw:nMwmswlk0msymEsms2ADKbgDrMZtOAENAHyaAH0AWc5AXkDhQEHmYCFApQARwDXgEJNpgCdYFdg4IBC4L5BEQGMQHPhc+D94LfgNfMJZMIAA
+          - raw:nMwmswlk0msymEsms2ADKbgDrMZtOAENAHyaAH0AWc5AXkDhQEHmYCFApQARwDXgEJNpgCdYFdg4IBC4L5BEQGMQHPhc+D94LfgNfMJZMIAA
+          - raw:nMwmswlk0msymEsms2ADKbgDrMZtOAENAHyaAH0AWc5AXkDhQEHmYCFApQARwDXgEJNpgCdYFdg4IBC4L5BEQGMQHPhc+D94LfgNfMJZMIAA
+          - raw:nMwmswlk0msymEsms2ADKbgDrMZtOAENAHyaAH0AWc5AXkDhQEHmYCFApQARwDXgEJNpgCdYFdg4IBC4L5BEQGMQHPhc+D94LfgNfMJZMIAA
+          - raw:nMwmswlk0msymEsms2ADKbgDrMZtOAENAHyaAH0AWc5AXkDhQEHmYCFApQARwDXgEJNpgCdYFdg4IBC4L5BEQGMQHPhc+D94LfgNfMJZMIAA
+          - raw:nMwmswlk0msymEsms2ADKbgDrMZtOAENAHyaAH0AWc5AXkDhQEHmYCFApQARwDXgEJNpgCdYFdg4IBC4L5BEQGMQHPhc+D94LfgNfMJZMIAA
+          - raw:nMwmswlk0msymEsms2ADKbgDrMZtOAENAHyaAH0AWc5AXkDhQEHmYCFApQARwDXgEJNpgCdYFdg4IBC4L5BEQGMQHPhc+D94LfgNfMJZMIAA
+          - raw:nMwmswlk0msymEsms2ADKbgDrMZtOAENAHyaAH0AWc5AXkDhQEHmYCFApQARwDXgEJNpgCdYFdg4IBC4L5BEQGMQHPhc+D94LfgNfMJZMIAA
+          - raw:nMwmswlk0msymEsms2ADKbgDrMZtOAENAHyaAH0AWc5AXkDhQEHmYCFApQARwDXgEJNpgCdYFdg4IBC4L5BEQGMQHPhc+D94LfgNfMJZMIAA
+          - raw:nMwmswlk0msymEsms2ADKbgDrMZtOAENAHyaAH0AWc5AXkDhQEHmYCFApQARwDXgEJNpgCdYFdg4IBC4L5BEQGMQHPhc+D94LfgNfMJZMIAA
+          - raw:nMwmswlk0msymEsms2ADKbgDrMZtOAENAHyaAH0AWc5AXkDhQEHmYCFApQARwDXgEJNpgCdYFdg4IBC4L5BEQGMQHPhc+D94LfgNfMJZMIAA
+          - raw:nMwmswlk0msymEsms2ADKbgDrMZtOAENAHyaAH0AWc5AXkDhQEHmYCFApQARwDXgEJNpgCdYFdg4IBC4L5BEQGMQHPhc+D94LfgNfMJZMIAA
+          - raw:nMwmswlk0msymEsms2ADKbgDrMZtOAENAHyaAH0AWc5AXkDhQEHmYCFApQARwDXgEJNpgCdYFdg4IBC4L5BEQGMQHPhc+D94LfgNfMJZMIAA
+          - raw:nMwmswlk0msymEsms2ADKbgDrMZtOAENAHyaAH0AWc5AXkDhQEHmYCFApQARwDXgEJNpgCdYFdg4IBC4L5BEQGMQHPhc+D94LfgNfMJZMIAA
+          - raw:nMwmswlk0msymEsms2ADKbgDrMZtOAENAHyaAH0AWc5AXkDhQEHmYCFApQARwDXgEJNpgCdYFdg4IBC4L5BEQGMQHPhc+D94LfgNfMJZMIAA
+          - raw:nMwmswlk0msymEsms2ADKbgDrMZtOAENAHyaAH0AWc5AXkDhQEHmYCFApQARwDXgEJNpgCdYFdg4IBC4L5BEQGMQHPhc+D94LfgNfMJZMIAA
+          - raw:nMwmswlk0msymEsms2ADKbgDrMZtOAENAHyaAH0AWc5AXkDhQEHmYCFApQARwDXgEJNpgCdYFdg4IBC4L5BEQGMQHPhc+D94LfgNfMJZMIAA
+      sven_vol_down_32:
+        command:
+          - raw:nMwmswlk0msxmEsms2ADKbgDrMZtOAENAHgC0gD/ms5APaaAcOAg8zAQoFKACOAa8IfwK/Ar8Cv5hLJtMAi7AQoANAmzDE4ErwEJmEAA
+          - raw:nMwmswlk0msxmEsms2ADKbgDrMZtOAENAHgC0gD/ms5APaaAcOAg8zAQoFKACOAa8IfwK/Ar8Cv5hLJtMAi7AQoANAmzDE4ErwEJmEAA
+          - raw:nMwmswlk0msxmEsms2ADKbgDrMZtOAENAHgC0gD/ms5APaaAcOAg8zAQoFKACOAa8IfwK/Ar8Cv5hLJtMAi7AQoANAmzDE4ErwEJmEAA
+          - raw:nMwmswlk0msxmEsms2ADKbgDrMZtOAENAHgC0gD/ms5APaaAcOAg8zAQoFKACOAa8IfwK/Ar8Cv5hLJtMAi7AQoANAmzDE4ErwEJmEAA
+          - raw:nMwmswlk0msxmEsms2ADKbgDrMZtOAENAHgC0gD/ms5APaaAcOAg8zAQoFKACOAa8IfwK/Ar8Cv5hLJtMAi7AQoANAmzDE4ErwEJmEAA
+          - raw:nMwmswlk0msxmEsms2ADKbgDrMZtOAENAHgC0gD/ms5APaaAcOAg8zAQoFKACOAa8IfwK/Ar8Cv5hLJtMAi7AQoANAmzDE4ErwEJmEAA
+          - raw:nMwmswlk0msxmEsms2ADKbgDrMZtOAENAHgC0gD/ms5APaaAcOAg8zAQoFKACOAa8IfwK/Ar8Cv5hLJtMAi7AQoANAmzDE4ErwEJmEAA
+          - raw:nMwmswlk0msxmEsms2ADKbgDrMZtOAENAHgC0gD/ms5APaaAcOAg8zAQoFKACOAa8IfwK/Ar8Cv5hLJtMAi7AQoANAmzDE4ErwEJmEAA
+          - raw:nMwmswlk0msxmEsms2ADKbgDrMZtOAENAHgC0gD/ms5APaaAcOAg8zAQoFKACOAa8IfwK/Ar8Cv5hLJtMAi7AQoANAmzDE4ErwEJmEAA
+          - raw:nMwmswlk0msxmEsms2ADKbgDrMZtOAENAHgC0gD/ms5APaaAcOAg8zAQoFKACOAa8IfwK/Ar8Cv5hLJtMAi7AQoANAmzDE4ErwEJmEAA
+          - raw:nMwmswlk0msxmEsms2ADKbgDrMZtOAENAHgC0gD/ms5APaaAcOAg8zAQoFKACOAa8IfwK/Ar8Cv5hLJtMAi7AQoANAmzDE4ErwEJmEAA
+          - raw:nMwmswlk0msxmEsms2ADKbgDrMZtOAENAHgC0gD/ms5APaaAcOAg8zAQoFKACOAa8IfwK/Ar8Cv5hLJtMAi7AQoANAmzDE4ErwEJmEAA
+          - raw:nMwmswlk0msxmEsms2ADKbgDrMZtOAENAHgC0gD/ms5APaaAcOAg8zAQoFKACOAa8IfwK/Ar8Cv5hLJtMAi7AQoANAmzDE4ErwEJmEAA
+          - raw:nMwmswlk0msxmEsms2ADKbgDrMZtOAENAHgC0gD/ms5APaaAcOAg8zAQoFKACOAa8IfwK/Ar8Cv5hLJtMAi7AQoANAmzDE4ErwEJmEAA
+          - raw:nMwmswlk0msxmEsms2ADKbgDrMZtOAENAHgC0gD/ms5APaaAcOAg8zAQoFKACOAa8IfwK/Ar8Cv5hLJtMAi7AQoANAmzDE4ErwEJmEAA
+          - raw:nMwmswlk0msxmEsms2ADKbgDrMZtOAENAHgC0gD/ms5APaaAcOAg8zAQoFKACOAa8IfwK/Ar8Cv5hLJtMAi7AQoANAmzDE4ErwEJmEAA
+          - raw:nMwmswlk0msxmEsms2ADKbgDrMZtOAENAHgC0gD/ms5APaaAcOAg8zAQoFKACOAa8IfwK/Ar8Cv5hLJtMAi7AQoANAmzDE4ErwEJmEAA
+          - raw:nMwmswlk0msxmEsms2ADKbgDrMZtOAENAHgC0gD/ms5APaaAcOAg8zAQoFKACOAa8IfwK/Ar8Cv5hLJtMAi7AQoANAmzDE4ErwEJmEAA
+          - raw:nMwmswlk0msxmEsms2ADKbgDrMZtOAENAHgC0gD/ms5APaaAcOAg8zAQoFKACOAa8IfwK/Ar8Cv5hLJtMAi7AQoANAmzDE4ErwEJmEAA
+          - raw:nMwmswlk0msxmEsms2ADKbgDrMZtOAENAHgC0gD/ms5APaaAcOAg8zAQoFKACOAa8IfwK/Ar8Cv5hLJtMAi7AQoANAmzDE4ErwEJmEAA
+          - raw:nMwmswlk0msxmEsms2ADKbgDrMZtOAENAHgC0gD/ms5APaaAcOAg8zAQoFKACOAa8IfwK/Ar8Cv5hLJtMAi7AQoANAmzDE4ErwEJmEAA
+          - raw:nMwmswlk0msxmEsms2ADKbgDrMZtOAENAHgC0gD/ms5APaaAcOAg8zAQoFKACOAa8IfwK/Ar8Cv5hLJtMAi7AQoANAmzDE4ErwEJmEAA
+          - raw:nMwmswlk0msxmEsms2ADKbgDrMZtOAENAHgC0gD/ms5APaaAcOAg8zAQoFKACOAa8IfwK/Ar8Cv5hLJtMAi7AQoANAmzDE4ErwEJmEAA
+          - raw:nMwmswlk0msxmEsms2ADKbgDrMZtOAENAHgC0gD/ms5APaaAcOAg8zAQoFKACOAa8IfwK/Ar8Cv5hLJtMAi7AQoANAmzDE4ErwEJmEAA
+          - raw:nMwmswlk0msxmEsms2ADKbgDrMZtOAENAHgC0gD/ms5APaaAcOAg8zAQoFKACOAa8IfwK/Ar8Cv5hLJtMAi7AQoANAmzDE4ErwEJmEAA
+          - raw:nMwmswlk0msxmEsms2ADKbgDrMZtOAENAHgC0gD/ms5APaaAcOAg8zAQoFKACOAa8IfwK/Ar8Cv5hLJtMAi7AQoANAmzDE4ErwEJmEAA
+          - raw:nMwmswlk0msxmEsms2ADKbgDrMZtOAENAHgC0gD/ms5APaaAcOAg8zAQoFKACOAa8IfwK/Ar8Cv5hLJtMAi7AQoANAmzDE4ErwEJmEAA
+          - raw:nMwmswlk0msxmEsms2ADKbgDrMZtOAENAHgC0gD/ms5APaaAcOAg8zAQoFKACOAa8IfwK/Ar8Cv5hLJtMAi7AQoANAmzDE4ErwEJmEAA
+          - raw:nMwmswlk0msxmEsms2ADKbgDrMZtOAENAHgC0gD/ms5APaaAcOAg8zAQoFKACOAa8IfwK/Ar8Cv5hLJtMAi7AQoANAmzDE4ErwEJmEAA
+          - raw:nMwmswlk0msxmEsms2ADKbgDrMZtOAENAHgC0gD/ms5APaaAcOAg8zAQoFKACOAa8IfwK/Ar8Cv5hLJtMAi7AQoANAmzDE4ErwEJmEAA
+          - raw:nMwmswlk0msxmEsms2ADKbgDrMZtOAENAHgC0gD/ms5APaaAcOAg8zAQoFKACOAa8IfwK/Ar8Cv5hLJtMAi7AQoANAmzDE4ErwEJmEAA
+          - raw:nMwmswlk0msxmEsms2ADKbgDrMZtOAENAHgC0gD/ms5APaaAcOAg8zAQoFKACOAa8IfwK/Ar8Cv5hLJtMAi7AQoANAmzDE4ErwEJmEAA
