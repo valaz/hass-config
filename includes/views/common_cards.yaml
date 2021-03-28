@@ -1,0 +1,118 @@
+
+
+  - type: vertical-stack
+    cards:
+      - type: weather-forecast
+        entity: weather.home_assistant 
+      - type: entities
+        title: 'Текущее состояние'
+        # show_header_toggle: false
+        entities:
+        - entity: sensor.last_boot_custom
+        - entity: sensor.online_custom
+        - entity: sensor.time
+          name: Текущее время
+          icon: mdi:clock-outline
+        - entity: sensor.date
+          name: Дата
+          icon: mdi:calendar-check-outline
+        - type: divider
+        - entity: sensor.maria_db_size
+          name: Объем БД
+          icon: mdi:database
+        - type: divider
+        - entity: sensor.hacs
+          name: Доступно обновление HACS
+   #=============================
+  #=== Component Counts
+  #=============================
+      - type: glance
+        title: 'Количество компонентов'
+        columns: 4
+        entities:
+          - entity: sensor.count_automations
+            name: Automations
+            icon: mdi:autorenew
+          - entity: sensor.count_scripts
+            name: Scripts
+            icon: mdi:script-text-outline
+          - entity: sensor.count_zones
+            name: Zones
+            icon: mdi:map-marker-radius
+          - entity: sensor.count_device_trackers
+            name: Device Trackers
+            icon: mdi:map-marker
+          - entity: sensor.count_switches
+            name: Switches
+            icon: mdi:light-switch
+          - entity: sensor.count_sensors
+            name: Sensors
+            icon: mdi:resistor
+          - entity: sensor.count_binary_sensors
+            name: Binary Sensors
+            icon: mdi:unfold-more-horizontal
+          - entity: sensor.count_input_booleans
+            name: Input Booleans
+            icon: mdi:toggle-switch
+          - entity: sensor.count_input_numbers
+            name: Input Numbers
+            icon: mdi:numeric
+          - entity: sensor.count_input_texts
+            name: Input Texts
+            icon: mdi:alphabetical
+          - entity: sensor.count_input_selects
+            name: Input Select
+            icon: mdi:view-list
+          - entity: sensor.count_input_datetimes
+            name: Input Date Times
+            icon: mdi:calendar-clock
+
+  - type: vertical-stack
+    cards:
+      - type: entities
+        title: 'Графики'
+        entities:
+          - type: weblink
+            name: Grafana
+            url: http://192.168.1.111:3000/d/RJC609sGk/hass
+            icon: mdi:chart-areaspline
+      - type: horizontal-stack
+        cards:
+          - type: gauge
+            name: Загрузка CPU
+            unit: '%'
+            entity: sensor.processor_use_percent
+            severity:
+                green: 0
+                yellow: 60
+                red: 85
+          - type: gauge
+            name: Загрузка ОЗУ
+            unit: '%'
+            entity: sensor.memory_use_percent
+            severity:
+                green: 0
+                yellow: 60
+                red: 85
+      - type: horizontal-stack
+        cards:
+          - type: gauge
+            name: Диск заполнен
+            unit: '%'
+            entity: sensor.disk_use_percent
+            severity:
+                green: 0
+                yellow: 60
+                red: 85
+          - type: gauge
+            name: Свободное место
+            unit: 'Гб'
+            entity: sensor.disk_free
+            severity:
+                red: 2
+                yellow: 6
+                green: 8
+      - type: history-graph
+        entities:
+          - entity: sensor.maria_db_size
+            name: Maria DB
