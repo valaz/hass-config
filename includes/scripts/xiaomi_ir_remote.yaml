@@ -1,0 +1,56 @@
+  call_sven_vol_up:
+    sequence:
+      - service: remote.send_command
+        target:
+          entity_id: "remote.xiaomi_ir_remote"
+        data:
+          command:
+            - 'sven_vol_up'
+  call_sven_vol_down:
+    sequence:
+      - service: remote.send_command
+        target:
+          entity_id: "remote.xiaomi_ir_remote"
+        data:
+          command:
+            - 'sven_vol_down'
+  call_sven_mute:
+    sequence:
+      - service: remote.send_command
+        target:
+          entity_id: "remote.xiaomi_ir_remote"
+        data:
+          command:
+            - 'sven_mute'
+  call_sven_on_off:
+    sequence:
+      - service: remote.send_command
+        target:
+          entity_id: "remote.xiaomi_ir_remote"
+        data:
+          command:
+            - 'sven_on_off'
+  call_sven_mode:
+    sequence:
+      - service: remote.send_command
+        target:
+          entity_id: "remote.xiaomi_ir_remote"
+        data:
+          command:
+            - 'sven_mode'  
+  call_sven_vol_up_32:
+    sequence:
+      - service: remote.send_command
+        target:
+          entity_id: "remote.xiaomi_ir_remote"
+        data:
+          command:
+            - 'sven_vol_up_32'
+  call_sven_vol_down_32:
+    sequence:
+      - service: remote.send_command
+        target:
+          entity_id: "remote.xiaomi_ir_remote"
+        data:
+          command:
+            - 'sven_vol_down_32'
