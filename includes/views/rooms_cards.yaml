@@ -79,6 +79,30 @@
            
   - type: vertical-stack
     cards:
+      - type: custom:vertical-stack-in-card
+        title: Спальня
+        cards:
+          - type: glance
+            show_name: false
+            entities:
+              - sensor.rm4_mini_temperature
+              - sensor.rm4_mini_humidity
+          - type: entities
+            entities: 
+              - entity: switch.0x4cf8cdf3c777c79_switch
+                name: 'Розетка'
+                icon: mdi:power-socket-eu
+          - type: custom:mini-graph-card
+            name: 'Потребление розетки'
+            animate: true
+            hour24: true
+            line_color: "#f39c12"
+            hours_to_show: 24
+            points_per_hour: 12
+            update_interval: 300
+            line_width: 3
+            entities:
+              - entity: sensor.0x4cf8cdf3c777c79_power
       - type: horizontal-stack
         cards:
           - type: custom:vertical-stack-in-card
