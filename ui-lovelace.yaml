@@ -12,17 +12,21 @@ views:
     icon: mdi:home-assistant
     cards: !include includes/views/common_cards.yaml
 
-  - title: Климат
-    icon: mdi:home-thermometer
-    cards: !include includes/views/climate_cards.yaml
-
   - title: Дом
     icon: mdi:home
     cards: !include includes/views/rooms_cards.yaml
 
+  - title: Климат
+    icon: mdi:home-thermometer
+    cards: !include includes/views/climate_cards.yaml
+
   - title: Devices
     icon: mdi:sitemap
     cards: !include includes/views/devices_cards.yaml
+
+  - title: Homelab
+    icon: mdi:server-network
+    cards: !include includes/views/homelab_cards.yaml
 
   - title: Zigbee
     icon: mdi:zigbee

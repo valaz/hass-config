@@ -1,0 +1,144 @@
+  - type: vertical-stack
+    cards:
+      - type: custom:vertical-stack-in-card
+        title: 'Asus Router'
+        cards:
+          - type: entities
+            entities:
+              - type: weblink
+                name: 'Asus Admin Panel'
+                url: https://valaz.asuscomm.com:8443/
+                icon: mdi:router-wireless-settings
+          - type: divider
+          - type: custom:mini-graph-card
+            name: 'Скорость загрузки'
+            animate: true
+            hour24: true
+            color_thresholds:
+              - value: 35
+                color: "#539652"
+              - value: 50
+                color: "#f39c12"
+              - value: 80
+                color: "#c0392b"
+            hours_to_show: 1
+            points_per_hour: 60
+            update_interval: 60
+            entities:
+              - entity: sensor.asuswrt_download_speed
+          - type: custom:mini-graph-card
+            name: 'Скорость выгрузки'
+            animate: true
+            hour24: true
+            color_thresholds:
+              - value: 35
+                color: "#539652"
+              - value: 50
+                color: "#f39c12"
+              - value: 80
+                color: "#c0392b"
+            hours_to_show: 1
+            points_per_hour: 60
+            update_interval: 60
+            entities:
+              - entity: sensor.asuswrt_upload_speed
+      - type: glance
+        columns: 4
+        title: 'Устройства в сети'
+        entities:
+          - entity: sensor.asuswrt_devices_connected
+            name: 'Количество'
+          - entity: device_tracker.iphone_12_az
+            name: 'iPhone Азат'
+          - entity: device_tracker.ipad_6_az_2
+            name: 'Планшет Азат'
+          - entity: device_tracker.deskmini
+            name: 'Deskmini'
+          - entity: device_tracker.mbp15
+            name: 'Макбук'
+          - entity: device_tracker.iphone_elia_2
+            name: 'iPhone Эля'
+          - entity: device_tracker.iphone_elia
+            name: 'iPhone Эля'
+          - entity: device_tracker.huawei_mediapad_m5_lite_9
+            name: 'Планшет Эля'
+            
+  - type: vertical-stack
+    cards:
+      - type: custom:vertical-stack-in-card
+        title: OpenMediaVault
+        cards:
+          - type: entities
+            entities:
+              - type: weblink
+                name: 'OMV Admin Panel'
+                url: https://valaz.asuscomm.com:2010/
+                icon: mdi:database
+              - entity: binary_sensor.omv_update_available
+              - entity: sensor.omv_uptime
+              - type: divider
+          - type: custom:mini-graph-card
+            name: 'CPU'
+            animate: true
+            hour24: true
+            color_thresholds:
+              - value: 35
+                color: "#539652"
+              - value: 50
+                color: "#f39c12"
+              - value: 80
+                color: "#c0392b"
+            hours_to_show: 24
+            points_per_hour: 12
+            update_interval: 300
+            entities:
+              - entity: sensor.omv_cpu_load
+          - type: custom:mini-graph-card
+            name: 'RAM'
+            animate: true
+            hour24: true
+            color_thresholds:
+              - value: 35
+                color: "#539652"
+              - value: 50
+                color: "#f39c12"
+              - value: 80
+                color: "#c0392b"
+            hours_to_show: 24
+            points_per_hour: 12
+            update_interval: 300
+            entities:
+              - entity: sensor.omv_memory
+                  
+                  
+      - type: entities
+        title: 'File Systems'
+        entities:
+          - entity: sensor.omv
+          - entity: sensor.omv_appdata
+          - entity: sensor.omv_elements
+      - type: custom:vertical-stack-in-card
+        title: 'Devices'
+        cards:
+          - type: custom:mini-graph-card
+            name: 'WD Elements'
+            animate: true
+            hour24: true
+            color_thresholds:
+              - value: 40
+                color: "#539652"
+              - value: 45
+                color: "#f39c12"
+              - value: 50
+                color: "#c0392b"
+            hours_to_show: 24
+            points_per_hour: 12
+            update_interval: 300
+            entities:
+              - entity: sensor.omv_sdc
+            align_state: center
+            show:
+              graph: true
+              icon: true
+              extrema: true
+              fill: true
