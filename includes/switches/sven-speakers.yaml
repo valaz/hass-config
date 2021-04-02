@@ -1,0 +1,10 @@
+  # Sven Speakers
+  - platform: template
+    switches:
+      sven_volume:
+        friendly_name: "Звук в колонках"
+        icon_template: mdi:speaker-multiple
+        turn_on:
+          service: script.call_sven_vol_up_32
+        turn_off:
+          service: script.call_sven_vol_down_32

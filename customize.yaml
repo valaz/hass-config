@@ -24,3 +24,17 @@
         
     sensor.xiaomi_airpurifier_air_quality_pm25:
         room: 'Гостиная'
+        
+    switch.0x4cf8cdf3c777c79_switch:
+        friendly_name: 'Розетка'
+        device_class: outlet
+        icon: mdi:power-socket-eu
+        
+    sensor.0x4cf8cdf3c777c79_consumption:
+        friendly_name: 'Потребление розетки'
+        device_class: energy
+        
+        
+    switch.sven_volume:
+        assumed_state: false
+        

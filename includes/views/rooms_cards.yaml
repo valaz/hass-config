@@ -5,6 +5,8 @@
     #     content: >
     #      **Комнаты**
       - type: custom:vertical-stack-in-card
+      
+#######   Гостиная   #######
         title: Гостиная
         cards:
           - type: glance
@@ -15,8 +17,9 @@
               - sensor.xiaomi_airpurifier_air_quality_pm25
           - type: entities
             entities:
-             - fan.xiaomi_miio_device
-             - media_player.android_tv
+             - entity: fan.xiaomi_miio_device
+             - entity: media_player.android_tv
+             - entity: switch.sven_volume
           - type: glance
             show_name: false
             show_state: false
@@ -55,6 +58,7 @@
               service: xiaomi_miio.remote_learn_command
               service_data:
                 entity_id: remote.xiaomi_ir_remote
+#######   Коридор   #######
       - type: custom:vertical-stack-in-card
         title: Коридор
         cards:
@@ -63,6 +67,7 @@
              - sensor.last_clean_custom
              - vacuum.roborock_s5
       - type: custom:vertical-stack-in-card
+#######   Гардероб   #######
         title: Гардероб
         cards:
           - type: glance
@@ -80,6 +85,7 @@
   - type: vertical-stack
     cards:
       - type: custom:vertical-stack-in-card
+#######   Спальня   #######
         title: Спальня
         cards:
           - type: glance
@@ -89,9 +95,9 @@
               - sensor.rm4_mini_humidity
           - type: entities
             entities: 
+              - entity: switch.philips_humidifier
               - entity: switch.0x4cf8cdf3c777c79_switch
                 name: 'Розетка'
-                icon: mdi:power-socket-eu
           - type: custom:mini-graph-card
             name: 'Потребление розетки'
             animate: true
@@ -106,14 +112,7 @@
       - type: horizontal-stack
         cards:
           - type: custom:vertical-stack-in-card
-            title: Спальня
-            cards:
-              - type: glance
-                show_name: false
-                entities:
-                  - sensor.rm4_mini_temperature
-                  - sensor.rm4_mini_humidity
-          - type: custom:vertical-stack-in-card
+#######   Детская   #######
             title: Детская
             cards:
               - type: glance
@@ -124,6 +123,7 @@
       - type: horizontal-stack
         cards:
           - type: custom:vertical-stack-in-card
+#######   Кухня   #######
             title: Кухня
             cards:
               - type: glance
@@ -132,6 +132,7 @@
                   - sensor.e72e01500c8f_temperature
                   - sensor.e72e01500c8f_humidity
           - type: custom:vertical-stack-in-card
+#######   Лоджия   #######
             title: Лоджия
             cards:
               - type: glance

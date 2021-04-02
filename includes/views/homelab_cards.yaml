@@ -23,7 +23,7 @@
                 color: "#c0392b"
             hours_to_show: 1
             points_per_hour: 60
-            update_interval: 60
+            update_interval: 10
             entities:
               - entity: sensor.asuswrt_download_speed
           - type: custom:mini-graph-card
@@ -39,7 +39,7 @@
                 color: "#c0392b"
             hours_to_show: 1
             points_per_hour: 60
-            update_interval: 60
+            update_interval: 10
             entities:
               - entity: sensor.asuswrt_upload_speed
       - type: glance
@@ -90,7 +90,7 @@
                 color: "#c0392b"
             hours_to_show: 24
             points_per_hour: 12
-            update_interval: 300
+            update_interval: 30
             entities:
               - entity: sensor.omv_cpu_load
           - type: custom:mini-graph-card
@@ -106,7 +106,7 @@
                 color: "#c0392b"
             hours_to_show: 24
             points_per_hour: 12
-            update_interval: 300
+            update_interval: 30
             entities:
               - entity: sensor.omv_memory
                   
@@ -133,7 +133,7 @@
                 color: "#c0392b"
             hours_to_show: 24
             points_per_hour: 12
-            update_interval: 300
+            update_interval: 30
             entities:
               - entity: sensor.omv_sdc
             align_state: center

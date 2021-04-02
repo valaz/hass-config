@@ -22,7 +22,7 @@
           icon: mdi:database
         - type: divider
         - entity: sensor.hacs
-          name: Доступно обновлений HACS
+          name: HACS
    #=============================
   #=== Component Counts
   #=============================

@@ -16,7 +16,9 @@
         level: info
         logger: automation_sven_volume_auto_off
         message: "Philips TV is Off now!"
-    - service: script.call_sven_vol_down_32
+    - service: switch.turn_off
+      entity_id: switch.sven_volume
+    # - service: script.call_sven_vol_down_32
       
 # Автовключение
 - alias: sven_volume_auto_on
@@ -36,5 +38,7 @@
         level: info
         logger: automation_sven_volume_auto_off
         message: "Philips TV is On now!"
-    - service: script.call_sven_vol_up_32
+    - service: switch.turn_on
+      entity_id: switch.sven_volume
+    # - service: script.call_sven_vol_up_32
       
