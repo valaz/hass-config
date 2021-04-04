@@ -2,17 +2,17 @@
   - platform: template
     sensors:
       xiaomi_airpurifier_temperature:
-        friendly_name: "Температура"
+        friendly_name: "Очиститель Температура"
         value_template: "{{ state_attr('fan.xiaomi_miio_device', 'temperature') | round(2) }}"
         unit_of_measurement: "°C"
         device_class: "temperature"
       xiaomi_airpurifier_humidity:
-        friendly_name: "Влажность"
+        friendly_name: "Очиститель Влажность"
         value_template: "{{ state_attr('fan.xiaomi_miio_device', 'humidity') | round(2) }}"
         unit_of_measurement: "%"
         device_class: "humidity"
       xiaomi_airpurifier_air_quality_pm25:
-        friendly_name: "PM2.5"
+        friendly_name: "Очиститель PM2.5"
         value_template: "{{ state_attr('fan.xiaomi_miio_device', 'aqi') }}"
         unit_of_measurement: "μg/m³"
         icon_template: "mdi:weather-fog"
