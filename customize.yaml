@@ -38,3 +38,5 @@
     switch.sven_volume:
         assumed_state: false
         
+    light.0x158d00052b3ad9_light:
+        occupancy_timeout: 10

@@ -7,9 +7,6 @@
   - service: timer.cancel
     target:
         entity_id: timer.wardrobe_light
-  - service: timer.start
-    target:
-        entity_id: timer.wardrobe_light
   - service: light.turn_on
     target:
       entity_id: light.0x158d00052b3ad9_light
@@ -25,3 +22,33 @@
     service: light.turn_off
     target:
       entity_id: light.0x158d00052b3ad9_light
+      
+- alias: "Start timer if light turned on manually"
+  trigger: 
+  - platform: state
+    entity_id: light.0x158d00052b3ad9_light
+    to: "on"
+  condition:
+    condition: state
+    entity_id: binary_sensor.0x158d00054cd813_motion
+    state: "off"
+  action:
+  - service: timer.cancel
+    target:
+        entity_id: timer.wardrobe_light
+  - service: timer.start
+    target:
+        entity_id: timer.wardrobe_light
+
+- alias: "Turn off light when timer finished"
+  trigger:
+    platform: event
+    event_type: timer.finished
+    event_data:
+      entity_id: timer.wardrobe_light
+  action:
+    service: light.turn_off
+    target:
+      entity_id:
+        - light.0x158d00052b3ad9_light
+    

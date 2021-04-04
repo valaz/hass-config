@@ -81,6 +81,10 @@
                name: Освещение
              - entity: binary_sensor.0x158d00054cd813_motion
                name: Движение
+          - type: entities
+            entities:
+             - entity: timer.wardrobe_light
+               name: Таймер
            
   - type: vertical-stack
     cards:
