@@ -55,7 +55,7 @@ telegram:
                  {{"\U0001F321"}} Сенсоров недоступно - {{ states('sensor.unavailable_now_sensor') }} 
                  {{"\U0001F51F"}} Бинарных сенсоров недоступно - {{ states('sensor.unavailable_now_binary_sensor') }}   
         
-                 
+# https://apps.timwhitlock.info/emoji/tables/unicode         
     automation:  
         - id: Клавиатура телеграмм бота
           alias: telegram_keyboard
@@ -79,7 +79,13 @@ telegram:
           trigger:   
              - platform: homeassistant
                event: start          
-          action:                    
+          action:          
+             - service: notify.tg_valaz
+               data:
+                 message: | 
+                     {{"\U0001F4AC"}} Основной сервер Hass 
+                     {{"\U0001F567"}} Зафиксирован запуск в {{ states('sensor.time_date') }} 
+                     {{"\U0001F4C3"}} Отчет о состоянии будет через 1 минуту   
              - delay: 00:01:10
              - service: script.turn_on
                entity_id: script.system_report
@@ -106,7 +112,7 @@ telegram:
                entity_id: switch.philips_humidifier
                from: "on"
                to: "off"
-            #   for: "00:00:30"
+               for: "00:00:20"
           condition:
             - condition: and
               conditions:
@@ -118,6 +124,62 @@ telegram:
                data:
                  message: | 
                      {{"\U0001F4A7"}} В увлажнителе закончилась вода или он был выключен вручную.
+                
+        - id: Лампа недоступна
+          alias: light_is_offline 
+          initial_state: true
+          trigger:   
+             - platform: state
+               entity_id: light.0x158d00052b3ad9_light
+               to: "unavailable"
+          action:
+             - service: notify.tg_valaz
+               data:
+                 message: | 
+                     {{"\U0001F4A1"}} Лампа в гардеробе была выключена вручную.
+                     
+        - id: Лампа доступна
+          alias: light_is_online 
+          initial_state: true
+          trigger:   
+             - platform: state
+               entity_id: light.0x158d00052b3ad9_light
+               from: "unavailable"
+          action:
+             - service: notify.tg_valaz
+               data:
+                 message: | 
+                     {{"\U0001F4A1"}} Лампа в гардеробе снова доступна.
+                     
+                     
+                     
+        - id: WD Elements горячий
+          alias: wd_elements_is_hot 
+          initial_state: true
+          trigger:   
+             - platform: numeric_state
+               entity_id: sensor.omv_sdc
+               above: 39
+          action:
+             - service: notify.tg_valaz
+               data:
+                 message: | 
+                     {{"\U0001F51F"}} Температура WD Elements увличилась - {{ states('sensor.omv_sdc') }} °C.
+                     
+        - id: WD Elements теплый
+          alias: wd_elements_is_ok 
+          initial_state: true
+          trigger:   
+             - platform: numeric_state
+               entity_id: sensor.omv_sdc
+               below: 40
+          action:
+             - service: notify.tg_valaz
+               data:
+                 message: | 
+                     {{"\U0001F51F"}} Температура WD Elements уменьшилась - {{ states('sensor.omv_sdc') }} °C.
+                     
+
           
           
           
