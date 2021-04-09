@@ -5,7 +5,7 @@
         show_header_toggle: false
         entities:
           - entity: sensor.xiaomi_airpurifier_air_quality_pm25
-          - entity: fan.xiaomi_miio_device
+          - entity: fan.xiaomi_air_purifier_2s
           - entity: input_select.xiaomi_airpurifier_mode
           - entity: input_number.xiaomi_airpurifier_favorite_level
           - entity: switch.xiaomi_airpurifier_child_lock

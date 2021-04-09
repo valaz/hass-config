@@ -17,7 +17,7 @@
               - sensor.xiaomi_airpurifier_air_quality_pm25
           - type: entities
             entities:
-             - entity: fan.xiaomi_miio_device
+             - entity: fan.xiaomi_air_purifier_2s
              - entity: media_player.android_tv
              - entity: switch.sven_volume
           - type: glance

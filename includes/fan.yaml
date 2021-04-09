@@ -1,4 +1,0 @@
-  - platform: xiaomi_miio
-    host: 192.168.1.52
-    token: e53d2648d47c994274e19342b5fd4ea2
-    name: "Xiaomi Air Purifier 2S"

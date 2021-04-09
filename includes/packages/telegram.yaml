@@ -125,6 +125,26 @@ telegram:
                  message: | 
                      {{"\U0001F4A7"}} В увлажнителе закончилась вода или он был выключен вручную.
                 
+        - id: Увлажнитель включился
+          alias: humidifier_turned_on
+          initial_state: true
+          trigger:   
+             - platform: state
+               entity_id: switch.philips_humidifier
+               from: "off"
+               to: "on"
+          condition:
+            - condition: and
+              conditions:
+                - condition: state
+                  entity_id: switch.0x4cf8cdf3c777c79_switch
+                  state: 'on'
+          action:
+             - service: notify.tg_valaz
+               data:
+                 message: | 
+                     {{"\U0001F4A7"}} Увлажнитель снова работает.
+                
         - id: Лампа недоступна
           alias: light_is_offline 
           initial_state: true
@@ -191,7 +211,7 @@ telegram:
              - service: notify.tg_valaz
                data:
                  message: | 
-                     {{"\U0001F9F9"}}{{"\U0001F50B"}} Пылесос готов убираться.
+                     {{"\U0001F9F9"}}{{"\U0001F50B"}} Пылесос готов к уборке.
 
         - id: Roborock завершил уборку
           alias: roborock_finished_cleaning 
@@ -199,6 +219,7 @@ telegram:
           trigger:   
              - platform: state
                entity_id: vacuum.roborock_s5
+               from: "cleaning"
                to: "docked"
           action:
              - service: notify.tg_valaz
