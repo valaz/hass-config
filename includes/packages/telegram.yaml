@@ -178,6 +178,46 @@ telegram:
                data:
                  message: | 
                      {{"\U0001F51F"}} Температура WD Elements уменьшилась - {{ states('sensor.omv_sdc') }} °C.
+
+        - id: Roborock зараяжен
+          alias: roborock_is_charged 
+          initial_state: true
+          trigger:   
+             - platform: state
+               entity_id: binary_sensor.roborock_is_charged
+               from: "off"
+               to: "on"
+          action:
+             - service: notify.tg_valaz
+               data:
+                 message: | 
+                     {{"\U0001F9F9"}}{{"\U0001F50B"}} Пылесос готов убираться.
+
+        - id: Roborock завершил уборку
+          alias: roborock_finished_cleaning 
+          initial_state: true
+          trigger:   
+             - platform: state
+               entity_id: vacuum.roborock_s5
+               to: "docked"
+          action:
+             - service: notify.tg_valaz
+               data:
+                 message: | 
+                     {{"\U0001F9F9"}} Пылесос закончил уборку.
+
+        - id: Roborock начал уборку
+          alias: roborock_started_cleaning 
+          initial_state: true
+          trigger:   
+             - platform: state
+               entity_id: vacuum.roborock_s5
+               to: "cleaning"
+          action:
+             - service: notify.tg_valaz
+               data:
+                 message: | 
+                     {{"\U0001F9F9"}} Пылесос начал уборку.
                      
 
           

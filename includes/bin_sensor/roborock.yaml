@@ -1,0 +1,6 @@
+  - platform: template
+    sensors:
+      roborock_is_charged:
+        friendly_name: "Roborock is charged"
+        value_template: >-
+          {{ state_attr('vacuum.roborock_s5', 'battery_level')|float > 90 }}

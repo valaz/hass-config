@@ -39,6 +39,16 @@
   - service: timer.start
     target:
         entity_id: timer.wardrobe_light
+        
+- alias: "Cancel timer if light turned off"
+  trigger: 
+  - platform: state
+    entity_id: light.0x158d00052b3ad9_light
+    to: "off"
+  action:
+  - service: timer.cancel
+    target:
+        entity_id: timer.wardrobe_light
 
 - alias: "Turn off light when timer finished"
   trigger:
@@ -51,4 +61,6 @@
     target:
       entity_id:
         - light.0x158d00052b3ad9_light
+        
+
     
