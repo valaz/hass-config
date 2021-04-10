@@ -10,58 +10,68 @@
                 url: https://valaz.asuscomm.com:8443/
                 icon: mdi:router-wireless-settings
           - type: divider
-          - type: custom:mini-graph-card
-            name: 'Скорость загрузки'
-            animate: true
-            hour24: true
-            color_thresholds:
-              - value: 35
-                color: "#539652"
-              - value: 50
-                color: "#f39c12"
-              - value: 80
-                color: "#c0392b"
-            hours_to_show: 1
-            points_per_hour: 60
-            update_interval: 10
-            entities:
-              - entity: sensor.asuswrt_download_speed
-          - type: custom:mini-graph-card
-            name: 'Скорость выгрузки'
-            animate: true
-            hour24: true
-            color_thresholds:
-              - value: 35
-                color: "#539652"
-              - value: 50
-                color: "#f39c12"
-              - value: 80
-                color: "#c0392b"
-            hours_to_show: 1
-            points_per_hour: 60
-            update_interval: 10
-            entities:
-              - entity: sensor.asuswrt_upload_speed
+          - type: horizontal-stack
+            cards:
+              - type: custom:mini-graph-card
+                name: 'Скорость загрузки'
+                animate: true
+                hour24: true
+                color_thresholds:
+                  - value: 35
+                    color: "#539652"
+                  - value: 50
+                    color: "#f39c12"
+                  - value: 80
+                    color: "#c0392b"
+                hours_to_show: 1
+                points_per_hour: 60
+                update_interval: 10
+                entities:
+                  - entity: sensor.asuswrt_download_speed
+              - type: custom:mini-graph-card
+                name: 'Скорость выгрузки'
+                animate: true
+                hour24: true
+                color_thresholds:
+                  - value: 35
+                    color: "#ffba08"
+                  - value: 50
+                    color: "#f48c06"
+                  - value: 80
+                    color: "#d00000"
+                hours_to_show: 1
+                points_per_hour: 60
+                update_interval: 10
+                entities:
+                  - entity: sensor.asuswrt_upload_speed
       - type: glance
         columns: 4
         title: 'Устройства в сети'
         entities:
           - entity: sensor.asuswrt_devices_connected
             name: 'Количество'
+            icon: mdi:account-multiple
           - entity: device_tracker.iphone_12_az
             name: 'iPhone Азат'
+            icon: mdi:cellphone
           - entity: device_tracker.ipad_6_az_2
             name: 'Планшет Азат'
+            icon: mdi:tablet
           - entity: device_tracker.deskmini
             name: 'Deskmini'
+            icon: mdi:desktop-tower
           - entity: device_tracker.mbp15
             name: 'Макбук'
+            icon: mdi:laptop
           - entity: device_tracker.iphone_elia_2
             name: 'iPhone Эля'
+            icon: mdi:cellphone
           - entity: device_tracker.iphone_elia
             name: 'iPhone Эля'
+            icon: mdi:cellphone
           - entity: device_tracker.huawei_mediapad_m5_lite_9
             name: 'Планшет Эля'
+            icon: mdi:tablet
             
   - type: vertical-stack
     cards:
@@ -77,38 +87,40 @@
               - entity: binary_sensor.omv_update_available
               - entity: sensor.omv_uptime
               - type: divider
-          - type: custom:mini-graph-card
-            name: 'CPU'
-            animate: true
-            hour24: true
-            color_thresholds:
-              - value: 35
-                color: "#539652"
-              - value: 50
-                color: "#f39c12"
-              - value: 80
-                color: "#c0392b"
-            hours_to_show: 24
-            points_per_hour: 12
-            update_interval: 30
-            entities:
-              - entity: sensor.omv_cpu_load
-          - type: custom:mini-graph-card
-            name: 'RAM'
-            animate: true
-            hour24: true
-            color_thresholds:
-              - value: 35
-                color: "#539652"
-              - value: 50
-                color: "#f39c12"
-              - value: 80
-                color: "#c0392b"
-            hours_to_show: 24
-            points_per_hour: 12
-            update_interval: 30
-            entities:
-              - entity: sensor.omv_memory
+          - type: horizontal-stack
+            cards:
+              - type: custom:mini-graph-card
+                name: 'CPU'
+                animate: true
+                hour24: true
+                color_thresholds:
+                  - value: 35
+                    color: "#539652"
+                  - value: 50
+                    color: "#f39c12"
+                  - value: 80
+                    color: "#c0392b"
+                hours_to_show: 24
+                points_per_hour: 12
+                update_interval: 30
+                entities:
+                  - entity: sensor.omv_cpu_load
+              - type: custom:mini-graph-card
+                name: 'RAM'
+                animate: true
+                hour24: true
+                color_thresholds:
+                  - value: 35
+                    color: "#539652"
+                  - value: 50
+                    color: "#f39c12"
+                  - value: 80
+                    color: "#c0392b"
+                hours_to_show: 24
+                points_per_hour: 12
+                update_interval: 30
+                entities:
+                  - entity: sensor.omv_memory
                   
                   
       - type: entities
@@ -142,3 +154,112 @@
               icon: true
               extrema: true
               fill: true
+                
+  - type: vertical-stack
+    cards:
+      - type: custom:vertical-stack-in-card
+        title: 'Transmission'
+        cards:
+          - type: entities
+            entities:
+              - type: weblink
+                name: 'Transmission Panel'
+                url: http://192.168.1.106:9091/transmission/web/
+                icon: mdi:download-box
+          - type: entities
+            entities:
+              - entity: switch.transmission_switch
+                name: Вкл/Выкл
+              - entity: switch.transmission_turtle_mode
+                name: Замедленный режим
+          - type: divider
+          - type: horizontal-stack
+            cards:
+              - type: custom:mini-graph-card
+                name: 'Скорость загрузки'
+                animate: true
+                hour24: true
+                color_thresholds:
+                  - value: 4
+                    color: "#95d5b2"
+                  - value: 7
+                    color: "#52b788"
+                  - value: 10
+                    color: "#1b4332"
+                hours_to_show: 1
+                points_per_hour: 60
+                update_interval: 10
+                entities:
+                  - entity: sensor.transmission_down_speed
+              - type: custom:mini-graph-card
+                name: 'Скорость выгрузки'
+                animate: true
+                hour24: true
+                color_thresholds:
+                  - value: 4
+                    color: "#ffba08"
+                  - value: 7
+                    color: "#f48c06"
+                  - value: 10
+                    color: "#d00000"
+                hours_to_show: 1
+                points_per_hour: 60
+                update_interval: 10
+                entities:
+                  - entity: sensor.transmission_up_speed
+      - type: glance
+        columns: 5
+        title: 'Статистика'
+        entities:
+          - entity: sensor.transmission_total_torrents
+            name: 'Всего'
+            # icon: mdi:download-multiple
+          - entity: sensor.transmission_active_torrents
+            name: 'Активно'
+            # icon: mdi:progress-download
+          - entity: sensor.transmission_completed_torrents
+            name: 'Завершено'
+            # icon: mdi:download-circle
+          - entity: sensor.transmission_started_torrents
+            name: 'Начато'
+            # icon: mdi:play
+          - entity: sensor.transmission_paused_torrents
+            name: 'На паузе'
+            # icon: mdi:pause
+                
+  - type: vertical-stack
+    cards:
+      - type: custom:vertical-stack-in-card
+        title: 'Pi-hole'
+        cards:
+          - type: entities
+            entities:
+              - type: weblink
+                name: 'Pi-hole Panel'
+                url: http://192.168.1.115/admin/index.php
+                icon: mdi:pi-hole
+          - type: entities
+            entities:
+              - entity: switch.pi_hole
+                name: Вкл/Выкл
+      - type: glance
+        columns: 4
+        title: 'Статистика'
+        show_name: false
+        entities:
+          - entity: sensor.pi_hole_dns_queries_today
+            name: 'Всего запросов'
+          - entity: sensor.pi_hole_ads_blocked_today
+            name: 'Заблокированых запросов'
+          - entity: sensor.pi_hole_ads_percentage_blocked_today
+            name: 'Процент блокировки'
+          - entity: sensor.pi_hole_domains_blocked
+            name: 'Заблокированных доменов'
+          - entity: sensor.pi_hole_seen_clients
+            name: 'Всего клиентов'
+          - entity: sensor.pi_hole_dns_unique_clients
+            name: 'Уникальных клиентов'
+                
+                
+                
+                

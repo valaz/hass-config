@@ -40,3 +40,22 @@
         
     light.0x158d00052b3ad9_light:
         occupancy_timeout: 10
+        
+    switch.transmission_switch:
+        icon: 'hass:power'
+    switch.transmission_turtle_mode:
+        icon: 'hass:turtle'
+    sensor.transmission_status:
+        icon: 'hass:information-outline'
+    sensor.transmission_up_speed:
+        icon: 'hass:upload-outline'
+    sensor.transmission_down_speed:
+        icon: 'hass:download-outline'
+    sensor.transmission_active_torrents:
+        icon: 'hass:dots-horizontal'
+    sensor.transmission_completed_torrents:
+        icon: 'hass:check-outline'
+    sensor.transmission_paused_torrents:
+        icon: 'hass:pause'
+    sensor.transmission_started_torrents:
+        icon: 'hass:play-outline'

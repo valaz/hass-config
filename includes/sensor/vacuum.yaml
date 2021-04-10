@@ -8,8 +8,14 @@
         friendly_name: "Уровень заряда"
         value_template: "{{ state_attr('vacuum.roborock_s5', 'battery_level') | round(0) }}"
         unit_of_measurement: "%"
-
-        
+      roborock_s5_cleaned_area:
+        friendly_name: "Убраная площадь"
+        value_template: "{{ state_attr('vacuum.roborock_s5', 'cleaned_area') }}"
+        unit_of_measurement: "m2"
+      roborock_s5_cleaning_time:
+        friendly_name: "Убраная площадь"
+        value_template: "{{ state_attr('vacuum.roborock_s5', 'cleaning_time') }}"
+        unit_of_measurement: "мин"
         
  
   - platform: template
