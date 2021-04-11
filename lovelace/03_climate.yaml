@@ -1,4 +1,6 @@
-
+title: Климат
+icon: mdi:home-thermometer
+cards: 
   - type: vertical-stack
     cards:
       - type: markdown

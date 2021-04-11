@@ -179,12 +179,12 @@ telegram:
           trigger:   
              - platform: numeric_state
                entity_id: sensor.omv_sdc
-               above: 39
+               above: 44
           action:
              - service: notify.tg_valaz
                data:
                  message: | 
-                     {{"\U0001F51F"}} Температура WD Elements увличилась - {{ states('sensor.omv_sdc') }} °C.
+                     {{"\U0001F51F"}} Температура WD Elements увеличилась - {{ states('sensor.omv_sdc') }} °C.
                      
         - id: WD Elements теплый
           alias: wd_elements_is_ok 
@@ -192,7 +192,7 @@ telegram:
           trigger:   
              - platform: numeric_state
                entity_id: sensor.omv_sdc
-               below: 40
+               below: 45
           action:
              - service: notify.tg_valaz
                data:

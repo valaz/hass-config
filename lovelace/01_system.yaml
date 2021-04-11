@@ -1,5 +1,6 @@
-
-
+title: Главная
+icon: mdi:home-assistant
+cards: 
   - type: vertical-stack
     cards:
       - type: weather-forecast
@@ -23,6 +24,13 @@
         - type: divider
         - entity: sensor.hacs
           name: HACS
+        - entity: sensor.current_ha
+          type: custom:multiple-entity-row
+          name: Home Assistant
+          state_header: Установлен
+          entities:
+            - entity: sensor.version
+              name: Последняя версия
    #=============================
   #=== Component Counts
   #=============================

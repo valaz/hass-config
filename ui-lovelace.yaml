@@ -7,27 +7,10 @@ swipe_nav:
   swipe_amount: 30
 
 views:
-
-  - title: Главная
-    icon: mdi:home-assistant
-    cards: !include includes/views/common_cards.yaml
-
-  - title: Дом
-    icon: mdi:home
-    cards: !include includes/views/rooms_cards.yaml
-
-  - title: Климат
-    icon: mdi:home-thermometer
-    cards: !include includes/views/climate_cards.yaml
-
-  - title: Devices
-    icon: mdi:sitemap
-    cards: !include includes/views/devices_cards.yaml
-
-  - title: Homelab
-    icon: mdi:server-network
-    cards: !include includes/views/homelab_cards.yaml
-
-  - title: Zigbee
-    icon: mdi:zigbee
-    cards: !include includes/views/zigbee_cards.yaml
+  - !include lovelace/01_system.yaml
+  - !include lovelace/02_rooms.yaml
+  - !include lovelace/03_climate.yaml
+  - !include lovelace/04_devices.yaml
+  - !include lovelace/05_homelab.yaml
+  - !include lovelace/06_zigbee.yaml
+  

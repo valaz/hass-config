@@ -1,3 +1,6 @@
+title: Homelab
+icon: mdi:server-network
+cards:
   - type: vertical-stack
     cards:
       - type: custom:vertical-stack-in-card

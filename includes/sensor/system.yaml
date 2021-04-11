@@ -84,3 +84,13 @@
                {% endif %}
              {% endif %}
         icon_template: mdi:clock
+        
+  - platform: version
+    name: current_ha
+    scan_interval: 1800
+  
+  - platform: template
+    sensors:
+      version:
+        friendly_name: 'Последняя версия'
+        value_template: '{{ states.binary_sensor.updater.attributes["newest_version"] }}'

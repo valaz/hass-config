@@ -1,4 +1,6 @@
-
+itle: Дом
+icon: mdi:home
+cards: 
   - type: vertical-stack
     cards:
     #   - type: markdown

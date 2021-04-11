@@ -1,4 +1,6 @@
-
+title: Devices
+icon: mdi:sitemap
+cards: 
   - type: vertical-stack
     cards:
       - type: entities
