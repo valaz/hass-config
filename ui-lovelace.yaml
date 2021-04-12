@@ -13,4 +13,5 @@ views:
   - !include lovelace/04_devices.yaml
   - !include lovelace/05_homelab.yaml
   - !include lovelace/06_zigbee.yaml
+  - !include lovelace/31_automation.yaml
   
