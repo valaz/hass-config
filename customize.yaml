@@ -29,14 +29,24 @@
         friendly_name: 'Розетка'
         device_class: outlet
         icon: mdi:power-socket-eu
-        
     sensor.0x4cf8cdf3c777c79_consumption:
+        friendly_name: 'Потребление розетки'
+        device_class: energy
+        
+    switch.0x4cf8cdf3c764d02_switch:
+        friendly_name: 'Розетка'
+        device_class: outlet
+        icon: mdi:power-socket-eu
+    sensor.0x4cf8cdf3c764d02_consumption:
         friendly_name: 'Потребление розетки'
         device_class: energy
         
         
     switch.sven_volume:
         assumed_state: false
+    switch.philips_wol:
+        assumed_state: false
+        icon: mdi:network
         
     light.0x158d00052b3ad9_light:
         occupancy_timeout: 10

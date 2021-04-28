@@ -1,0 +1,42 @@
+# Автовключение
+- alias: speakers_volume_auto_on
+  initial_state: true
+  trigger:
+    platform: state
+    entity_id: binary_sensor.philips_tv_screen
+    to: "on"
+  condition:
+    - condition: state
+      entity_id: switch.sven_volume
+      state: "off"
+  action:
+    - service: system_log.write
+      data_template:
+        level: info
+        logger: automation_sven_volume_auto
+        message: "TV Screen is ON now!"
+    - service: switch.turn_on
+      entity_id: switch.sven_volume
+    # - service: script.call_sven_vol_up_32
+
+# Автовыключение
+- alias: speakers_volume_auto_off
+  initial_state: true
+  trigger:
+    platform: state
+    entity_id: binary_sensor.philips_tv_screen
+    to: "off"
+    for: "00:00:10"
+  condition:
+    - condition: state
+      entity_id: switch.sven_volume
+      state: "on"
+  action:
+    - service: system_log.write
+      data_template:
+        level: info
+        logger: automation_sven_volume_auto
+        message: "TV screen is OFF now!"
+    - service: switch.turn_off
+      entity_id: switch.sven_volume
+    # - service: script.call_sven_vol_down_32      

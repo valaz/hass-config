@@ -193,11 +193,13 @@ telegram:
 
         - id: Roborock зараяжен
           alias: roborock_is_charged 
-          initial_state: true
+          initial_state: false
           trigger:   
               - platform: numeric_state
                 entity_id: sensor.roborock_s5_battery
                 above: 90
+                for:
+                  minutes: 1
             #  - platform: state
             #   entity_id: binary_sensor.roborock_is_charged
             #   from: "off"
@@ -231,6 +233,7 @@ telegram:
           trigger:   
              - platform: state
                entity_id: vacuum.roborock_s5
+               from: "docked"
                to: "cleaning"
           action:
              - service: notify.tg_valaz

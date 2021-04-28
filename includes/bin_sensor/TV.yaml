@@ -1,0 +1,6 @@
+  - platform: template
+    sensors:
+      philips_tv_screen:
+        friendly_name: "Экран телевизора"
+        value_template: >-
+          {{ states('sensor.0x4cf8cdf3c764d02_power') | float > 15 }}

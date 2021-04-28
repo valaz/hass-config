@@ -1,43 +1,63 @@
 # Автовыключение
 - alias: sven_volume_auto_off
-  initial_state: true
+  initial_state: false
   trigger:
     platform: state
-    entity_id: media_player.android_tv
+    entity_id: media_player.mi_box
   condition:
     - condition: and
       conditions:
         - condition: state
-          entity_id: media_player.android_tv
-          state: 'off'
+          entity_id: switch.sven_volume
+          state: "on"
+        - condition: or
+          conditions:
+            - condition: state
+              entity_id: media_player.mi_box
+              state: 'off'
+              for:
+                seconds: 15
+            - condition: state
+              entity_id: media_player.mi_box
+              state: 'unavailable'
+              for:
+                seconds: 15
   action:
     - service: system_log.write
       data_template:
         level: info
-        logger: automation_sven_volume_auto_off
-        message: "Philips TV is Off now!"
+        logger: automation_sven_volume_auto
+        message: "Mi Box is Off now!"
     - service: switch.turn_off
       entity_id: switch.sven_volume
     # - service: script.call_sven_vol_down_32
       
 # Автовключение
 - alias: sven_volume_auto_on
-  initial_state: true
+  initial_state: false
   trigger:
     platform: state
-    entity_id: media_player.android_tv
+    entity_id: media_player.mi_box
   condition:
     - condition: and
       conditions:
         - condition: state
-          entity_id: media_player.android_tv
-          state: 'on'
+          entity_id: switch.sven_volume
+          state: "off"
+        - condition: not
+          conditions:
+            - condition: state
+              entity_id: media_player.mi_box
+              state: 'off'
+            - condition: state
+              entity_id: media_player.mi_box
+              state: 'unavailable'
   action:
     - service: system_log.write
       data_template:
         level: info
-        logger: automation_sven_volume_auto_off
-        message: "Philips TV is On now!"
+        logger: automation_sven_volume_auto
+        message: "Mi Box TV is On now!"
     - service: switch.turn_on
       entity_id: switch.sven_volume
     # - service: script.call_sven_vol_up_32

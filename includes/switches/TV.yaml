@@ -1,0 +1,4 @@
+
+  - platform: wake_on_lan
+    mac: 70:AF:24:A7:F5:13
+    name: Philips wol
