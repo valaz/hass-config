@@ -30,6 +30,12 @@
         device_class: outlet
         icon: mdi:power-socket-eu
     sensor.0x4cf8cdf3c777c79_consumption:
+        type: 'consumption'
+        friendly_name: 'Потребление розетки'
+        device_class: energy
+    sensor.0x4cf8cdf3c777c79_power:
+        type: 'power'
+        room: 'Спальня'
         friendly_name: 'Потребление розетки'
         device_class: energy
         
@@ -38,8 +44,15 @@
         device_class: outlet
         icon: mdi:power-socket-eu
     sensor.0x4cf8cdf3c764d02_consumption:
+        type: 'consumption'
         friendly_name: 'Потребление розетки'
         device_class: energy
+    sensor.0x4cf8cdf3c764d02_power:
+        type: 'power'
+        room: 'Гостиная'
+        friendly_name: 'Потребление розетки'
+        device_class: energy
+        
         
         
     switch.sven_volume:

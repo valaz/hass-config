@@ -77,6 +77,8 @@ influxdb:
   component_config:
     sensor.xiaomi_airpurifier_air_quality_pm25:
       override_measurement: aqi
+    sensor.omv_sdc:
+      override_measurement: drive
   component_config_glob:
     sensor.*humidity:
       override_measurement: humidity
@@ -84,8 +86,13 @@ influxdb:
       override_measurement: temperature
     sensor.*battery*:
       override_measurement: battery
+    sensor.*power*:
+      override_measurement: energy
+    sensor.*consumption*:
+      override_measurement: energy
   tags_attributes:
     - room
+    - type
     - friendly_name
 
 telegram_bot:

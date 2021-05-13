@@ -3,12 +3,16 @@
   initial_state: true
   trigger:
     platform: state
-    entity_id: binary_sensor.philips_tv_screen
-    to: "on"
+    entity_id: sensor.0x4cf8cdf3c764d02_power
   condition:
-    - condition: state
-      entity_id: switch.sven_volume
-      state: "off"
+    - condition: and
+      conditions:
+        - condition: state
+          entity_id: binary_sensor.philips_tv_screen
+          state: "on"
+        - condition: state
+          entity_id: switch.sven_volume
+          state: "off"
   action:
     - service: system_log.write
       data_template:
@@ -24,13 +28,16 @@
   initial_state: true
   trigger:
     platform: state
-    entity_id: binary_sensor.philips_tv_screen
-    to: "off"
-    for: "00:00:10"
+    entity_id: sensor.0x4cf8cdf3c764d02_power
   condition:
-    - condition: state
-      entity_id: switch.sven_volume
-      state: "on"
+    - condition: and
+      conditions:
+        - condition: state
+          entity_id: binary_sensor.philips_tv_screen
+          state: "off"
+        - condition: state
+          entity_id: switch.sven_volume
+          state: "on"
   action:
     - service: system_log.write
       data_template:
