@@ -105,7 +105,7 @@ cards:
       - type: horizontal-stack
         cards:
           - type: gauge
-            name: Диск заполнен
+            name: Диск заполненн
             unit: '%'
             entity: sensor.disk_use_percent
             severity:
@@ -124,3 +124,20 @@ cards:
         entities:
           - entity: sensor.maria_db_size
             name: Maria DB
+      
+      - type: custom:mini-graph-card
+        entities:
+          - entity: sensor.cpu_temp_package
+        name: 'Температура процессора'
+        animate: true
+        hour24: true
+        color_thresholds:
+          - value: 60
+            color: "#539652"
+          - value: 80
+            color: "#f39c12"
+          - value: 90
+            color: "#c0392b"
+        hours_to_show: 1
+        points_per_hour: 60
+        update_interval: 10

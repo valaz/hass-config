@@ -94,3 +94,19 @@
       version:
         friendly_name: 'Последняя версия'
         value_template: '{{ states.binary_sensor.updater.attributes["newest_version"] }}'
+        
+  - platform: influxdb
+    host: !secret influxdb_host
+    username: !secret influxdb_username
+    password: !secret influxdb_password
+    queries:
+    - name: CPU Temp Package
+      unit_of_measurement: °C
+      value_template: '{{ value | round(1) }}'
+      group_function: last
+      where: '"sensor" = ''coretemp_packageid0_input'''
+      measurement: '"temp"'
+      field: temp
+      database: homelab_telegraf
+      
+      

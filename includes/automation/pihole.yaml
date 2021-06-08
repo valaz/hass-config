@@ -1,0 +1,35 @@
+- alias: "Start timer when Pihole disabled"
+  trigger:
+  - platform: state
+    entity_id: switch.pi_hole
+    to: "off"
+  action:
+  - service: timer.cancel
+    target:
+        entity_id: timer.pihole
+  - service: timer.start
+    target:
+        entity_id: timer.pihole
+        
+- alias: "Cancel timer when Pihole enabled"
+  trigger:
+  - platform: state
+    entity_id: switch.pi_hole
+    to: "on"
+  action:
+  - service: timer.cancel
+    target:
+        entity_id: timer.pihole
+        
+- alias: "Enable Pihole after timer finished"
+  trigger:
+    platform: event
+    event_type: timer.finished
+    event_data:
+      entity_id: timer.pihole
+  action:
+    service: switch.turn_on
+    target:
+      entity_id:
+        - switch.pi_hole
+        

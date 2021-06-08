@@ -46,6 +46,28 @@ telegram:
                  {{"\U0001F50C"}} Свичей недоступно - {{ states('sensor.unavailable_now_switch') }} 
                  {{"\U0001F321"}} Сенсоров недоступно - {{ states('sensor.unavailable_now_sensor') }} 
                  {{"\U0001F51F"}} Бинарных сенсоров недоступно - {{ states('sensor.unavailable_now_binary_sensor') }}   
+      climate_report:
+        alias: Отправка отчета о состоянии климата
+        sequence:
+         - service: notify.tg_valaz
+           data:
+             message: | 
+                 {{"\U0001F333"}} Климат в квартире
+                 {{"\U0001F567"}} Отчет за {{ states('sensor.time_date') }}
+                 {{"\U0001F4FA"}} Гостиная - {{ states('sensor.xiaomi_airpurifier_temperature') }} °C, {{ states('sensor.xiaomi_airpurifier_humidity') }} %
+                 {{"\U0001F468"}} Спальня - {{ states('sensor.rm4_mini_temperature') }} °C, {{ states('sensor.rm4_mini_humidity') }} %
+                 {{"\U0001F476"}} Детская - {{ states('sensor.0x158d000586695c_temperature') }} °C, {{ states('sensor.0x158d000586695c_humidity') }} %
+                 {{"\U0001F52A"}} Кухня - {{ states('sensor.0x158d0005800735_temperature') }} °C, {{ states('sensor.0x158d0005800735_humidity') }} %
+      homelab_report:
+        alias: Отправка отчета о состоянии homelab
+        sequence:
+         - service: notify.tg_valaz
+           data:
+             message: | 
+                 {{"\U00002699"}} Homelab
+                 {{"\U0001F567"}} Отчет за {{ states('sensor.time_date') }}
+                 {{"\U00002600"}} CPU - {{ states('sensor.cpu_temp_package') }} °C
+                 {{"\U0001F4BD"}} WD Elements - {{ states('sensor.omv_sdc') }} °C
         
 # https://apps.timwhitlock.info/emoji/tables/unicode         
     automation:  
@@ -64,6 +86,8 @@ telegram:
               data:
                 keyboard:
                   - '/report' 
+                  - '/climate' 
+                  - '/homelab'
 
         - id: Отчет при запуске системы
           alias: start_message
@@ -94,6 +118,32 @@ telegram:
            - service: script.turn_on
              entity_id: 
                 - script.system_report
+                
+        - id: Запрос на климат             
+          alias: send_climate_report
+          initial_state: true
+          trigger:
+          - platform: event
+            event_type: telegram_command
+            event_data:
+              command: '/climate'
+          action:
+           - service: script.turn_on
+             entity_id: 
+                - script.climate_report
+                
+        - id: Запрос на homelab             
+          alias: send_homelab_report
+          initial_state: true
+          trigger:
+          - platform: event
+            event_type: telegram_command
+            event_data:
+              command: '/homelab'
+          action:
+           - service: script.turn_on
+             entity_id: 
+                - script.homelab_report
                 
                 
         - id: Увлажнитель выключился
@@ -165,6 +215,32 @@ telegram:
                      
                      
                      
+        - id: CPU горячий
+          alias: cpu_temp_is_hot 
+          initial_state: true
+          trigger:   
+             - platform: numeric_state
+               entity_id: sensor.cpu_temp_package
+               above: 84
+          action:
+             - service: notify.tg_valaz
+               data:
+                 message: | 
+                     {{"\U0001F975"}} Температура CPU увеличилась - {{ states('sensor.cpu_temp_package') }} °C.
+                     
+        - id: CPU теплый
+          alias: cpu_temp_is_ok 
+          initial_state: true
+          trigger:   
+             - platform: numeric_state
+               entity_id: sensor.cpu_temp_package
+               below: 85
+          action:
+             - service: notify.tg_valaz
+               data:
+                 message: | 
+                     {{"\U0001F976"}} Температура CPU уменьшилась - {{ states('sensor.cpu_temp_package') }} °C.
+                     
         - id: WD Elements горячий
           alias: wd_elements_is_hot 
           initial_state: true
@@ -176,7 +252,7 @@ telegram:
              - service: notify.tg_valaz
                data:
                  message: | 
-                     {{"\U0001F51F"}} Температура WD Elements увеличилась - {{ states('sensor.omv_sdc') }} °C.
+                     {{"\U0001F4BD"}} Температура WD Elements увеличилась - {{ states('sensor.omv_sdc') }} °C.
                      
         - id: WD Elements теплый
           alias: wd_elements_is_ok 
@@ -189,7 +265,7 @@ telegram:
              - service: notify.tg_valaz
                data:
                  message: | 
-                     {{"\U0001F51F"}} Температура WD Elements уменьшилась - {{ states('sensor.omv_sdc') }} °C.
+                     {{"\U0001F4BD"}} Температура WD Elements уменьшилась - {{ states('sensor.omv_sdc') }} °C.
 
         - id: Roborock зараяжен
           alias: roborock_is_charged 

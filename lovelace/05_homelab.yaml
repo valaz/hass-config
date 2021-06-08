@@ -245,6 +245,10 @@ cards:
             entities:
               - entity: switch.pi_hole
                 name: Вкл/Выкл
+          - type: entities
+            entities:
+             - entity: timer.pihole
+               name: Таймер
       - type: glance
         columns: 4
         title: 'Статистика'

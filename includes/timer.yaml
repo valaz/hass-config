@@ -1,2 +1,5 @@
   wardrobe_light:
     duration: '00:01:00'
+    
+  pihole:
+    duration: '00:05:00'
