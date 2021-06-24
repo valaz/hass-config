@@ -66,8 +66,9 @@ telegram:
              message: | 
                  {{"\U00002699"}} Homelab
                  {{"\U0001F567"}} Отчет за {{ states('sensor.time_date') }}
-                 {{"\U00002600"}} CPU - {{ states('sensor.cpu_temp_package') }} °C
-                 {{"\U0001F4BD"}} WD Elements - {{ states('sensor.omv_sdc') }} °C
+                 {{"\U00002600"}} CPU - {{ states('sensor.proxmox_cpu_temperature') }} °C
+                 {{"\U0001F4BD"}} Samsung 970 EVO - {{ states('sensor.samsung_ssd_970_evo_250gb_temperature') }} °C
+                 {{"\U0001F4BD"}} WD Elements - {{ states('sensor.wdc_wd140edfz_11a0va0_temperature') }} °C
         
 # https://apps.timwhitlock.info/emoji/tables/unicode         
     automation:  
@@ -226,7 +227,7 @@ telegram:
              - service: notify.tg_valaz
                data:
                  message: | 
-                     {{"\U0001F975"}} Температура CPU увеличилась - {{ states('sensor.cpu_temp_package') }} °C.
+                     {{"\U0001F975"}} Температура CPU увеличилась - {{ states('sensor.proxmox_cpu_temperature') }} °C.
                      
         - id: CPU теплый
           alias: cpu_temp_is_ok 
@@ -239,7 +240,7 @@ telegram:
              - service: notify.tg_valaz
                data:
                  message: | 
-                     {{"\U0001F976"}} Температура CPU уменьшилась - {{ states('sensor.cpu_temp_package') }} °C.
+                     {{"\U0001F976"}} Температура CPU уменьшилась - {{ states('sensor.proxmox_cpu_temperature') }} °C.
                      
         - id: WD Elements горячий
           alias: wd_elements_is_hot 

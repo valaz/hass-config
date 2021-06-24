@@ -82,3 +82,12 @@
         icon: 'hass:pause'
     sensor.transmission_started_torrents:
         icon: 'hass:play-outline'
+        
+        
+    sensor.proxmox_cpu_usage:
+        icon: 'mdi:speedometer'
+    sensor.proxmox_ram_usage:
+        icon: 'mdi:memory'
+    sensor.proxmox_swap_usage:
+        icon: 'mdi:memory'
+        

@@ -57,7 +57,7 @@ cards:
           - entity: device_tracker.iphone_12_az
             name: 'iPhone Азат'
             icon: mdi:cellphone
-          - entity: device_tracker.ipad_6_az_2
+          - entity: device_tracker.ipad_6_az
             name: 'Планшет Азат'
             icon: mdi:tablet
           - entity: device_tracker.deskmini
@@ -66,15 +66,159 @@ cards:
           - entity: device_tracker.mbp15
             name: 'Макбук'
             icon: mdi:laptop
-          - entity: device_tracker.iphone_elia_2
-            name: 'iPhone Эля'
-            icon: mdi:cellphone
           - entity: device_tracker.iphone_elia
             name: 'iPhone Эля'
             icon: mdi:cellphone
           - entity: device_tracker.huawei_mediapad_m5_lite_9
             name: 'Планшет Эля'
             icon: mdi:tablet
+      - type: custom:vertical-stack-in-card
+        title: 'Pi-hole'
+        cards:
+          - type: entities
+            entities:
+              - type: weblink
+                name: 'Pi-hole Panel'
+                url: http://192.168.1.115/admin/index.php
+                icon: mdi:pi-hole
+              - entity: switch.pi_hole
+                name: Вкл/Выкл
+              - entity: timer.pihole
+                name: Таймер
+      - type: glance
+        columns: 4
+        title: 'Статистика'
+        show_name: false
+        entities:
+          - entity: sensor.pi_hole_dns_queries_today
+            name: 'Всего запросов'
+          - entity: sensor.pi_hole_ads_blocked_today
+            name: 'Заблокированых запросов'
+          - entity: sensor.pi_hole_ads_percentage_blocked_today
+            name: 'Процент блокировки'
+          - entity: sensor.pi_hole_domains_blocked
+            name: 'Заблокированных доменов'
+          - entity: sensor.pi_hole_seen_clients
+            name: 'Всего клиентов'
+          - entity: sensor.pi_hole_dns_unique_clients
+            name: 'Уникальных клиентов'
+            
+  - type: vertical-stack
+    cards:
+      - type: custom:vertical-stack-in-card
+        title: Proxmox
+        cards:
+          - type: entities
+            entities:
+              - type: weblink
+                name: 'Proxmox Admin Panel'
+                url: https://valaz.asuscomm.com:8006/
+                icon: mdi:database
+          - type: divider
+          - type: custom:mini-graph-card
+            entities:
+              - entity: sensor.proxmox_cpu_temperature
+            name: 'Температура процессора'
+            animate: true
+            hour24: true
+            color_thresholds:
+              - value: 60
+                color: "#539652"
+              - value: 80
+                color: "#f39c12"
+              - value: 90
+                color: "#c0392b"
+            hours_to_show: 1
+            points_per_hour: 60
+            update_interval: 10
+          - type: horizontal-stack
+            cards:
+              - type: custom:mini-graph-card
+                name: 'CPU'
+                animate: true
+                hour24: true
+                color_thresholds:
+                  - value: 35
+                    color: "#539652"
+                  - value: 50
+                    color: "#f39c12"
+                  - value: 80
+                    color: "#c0392b"
+                hours_to_show: 24
+                points_per_hour: 12
+                update_interval: 30
+                entities:
+                  - entity: sensor.proxmox_cpu_usage
+              - type: custom:mini-graph-card
+                name: 'RAM'
+                animate: true
+                hour24: true
+                color_thresholds:
+                  - value: 35
+                    color: "#539652"
+                  - value: 50
+                    color: "#f39c12"
+                  - value: 80
+                    color: "#c0392b"
+                hours_to_show: 24
+                points_per_hour: 12
+                update_interval: 30
+                entities:
+                  - entity: sensor.proxmox_ram_usage
+              - type: custom:mini-graph-card
+                name: 'SWAP'
+                animate: true
+                hour24: true
+                color_thresholds:
+                  - value: 35
+                    color: "#539652"
+                  - value: 50
+                    color: "#f39c12"
+                  - value: 80
+                    color: "#c0392b"
+                hours_to_show: 24
+                points_per_hour: 12
+                update_interval: 30
+                entities:
+                  - entity: sensor.proxmox_swap_usage
+      - type: custom:vertical-stack-in-card
+        title: Drives
+        cards:
+          - type: horizontal-stack
+            cards:
+              - type: custom:mini-graph-card
+                name: 'Samsung 970 EVO'
+                animate: true
+                hour24: true
+                color_thresholds:
+                  - value: 50
+                    color: "#539652"
+                  - value: 60
+                    color: "#f39c12"
+                  - value: 70
+                    color: "#c0392b"
+                hours_to_show: 24
+                points_per_hour: 12
+                update_interval: 30
+                entities:
+                  - entity: sensor.samsung_ssd_970_evo_250gb_temperature
+              - type: custom:mini-graph-card
+                name: 'WD Elements'
+                animate: true
+                hour24: true
+                color_thresholds:
+                  - value: 40
+                    color: "#539652"
+                  - value: 45
+                    color: "#f39c12"
+                  - value: 50
+                    color: "#c0392b"
+                hours_to_show: 24
+                points_per_hour: 12
+                update_interval: 30
+                entities:
+                  - entity: sensor.wdc_wd140edfz_11a0va0_temperature
+                  
             
   - type: vertical-stack
     cards:
@@ -124,42 +268,12 @@ cards:
                 update_interval: 30
                 entities:
                   - entity: sensor.omv_memory
-                  
-                  
       - type: entities
         title: 'File Systems'
         entities:
           - entity: sensor.omv
           - entity: sensor.omv_appdata
           - entity: sensor.omv_elements
-      - type: custom:vertical-stack-in-card
-        title: 'Devices'
-        cards:
-          - type: custom:mini-graph-card
-            name: 'WD Elements'
-            animate: true
-            hour24: true
-            color_thresholds:
-              - value: 40
-                color: "#539652"
-              - value: 45
-                color: "#f39c12"
-              - value: 50
-                color: "#c0392b"
-            hours_to_show: 24
-            points_per_hour: 12
-            update_interval: 30
-            entities:
-              - entity: sensor.omv_sdc
-            align_state: center
-            show:
-              graph: true
-              icon: true
-              extrema: true
-              fill: true
-                
-  - type: vertical-stack
-    cards:
       - type: custom:vertical-stack-in-card
         title: 'Transmission'
         cards:
@@ -169,8 +283,6 @@ cards:
                 name: 'Transmission Panel'
                 url: http://192.168.1.106:9091/transmission/web/
                 icon: mdi:download-box
-          - type: entities
-            entities:
               - entity: switch.transmission_switch
                 name: Вкл/Выкл
               - entity: switch.transmission_turtle_mode
@@ -210,63 +322,26 @@ cards:
                 update_interval: 10
                 entities:
                   - entity: sensor.transmission_up_speed
-      - type: glance
-        columns: 5
-        title: 'Статистика'
-        entities:
-          - entity: sensor.transmission_total_torrents
-            name: 'Всего'
-            # icon: mdi:download-multiple
-          - entity: sensor.transmission_active_torrents
-            name: 'Активно'
-            # icon: mdi:progress-download
-          - entity: sensor.transmission_completed_torrents
-            name: 'Завершено'
-            # icon: mdi:download-circle
-          - entity: sensor.transmission_started_torrents
-            name: 'Начато'
-            # icon: mdi:play
-          - entity: sensor.transmission_paused_torrents
-            name: 'На паузе'
-            # icon: mdi:pause
-                
-  - type: vertical-stack
-    cards:
-      - type: custom:vertical-stack-in-card
-        title: 'Pi-hole'
-        cards:
-          - type: entities
+          - type: divider
+          - type: glance
+            columns: 5
             entities:
-              - type: weblink
-                name: 'Pi-hole Panel'
-                url: http://192.168.1.115/admin/index.php
-                icon: mdi:pi-hole
-          - type: entities
-            entities:
-              - entity: switch.pi_hole
-                name: Вкл/Выкл
-          - type: entities
-            entities:
-             - entity: timer.pihole
-               name: Таймер
-      - type: glance
-        columns: 4
-        title: 'Статистика'
-        show_name: false
-        entities:
-          - entity: sensor.pi_hole_dns_queries_today
-            name: 'Всего запросов'
-          - entity: sensor.pi_hole_ads_blocked_today
-            name: 'Заблокированых запросов'
-          - entity: sensor.pi_hole_ads_percentage_blocked_today
-            name: 'Процент блокировки'
-          - entity: sensor.pi_hole_domains_blocked
-            name: 'Заблокированных доменов'
-          - entity: sensor.pi_hole_seen_clients
-            name: 'Всего клиентов'
-          - entity: sensor.pi_hole_dns_unique_clients
-            name: 'Уникальных клиентов'
-                
+              - entity: sensor.transmission_total_torrents
+                name: 'Всего'
+                # icon: mdi:download-multiple
+              - entity: sensor.transmission_active_torrents
+                name: 'Активно'
+                # icon: mdi:progress-download
+              - entity: sensor.transmission_completed_torrents
+                name: 'Завершено'
+                # icon: mdi:download-circle
+              - entity: sensor.transmission_started_torrents
+                name: 'Начато'
+                # icon: mdi:play
+              - entity: sensor.transmission_paused_torrents
+                name: 'На паузе'
+                # icon: mdi:pause
+ 
                 
                 
                 
