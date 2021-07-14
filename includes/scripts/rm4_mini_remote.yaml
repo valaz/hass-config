@@ -1,0 +1,28 @@
+  learn_broadlink_speakers:
+    sequence:
+      - service: remote.learn_command
+        data:
+          entity_id: remote.rm4_mini_remote
+          device: speakers
+          command:
+            - power
+            - volume up
+            - volume down
+            
+            
+  speakers_vup_broadlink:
+    sequence:
+      - service: remote.send_command
+        data:
+          entity_id: remote.rm4_mini_remote
+          device: speakers
+          command: volume up
+          num_repeats: 3
+  speakers_vdown_broadlink:
+    sequence:
+      - service: remote.send_command
+        data:
+          entity_id: remote.rm4_mini_remote
+          device: speakers
+          command: volume down
+          num_repeats: 3

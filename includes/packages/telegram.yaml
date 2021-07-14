@@ -195,6 +195,8 @@ telegram:
              - platform: state
                entity_id: light.0x158d00052b3ad9_light
                to: "unavailable"
+               for:
+                 minutes: 2
           action:
              - service: notify.tg_valaz
                data:
