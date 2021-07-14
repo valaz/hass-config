@@ -26,7 +26,7 @@
         room: 'Гостиная'
         
     switch.0x4cf8cdf3c777c79_switch:
-        friendly_name: 'Розетка'
+        friendly_name: 'Розетка 1'
         device_class: outlet
         icon: mdi:power-socket-eu
     sensor.0x4cf8cdf3c777c79_consumption:
@@ -35,12 +35,13 @@
         device_class: energy
     sensor.0x4cf8cdf3c777c79_power:
         type: 'power'
-        room: 'Спальня'
+        room: 'Гостиная'
         friendly_name: 'Потребление розетки'
         device_class: energy
+        icon: mdi:power-plug-outline
         
     switch.0x4cf8cdf3c764d02_switch:
-        friendly_name: 'Розетка'
+        friendly_name: 'Розетка 2'
         device_class: outlet
         icon: mdi:power-socket-eu
     sensor.0x4cf8cdf3c764d02_consumption:
@@ -52,6 +53,7 @@
         room: 'Гостиная'
         friendly_name: 'Потребление розетки'
         device_class: energy
+        icon: mdi:power-plug-outline
         
         
         
