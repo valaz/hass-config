@@ -24,7 +24,8 @@ cards:
              - entity: binary_sensor.philips_tv_screen
              - entity: switch.philips_wol
              - entity: switch.sven_volume
-             
+             - entity: media_player.pop_os
+             - entity: alarm_control_panel.0x842e14fffe54c44d_alarm
              - entity: switch.0x4cf8cdf3c764d02_switch
                name: 'Телевизор Розетка'
              - entity: switch.0x4cf8cdf3c777c79_switch
