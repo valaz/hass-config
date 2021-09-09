@@ -219,21 +219,32 @@ cards:
                 entities:
                   - entity: sensor.wdc_wd140edfz_11a0va0_temperature
                   
-            
-  - type: vertical-stack
-    cards:
       - type: custom:vertical-stack-in-card
-        title: OpenMediaVault
+        title: Ultron
         cards:
           - type: entities
             entities:
               - type: weblink
-                name: 'OMV Admin Panel'
-                url: https://valaz.asuscomm.com:2010/
+                name: 'Ultron Admin Panel'
+                url: http://192.168.1.11/
                 icon: mdi:database
-              - entity: binary_sensor.omv_update_available
-              - entity: sensor.omv_uptime
-              - type: divider
+          - type: divider
+          - type: custom:mini-graph-card
+            entities:
+              - entity: sensor.ultron_cpu_temperature
+            name: 'Температура процессора'
+            animate: true
+            hour24: true
+            color_thresholds:
+              - value: 60
+                color: "#539652"
+              - value: 80
+                color: "#f39c12"
+              - value: 90
+                color: "#c0392b"
+            hours_to_show: 1
+            points_per_hour: 60
+            update_interval: 10
           - type: horizontal-stack
             cards:
               - type: custom:mini-graph-card
@@ -251,7 +262,7 @@ cards:
                 points_per_hour: 12
                 update_interval: 30
                 entities:
-                  - entity: sensor.omv_cpu_load
+                  - entity: sensor.ultron_cpu_usage
               - type: custom:mini-graph-card
                 name: 'RAM'
                 animate: true
@@ -267,13 +278,25 @@ cards:
                 points_per_hour: 12
                 update_interval: 30
                 entities:
-                  - entity: sensor.omv_memory
-      - type: entities
-        title: 'File Systems'
-        entities:
-          - entity: sensor.omv
-          - entity: sensor.omv_appdata
-          - entity: sensor.omv_elements
+                  - entity: sensor.ultron_ram_usage
+              - type: custom:mini-graph-card
+                name: 'SWAP'
+                animate: true
+                hour24: true
+                color_thresholds:
+                  - value: 35
+                    color: "#539652"
+                  - value: 50
+                    color: "#f39c12"
+                  - value: 80
+                    color: "#c0392b"
+                hours_to_show: 24
+                points_per_hour: 12
+                update_interval: 30
+                entities:
+                  - entity: sensor.ultron_swap_usage
+
+          
       - type: custom:vertical-stack-in-card
         title: 'Transmission'
         cards:
@@ -281,7 +304,7 @@ cards:
             entities:
               - type: weblink
                 name: 'Transmission Panel'
-                url: http://192.168.1.106:9091/transmission/web/
+                url: http://192.168.1.11:9091/transmission/web/
                 icon: mdi:download-box
               - entity: switch.transmission_switch
                 name: Вкл/Выкл

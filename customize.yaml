@@ -64,7 +64,7 @@
         icon: mdi:network
         
     light.0x158d00052b3ad9_light:
-        occupancy_timeout: 10
+        default_transition: 5
         
     switch.transmission_switch:
         icon: 'hass:power'
@@ -91,5 +91,11 @@
     sensor.proxmox_ram_usage:
         icon: 'mdi:memory'
     sensor.proxmox_swap_usage:
+        icon: 'mdi:memory'
+    sensor.ultron_cpu_usage:
+        icon: 'mdi:speedometer'
+    sensor.ultron_ram_usage:
+        icon: 'mdi:memory'
+    sensor.ultron_swap_usage:
         icon: 'mdi:memory'
         

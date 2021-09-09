@@ -57,44 +57,44 @@ cards:
                 entities:
                   - entity: sensor.0x4cf8cdf3c777c79_power
               
-          - type: glance
-            show_name: false
-            show_state: false
-            entities:
-              - entity: remote.xiaomi_ir_remote
-                icon: mdi:volume-low
-                tap_action:
-                  action: call-service
-                  service: script.call_sven_vol_down_32
-              - entity: remote.xiaomi_ir_remote
-                icon: mdi:volume-minus
-                tap_action:
-                  action: call-service
-                  service: script.call_sven_vol_down
-              - entity: remote.xiaomi_ir_remote
-                icon: mdi:volume-mute
-                tap_action:
-                  action: call-service
-                  service: script.call_sven_mute
-              - entity: remote.xiaomi_ir_remote
-                name: Тищина
-                icon: mdi:volume-plus
-                tap_action:
-                  action: call-service
-                  service: script.call_sven_vol_up
-              - entity: remote.xiaomi_ir_remote
-                icon: mdi:volume-high
-                name: Громкость
-                tap_action:
-                  action: call-service
-                  service: script.call_sven_vol_up_32
-          - type: button
-            name: 'Сканировать сигнал'
-            tap_action:
-              action: call-service
-              service: xiaomi_miio.remote_learn_command
-              service_data:
-                entity_id: remote.xiaomi_ir_remote
+        #   - type: glance
+        #     show_name: false
+        #     show_state: false
+        #     entities:
+        #       - entity: remote.xiaomi_ir_remote
+        #         icon: mdi:volume-low
+        #         tap_action:
+        #           action: call-service
+        #           service: script.call_sven_vol_down_32
+        #       - entity: remote.xiaomi_ir_remote
+        #         icon: mdi:volume-minus
+        #         tap_action:
+        #           action: call-service
+        #           service: script.call_sven_vol_down
+        #       - entity: remote.xiaomi_ir_remote
+        #         icon: mdi:volume-mute
+        #         tap_action:
+        #           action: call-service
+        #           service: script.call_sven_mute
+        #       - entity: remote.xiaomi_ir_remote
+        #         name: Тищина
+        #         icon: mdi:volume-plus
+        #         tap_action:
+        #           action: call-service
+        #           service: script.call_sven_vol_up
+        #       - entity: remote.xiaomi_ir_remote
+        #         icon: mdi:volume-high
+        #         name: Громкость
+        #         tap_action:
+        #           action: call-service
+        #           service: script.call_sven_vol_up_32
+        #   - type: button
+        #     name: 'Сканировать сигнал'
+        #     tap_action:
+        #       action: call-service
+        #       service: xiaomi_miio.remote_learn_command
+        #       service_data:
+        #         entity_id: remote.xiaomi_ir_remote
 #######   Коридор   #######
       - type: custom:vertical-stack-in-card
         title: Коридор

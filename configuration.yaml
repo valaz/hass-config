@@ -63,7 +63,9 @@ http:
   use_x_forwarded_for: true
   # You must set the trusted proxy IP address so that Home Assistant will properly accept connections
   # Set this to your NGINX machine IP, or localhost if hosted on the same machine.
-  trusted_proxies: 192.168.1.107
+  trusted_proxies: 
+    - 192.168.1.107 
+    - 192.168.1.40
   
   
 influxdb:
