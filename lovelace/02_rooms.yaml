@@ -13,9 +13,9 @@ cards:
           - type: glance
             show_name: false
             entities:
-              - sensor.xiaomi_airpurifier_temperature
-              - sensor.xiaomi_airpurifier_humidity
-              - sensor.xiaomi_airpurifier_air_quality_pm25
+              - sensor.xiaomi_air_purifier_2s_temperature
+              - sensor.xiaomi_air_purifier_2s_humidity
+              - sensor.xiaomi_air_purifier_2s_pm2_5
           - type: entities
             entities:
              - entity: fan.xiaomi_air_purifier_2s
