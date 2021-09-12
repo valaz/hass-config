@@ -3,20 +3,43 @@ icon: mdi:sitemap
 cards: 
   - type: vertical-stack
     cards:
-      - type: entities
-        show_header_toggle: false
-        entities:
-          - entity: sensor.xiaomi_air_purifier_2s_pm2_5
+      - type: conditional
+        conditions:
           - entity: fan.xiaomi_air_purifier_2s
-          - entity: input_select.xiaomi_airpurifier_mode
-          - entity: input_number.xiaomi_airpurifier_favorite_level
-          - entity: switch.xiaomi_air_purifier_2s_child_lock
-          - entity: switch.xiaomi_air_purifier_2s_led
-          - entity: sensor.xiaomi_air_purifier_2s_motor_speed
-          - entity: sensor.xiaomi_air_purifier_2s_filter_life_remaining
-        theme: default
-        title: Очиститель воздуха
+            state: 'on'
+        card:
+          type: horizontal-stack
+          cards:
+              - type: entities
+                show_header_toggle: false
+                entities:
+                  - entity: sensor.xiaomi_air_purifier_2s_pm2_5
+                  - entity: fan.xiaomi_air_purifier_2s
+                  - entity: input_select.xiaomi_airpurifier_mode
+                  - entity: input_number.xiaomi_airpurifier_favorite_level
+                  - entity: switch.xiaomi_air_purifier_2s_child_lock
+                  - entity: switch.xiaomi_air_purifier_2s_led
+                  - entity: sensor.xiaomi_air_purifier_2s_motor_speed
+                  - entity: sensor.xiaomi_air_purifier_2s_filter_life_remaining
+                theme: default
+                title: Очиститель воздуха
         
+      - type: conditional
+        conditions:
+          - entity: fan.xiaomi_air_purifier_2s
+            state: 'off'
+        card:
+          type: horizontal-stack
+          cards:
+            - type: entities
+              entities:
+                  - entity: sensor.xiaomi_air_purifier_2s_pm2_5
+                  - entity: fan.xiaomi_air_purifier_2s
+              state_color: true
+              theme: default
+              title: Очиститель воздуха
+              
+          
   - type: vertical-stack
     cards:
       - type: 'custom:vacuum-card'

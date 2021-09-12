@@ -78,7 +78,7 @@ influxdb:
   password: !secret influxdb_password
   database: !secret influxdb_database
   component_config:
-    sensor.xiaomi_airpurifier_air_quality_pm25:
+    sensor.xiaomi_air_purifier_2s_pm2_5:
       override_measurement: aqi
     sensor.omv_sdc:
       override_measurement: drive
