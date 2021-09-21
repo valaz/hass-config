@@ -54,10 +54,11 @@ telegram:
              message: | 
                  {{"\U0001F333"}} Климат в квартире
                  {{"\U0001F567"}} Отчет за {{ states('sensor.time_date') }}
-                 {{"\U0001F4FA"}} Гостиная - {{ states('sensor.xiaomi_airpurifier_temperature') }} °C, {{ states('sensor.xiaomi_airpurifier_humidity') }} %
+                 {{"\U0001F4FA"}} Гостиная - {{ states('sensor.xiaomi_air_purifier_2s_temperature') }} °C, {{ states('sensor.xiaomi_air_purifier_2s_humidity') }} %
                  {{"\U0001F468"}} Спальня - {{ states('sensor.rm4_mini_temperature') }} °C, {{ states('sensor.rm4_mini_humidity') }} %
                  {{"\U0001F476"}} Детская - {{ states('sensor.0x158d000586695c_temperature') }} °C, {{ states('sensor.0x158d000586695c_humidity') }} %
-                 {{"\U0001F52A"}} Кухня - {{ states('sensor.0x158d0005800735_temperature') }} °C, {{ states('sensor.0x158d0005800735_humidity') }} %
+                 {{"\U0001F487"}} Лоджия - {{ states('sensor.0x158d0005800735_temperature') }} °C, {{ states('sensor.0x158d0005800735_humidity') }} %
+                 {{"\U0001F52A"}} Кухня - {{ states('sensor.e72e01500c8f_temperature') }} °C, {{ states('sensor.e72e01500c8f_humidity') }} %
       homelab_report:
         alias: Отправка отчета о состоянии homelab
         sequence:
@@ -66,9 +67,7 @@ telegram:
              message: | 
                  {{"\U00002699"}} Homelab
                  {{"\U0001F567"}} Отчет за {{ states('sensor.time_date') }}
-                 {{"\U00002600"}} CPU - {{ states('sensor.proxmox_cpu_temperature') }} °C
-                 {{"\U0001F4BD"}} Samsung 970 EVO - {{ states('sensor.samsung_ssd_970_evo_250gb_temperature') }} °C
-                 {{"\U0001F4BD"}} WD Elements - {{ states('sensor.wdc_wd140edfz_11a0va0_temperature') }} °C
+                 {{"\U00002600"}} Ultron CPU - {{ states('sensor.ultron_cpu_temperature') }} °C
         
 # https://apps.timwhitlock.info/emoji/tables/unicode         
     automation:  

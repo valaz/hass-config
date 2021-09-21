@@ -17,6 +17,7 @@ cards:
                   - entity: fan.xiaomi_air_purifier_2s
                   - entity: input_select.xiaomi_airpurifier_mode
                   - entity: input_number.xiaomi_airpurifier_favorite_level
+                  - entity: number.xiaomi_air_purifier_2s_favorite_level
                   - entity: switch.xiaomi_air_purifier_2s_child_lock
                   - entity: switch.xiaomi_air_purifier_2s_led
                   - entity: sensor.xiaomi_air_purifier_2s_motor_speed

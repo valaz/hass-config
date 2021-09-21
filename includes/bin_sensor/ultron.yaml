@@ -1,0 +1,5 @@
+  - platform: ping
+    name: "VM Windows 10"
+    host: 192.168.1.30
+    scan_interval: 10
+    count: 2

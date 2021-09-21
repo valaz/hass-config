@@ -102,269 +102,159 @@ cards:
             name: 'Всего клиентов'
           - entity: sensor.pi_hole_dns_unique_clients
             name: 'Уникальных клиентов'
-            
-  - type: vertical-stack
-    cards:
-      - type: custom:vertical-stack-in-card
-        title: Proxmox
-        cards:
-          - type: entities
-            entities:
-              - type: weblink
-                name: 'Proxmox Admin Panel'
-                url: https://valaz.asuscomm.com:8006/
-                icon: mdi:database
-          - type: divider
-          - type: custom:mini-graph-card
-            entities:
-              - entity: sensor.proxmox_cpu_temperature
-            name: 'Температура процессора'
-            animate: true
-            hour24: true
-            color_thresholds:
-              - value: 60
-                color: "#539652"
-              - value: 80
-                color: "#f39c12"
-              - value: 90
-                color: "#c0392b"
-            hours_to_show: 1
-            points_per_hour: 60
-            update_interval: 10
-          - type: horizontal-stack
-            cards:
-              - type: custom:mini-graph-card
-                name: 'CPU'
-                animate: true
-                hour24: true
-                color_thresholds:
-                  - value: 35
-                    color: "#539652"
-                  - value: 50
-                    color: "#f39c12"
-                  - value: 80
-                    color: "#c0392b"
-                hours_to_show: 24
-                points_per_hour: 12
-                update_interval: 30
-                entities:
-                  - entity: sensor.proxmox_cpu_usage
-              - type: custom:mini-graph-card
-                name: 'RAM'
-                animate: true
-                hour24: true
-                color_thresholds:
-                  - value: 35
-                    color: "#539652"
-                  - value: 50
-                    color: "#f39c12"
-                  - value: 80
-                    color: "#c0392b"
-                hours_to_show: 24
-                points_per_hour: 12
-                update_interval: 30
-                entities:
-                  - entity: sensor.proxmox_ram_usage
-              - type: custom:mini-graph-card
-                name: 'SWAP'
-                animate: true
-                hour24: true
-                color_thresholds:
-                  - value: 35
-                    color: "#539652"
-                  - value: 50
-                    color: "#f39c12"
-                  - value: 80
-                    color: "#c0392b"
-                hours_to_show: 24
-                points_per_hour: 12
-                update_interval: 30
-                entities:
-                  - entity: sensor.proxmox_swap_usage
-      - type: custom:vertical-stack-in-card
-        title: Drives
-        cards:
-          - type: horizontal-stack
-            cards:
-              - type: custom:mini-graph-card
-                name: 'Samsung 970 EVO'
-                animate: true
-                hour24: true
-                color_thresholds:
-                  - value: 50
-                    color: "#539652"
-                  - value: 60
-                    color: "#f39c12"
-                  - value: 70
-                    color: "#c0392b"
-                hours_to_show: 24
-                points_per_hour: 12
-                update_interval: 30
-                entities:
-                  - entity: sensor.samsung_ssd_970_evo_250gb_temperature
-              - type: custom:mini-graph-card
-                name: 'WD Elements'
-                animate: true
-                hour24: true
-                color_thresholds:
-                  - value: 40
-                    color: "#539652"
-                  - value: 45
-                    color: "#f39c12"
-                  - value: 50
-                    color: "#c0392b"
-                hours_to_show: 24
-                points_per_hour: 12
-                update_interval: 30
-                entities:
-                  - entity: sensor.wdc_wd140edfz_11a0va0_temperature
                   
-      - type: custom:vertical-stack-in-card
-        title: Ultron
+  - type: custom:vertical-stack-in-card
+    title: Ultron
+    cards:
+      - type: entities
+        entities:
+          - type: weblink
+            name: 'Ultron Admin Panel'
+            url: http://192.168.1.11/
+            icon: mdi:database
+          - switch.vm_windows_10
+          - switch.vm_gaming_center
+          - switch.vm_pop_os
+          
+  - type: custom:vertical-stack-in-card
+    title: Ultron Metrics
+    cards:
+      - type: custom:mini-graph-card
+        entities:
+          - entity: sensor.ultron_cpu_temperature
+        name: 'Температура процессора'
+        animate: true
+        hour24: true
+        color_thresholds:
+          - value: 60
+            color: "#539652"
+          - value: 80
+            color: "#f39c12"
+          - value: 90
+            color: "#c0392b"
+        hours_to_show: 1
+        points_per_hour: 60
+        update_interval: 10
+      - type: horizontal-stack
         cards:
-          - type: entities
-            entities:
-              - type: weblink
-                name: 'Ultron Admin Panel'
-                url: http://192.168.1.11/
-                icon: mdi:database
-          - type: divider
           - type: custom:mini-graph-card
-            entities:
-              - entity: sensor.ultron_cpu_temperature
-            name: 'Температура процессора'
+            name: 'CPU'
             animate: true
             hour24: true
             color_thresholds:
-              - value: 60
+              - value: 35
                 color: "#539652"
-              - value: 80
+              - value: 50
                 color: "#f39c12"
-              - value: 90
+              - value: 80
                 color: "#c0392b"
-            hours_to_show: 1
-            points_per_hour: 60
-            update_interval: 10
-          - type: horizontal-stack
-            cards:
-              - type: custom:mini-graph-card
-                name: 'CPU'
-                animate: true
-                hour24: true
-                color_thresholds:
-                  - value: 35
-                    color: "#539652"
-                  - value: 50
-                    color: "#f39c12"
-                  - value: 80
-                    color: "#c0392b"
-                hours_to_show: 24
-                points_per_hour: 12
-                update_interval: 30
-                entities:
-                  - entity: sensor.ultron_cpu_usage
-              - type: custom:mini-graph-card
-                name: 'RAM'
-                animate: true
-                hour24: true
-                color_thresholds:
-                  - value: 35
-                    color: "#539652"
-                  - value: 50
-                    color: "#f39c12"
-                  - value: 80
-                    color: "#c0392b"
-                hours_to_show: 24
-                points_per_hour: 12
-                update_interval: 30
-                entities:
-                  - entity: sensor.ultron_ram_usage
-              - type: custom:mini-graph-card
-                name: 'SWAP'
-                animate: true
-                hour24: true
-                color_thresholds:
-                  - value: 35
-                    color: "#539652"
-                  - value: 50
-                    color: "#f39c12"
-                  - value: 80
-                    color: "#c0392b"
-                hours_to_show: 24
-                points_per_hour: 12
-                update_interval: 30
-                entities:
-                  - entity: sensor.ultron_swap_usage
+            hours_to_show: 24
+            points_per_hour: 12
+            update_interval: 30
+            entities:
+              - entity: sensor.ultron_cpu_usage
+          - type: custom:mini-graph-card
+            name: 'RAM'
+            animate: true
+            hour24: true
+            color_thresholds:
+              - value: 35
+                color: "#539652"
+              - value: 50
+                color: "#f39c12"
+              - value: 80
+                color: "#c0392b"
+            hours_to_show: 24
+            points_per_hour: 12
+            update_interval: 30
+            entities:
+              - entity: sensor.ultron_ram_usage
+          - type: custom:mini-graph-card
+            name: 'SWAP'
+            animate: true
+            hour24: true
+            color_thresholds:
+              - value: 35
+                color: "#539652"
+              - value: 50
+                color: "#f39c12"
+              - value: 80
+                color: "#c0392b"
+            hours_to_show: 24
+            points_per_hour: 12
+            update_interval: 30
+            entities:
+              - entity: sensor.ultron_swap_usage
 
           
-      - type: custom:vertical-stack-in-card
-        title: 'Transmission'
+  - type: custom:vertical-stack-in-card
+    title: 'Transmission'
+    cards:
+      - type: entities
+        entities:
+          - type: weblink
+            name: 'Transmission Panel'
+            url: http://192.168.1.11:9091/transmission/web/
+            icon: mdi:download-box
+          - entity: switch.transmission_switch
+            name: Вкл/Выкл
+          - entity: switch.transmission_turtle_mode
+            name: Замедленный режим
+      - type: divider
+      - type: horizontal-stack
         cards:
-          - type: entities
+          - type: custom:mini-graph-card
+            name: 'Скорость загрузки'
+            animate: true
+            hour24: true
+            color_thresholds:
+              - value: 4
+                color: "#95d5b2"
+              - value: 7
+                color: "#52b788"
+              - value: 10
+                color: "#1b4332"
+            hours_to_show: 1
+            points_per_hour: 60
+            update_interval: 10
             entities:
-              - type: weblink
-                name: 'Transmission Panel'
-                url: http://192.168.1.11:9091/transmission/web/
-                icon: mdi:download-box
-              - entity: switch.transmission_switch
-                name: Вкл/Выкл
-              - entity: switch.transmission_turtle_mode
-                name: Замедленный режим
-          - type: divider
-          - type: horizontal-stack
-            cards:
-              - type: custom:mini-graph-card
-                name: 'Скорость загрузки'
-                animate: true
-                hour24: true
-                color_thresholds:
-                  - value: 4
-                    color: "#95d5b2"
-                  - value: 7
-                    color: "#52b788"
-                  - value: 10
-                    color: "#1b4332"
-                hours_to_show: 1
-                points_per_hour: 60
-                update_interval: 10
-                entities:
-                  - entity: sensor.transmission_down_speed
-              - type: custom:mini-graph-card
-                name: 'Скорость выгрузки'
-                animate: true
-                hour24: true
-                color_thresholds:
-                  - value: 4
-                    color: "#ffba08"
-                  - value: 7
-                    color: "#f48c06"
-                  - value: 10
-                    color: "#d00000"
-                hours_to_show: 1
-                points_per_hour: 60
-                update_interval: 10
-                entities:
-                  - entity: sensor.transmission_up_speed
-          - type: divider
-          - type: glance
-            columns: 5
+              - entity: sensor.transmission_down_speed
+          - type: custom:mini-graph-card
+            name: 'Скорость выгрузки'
+            animate: true
+            hour24: true
+            color_thresholds:
+              - value: 4
+                color: "#ffba08"
+              - value: 7
+                color: "#f48c06"
+              - value: 10
+                color: "#d00000"
+            hours_to_show: 1
+            points_per_hour: 60
+            update_interval: 10
             entities:
-              - entity: sensor.transmission_total_torrents
-                name: 'Всего'
-                # icon: mdi:download-multiple
-              - entity: sensor.transmission_active_torrents
-                name: 'Активно'
-                # icon: mdi:progress-download
-              - entity: sensor.transmission_completed_torrents
-                name: 'Завершено'
-                # icon: mdi:download-circle
-              - entity: sensor.transmission_started_torrents
-                name: 'Начато'
-                # icon: mdi:play
-              - entity: sensor.transmission_paused_torrents
-                name: 'На паузе'
-                # icon: mdi:pause
- 
+              - entity: sensor.transmission_up_speed
+      - type: divider
+      - type: glance
+        columns: 5
+        entities:
+          - entity: sensor.transmission_total_torrents
+            name: 'Всего'
+            # icon: mdi:download-multiple
+          - entity: sensor.transmission_active_torrents
+            name: 'Активно'
+            # icon: mdi:progress-download
+          - entity: sensor.transmission_completed_torrents
+            name: 'Завершено'
+            # icon: mdi:download-circle
+          - entity: sensor.transmission_started_torrents
+            name: 'Начато'
+            # icon: mdi:play
+          - entity: sensor.transmission_paused_torrents
+            name: 'На паузе'
+            # icon: mdi:pause
+
                 
                 
                 

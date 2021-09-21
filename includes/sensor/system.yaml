@@ -112,59 +112,5 @@
       version:
         friendly_name: 'Последняя версия'
         value_template: '{{ states.binary_sensor.updater.attributes["newest_version"] }}'
-        
-  - platform: influxdb
-    host: !secret influxdb_host
-    username: !secret influxdb_username
-    password: !secret influxdb_password
-    queries:
-    - name: Proxmox CPU Temperature
-      unit_of_measurement: °C
-      value_template: '{{ value | round(1) }}'
-      group_function: last
-      where: '"sensor" = ''coretemp_packageid0_input'' AND "host" = ''pve'''
-      measurement: '"temp"'
-      field: temp
-      database: homelab_telegraf
-    - name: Samsung SSD 970 EVO 250GB Temperature
-      unit_of_measurement: °C
-      value_template: '{{ value | round(1) }}'
-      group_function: last
-      where: '"model" = ''Samsung SSD 970 EVO 250GB'''
-      measurement: '"smart_device"'
-      field: temp_c
-      database: homelab_telegraf
-    # - name: WDC WD140EDFZ-11A0VA0 Temperature
-    #   unit_of_measurement: °C
-    #   value_template: '{{ value | round(1) }}'
-    #   group_function: last
-    #   where: '"model" = ''WDC WD140EDFZ-11A0VA0'''
-    #   measurement: '"smart_device"'
-    #   field: temp_c
-    #   database: homelab_telegraf
-    - name: Proxmox CPU usage
-      unit_of_measurement: '%'
-      value_template: '{{ (value | float * 100) | round(2) }}'
-      group_function: last
-      where: '"host" = ''pve'''
-      measurement: '"cpustat"'
-      field: cpu
-      database: proxmox
-    - name: Proxmox RAM usage
-      unit_of_measurement: '%'
-      value_template: '{{ value | round(2) }}'
-      group_function: last
-      where: '"host" = ''pve'''
-      measurement: '"mem"'
-      field: used_percent
-      database: homelab_telegraf
-    - name: Proxmox SWAP usage
-      unit_of_measurement: '%'
-      value_template: '{{ value | round(2) }}'
-      group_function: last
-      where: '"host" = ''pve'''
-      measurement: '"swap"'
-      field: used_percent
-      database: homelab_telegraf
       
       

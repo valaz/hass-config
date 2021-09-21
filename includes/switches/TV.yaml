@@ -1,4 +1,5 @@
 
   - platform: wake_on_lan
     mac: 70:AF:24:A7:F5:13
+    host: 192.168.1.156
     name: Philips wol

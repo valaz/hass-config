@@ -14,7 +14,7 @@
     platform: state
     entity_id: fan.xiaomi_air_purifier_2s
   condition:
-    alias: "airpurifier preset_mode in Unknown"
+    alias: "airpurifier preset_mode is not Unknown"
     condition: not
     conditions:
         - condition: state
@@ -38,6 +38,13 @@
   trigger:
     platform: state
     entity_id: number.xiaomi_air_purifier_2s_favorite_level
+  condition:
+    alias: "airpurifier favorite_level is not Unknown"
+    condition: not
+    conditions:
+        - condition: state
+          entity_id: number.xiaomi_air_purifier_2s_favorite_level
+          state: "unknown"
   action:
     service: input_number.set_value
     entity_id: input_number.xiaomi_airpurifier_favorite_level
@@ -50,7 +57,7 @@
   initial_state: true
   trigger:
     platform: state
-    entity_id: fan.xiaomi_air_purifier_2s
+    entity_id: sensor.xiaomi_air_purifier_2s_pm2_5
   condition:
     - condition: and
       conditions:
@@ -58,7 +65,7 @@
           entity_id: fan.xiaomi_air_purifier_2s
           state: 'on'
         - condition: numeric_state
-          entity_id: sensor.xiaomi_airpurifier_air_quality_pm25
+          entity_id: sensor.xiaomi_air_purifier_2s_pm2_5
           below: 2
   action:
     - service: system_log.write
@@ -79,7 +86,7 @@
   initial_state: true
   trigger:
     platform: state
-    entity_id: fan.xiaomi_air_purifier_2s
+    entity_id: sensor.xiaomi_air_purifier_2s_pm2_5
   condition:
     - condition: and
       conditions:
@@ -87,7 +94,7 @@
           entity_id: fan.xiaomi_air_purifier_2s
           state: 'off'
         - condition: numeric_state
-          entity_id: sensor.xiaomi_airpurifier_air_quality_pm25
+          entity_id: sensor.xiaomi_air_purifier_2s_pm2_5
           above: 5
   action:
     - service: system_log.write
