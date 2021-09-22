@@ -20,7 +20,6 @@
     
       vm_windows_10:
         friendly_name: "VM Windows 10"
-        # icon_template: mdi:desktop-classic
         command_on: "ssh -i /config/ultron.key -o StrictHostKeyChecking=no root@192.168.1.11 virsh start Windows10"
         command_off: "ssh -i /config/ultron.key -o StrictHostKeyChecking=no root@192.168.1.11 virsh shutdown Windows10"
         command_state: "ssh -i /config/ultron.key -o StrictHostKeyChecking=no root@192.168.1.11 virsh list --all | grep Windows10 | awk '{print $3}' "
@@ -28,7 +27,6 @@
         
       vm_gaming_center:
         friendly_name: "VM Gaming Center"
-        # icon_template: mdi:desktop-classic
         command_on: "ssh -i /config/ultron.key -o StrictHostKeyChecking=no root@192.168.1.11 virsh start GamingCenter"
         command_off: "ssh -i /config/ultron.key -o StrictHostKeyChecking=no root@192.168.1.11 virsh shutdown GamingCenter"
         command_state: "ssh -i /config/ultron.key -o StrictHostKeyChecking=no root@192.168.1.11 virsh list --all | grep GamingCenter | awk '{print $3}' "
@@ -36,8 +34,21 @@
         
       vm_pop_os:
         friendly_name: "VM Pop OS"
-        # icon_template: mdi:desktop-classic
         command_on: "ssh -i /config/ultron.key -o StrictHostKeyChecking=no root@192.168.1.11 virsh start Pop_Os"
         command_off: "ssh -i /config/ultron.key -o StrictHostKeyChecking=no root@192.168.1.11 virsh shutdown Pop_Os"
         command_state: "ssh -i /config/ultron.key -o StrictHostKeyChecking=no root@192.168.1.11 virsh list --all | grep Pop_Os | awk '{print $3}' "
+        value_template: '{{ value == "running" }}'
+        
+      docker_transmission:
+        friendly_name: "Docker Transmission"
+        command_on: "ssh -i /config/ultron.key -o StrictHostKeyChecking=no root@192.168.1.11 docker start transmission"
+        command_off: "ssh -i /config/ultron.key -o StrictHostKeyChecking=no root@192.168.1.11 docker stop transmission"
+        command_state: "ssh -i /config/ultron.key -o StrictHostKeyChecking=no root@192.168.1.11 docker inspect transmission | jq '.[0].State.Status' -r "
+        value_template: '{{ value == "running" }}'
+        
+      docker_transmission_telegram:
+        friendly_name: "Docker Transmission-Telegram"
+        command_on: "ssh -i /config/ultron.key -o StrictHostKeyChecking=no root@192.168.1.11 docker start transmission-telegram"
+        command_off: "ssh -i /config/ultron.key -o StrictHostKeyChecking=no root@192.168.1.11 docker stop transmission-telegram"
+        command_state: "ssh -i /config/ultron.key -o StrictHostKeyChecking=no root@192.168.1.11 docker inspect transmission-telegram | jq '.[0].State.Status' -r "
         value_template: '{{ value == "running" }}'

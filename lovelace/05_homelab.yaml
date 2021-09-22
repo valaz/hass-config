@@ -115,6 +115,9 @@ cards:
           - switch.vm_windows_10
           - switch.vm_gaming_center
           - switch.vm_pop_os
+          - type: divider
+          - switch.docker_transmission
+          - switch.docker_transmission_telegram
           
   - type: custom:vertical-stack-in-card
     title: Ultron Metrics

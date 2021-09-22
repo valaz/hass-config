@@ -1,0 +1,19 @@
+- alias: "Start Telegram for Transmission"
+  trigger:
+  - platform: state
+    entity_id: switch.docker_transmission
+  - platform: state
+    entity_id: switch.docker_transmission_telegram
+  condition:
+    - condition: and
+      conditions:
+        - condition: state
+          entity_id: switch.docker_transmission
+          state: "on"
+        - condition: state
+          entity_id: switch.docker_transmission_telegram
+          state: "off"
+  action:
+  - service: switch.turn_on
+    target:
+        entity_id: switch.docker_transmission_telegram
