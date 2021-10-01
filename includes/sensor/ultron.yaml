@@ -39,3 +39,39 @@
       measurement: '"swap"'
       field: used_percent
       database: homelab_telegraf
+      
+    - name: Ultron Parity Disk Temperature
+      unit_of_measurement: °C
+      value_template: '{{ value | round(2) }}'
+      group_function: last
+      where: '"serial_no" = ''9MGWL7YJ'' AND "host" = ''ultron'''
+      measurement: '"smart_device"'
+      field: temp_c
+      database: homelab_telegraf
+      
+    - name: Ultron Disk 1 Temperature
+      unit_of_measurement: °C
+      value_template: '{{ value | round(2) }}'
+      group_function: last
+      where: '"serial_no" = ''9KGVHS3L'' AND "host" = ''ultron'''
+      measurement: '"smart_device"'
+      field: temp_c
+      database: homelab_telegraf
+      
+    - name: Ultron Cache Temperature
+      unit_of_measurement: °C
+      value_template: '{{ value | round(2) }}'
+      group_function: last
+      where: '"serial_no" = ''S5Y1NZ0R522193Z'' AND "host" = ''ultron'''
+      measurement: '"smart_device"'
+      field: temp_c
+      database: homelab_telegraf
+      
+    - name: Ultron 970 Evo Temperature
+      unit_of_measurement: °C
+      value_template: '{{ value | round(2) }}'
+      group_function: last
+      where: '"serial_no" = ''S465NX0K957169H'' AND "host" = ''ultron'''
+      measurement: '"smart_device"'
+      field: temp_c
+      database: homelab_telegraf

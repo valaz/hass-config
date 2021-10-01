@@ -34,9 +34,9 @@
         
       vm_pop_os:
         friendly_name: "VM Pop OS"
-        command_on: "ssh -i /config/ultron.key -o StrictHostKeyChecking=no root@192.168.1.11 virsh start Pop_Os"
-        command_off: "ssh -i /config/ultron.key -o StrictHostKeyChecking=no root@192.168.1.11 virsh shutdown Pop_Os"
-        command_state: "ssh -i /config/ultron.key -o StrictHostKeyChecking=no root@192.168.1.11 virsh list --all | grep Pop_Os | awk '{print $3}' "
+        command_on: "ssh -i /config/ultron.key -o StrictHostKeyChecking=no root@192.168.1.11 virsh start PopOs"
+        command_off: "ssh -i /config/ultron.key -o StrictHostKeyChecking=no root@192.168.1.11 virsh shutdown PopOs"
+        command_state: "ssh -i /config/ultron.key -o StrictHostKeyChecking=no root@192.168.1.11 virsh list --all | grep PopOs | awk '{print $3}' "
         value_template: '{{ value == "running" }}'
         
       docker_transmission:

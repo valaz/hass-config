@@ -76,3 +76,5 @@ cards:
           - name: Clean kitchen
             service: script.clean_kitchen
             icon: 'mdi:silverware-fork-knife'
+
+            

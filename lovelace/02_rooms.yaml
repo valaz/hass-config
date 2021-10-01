@@ -23,39 +23,50 @@ cards:
             #  - entity: media_player.android_tv
              - entity: binary_sensor.philips_tv_screen
              - entity: switch.philips_wol
+             - entity: switch.philips_wwol
              - entity: switch.sven_volume
              - entity: media_player.pop_os
              - entity: alarm_control_panel.0x842e14fffe54c44d_alarm
              - entity: switch.0x4cf8cdf3c764d02_switch
+               type: custom:multiple-entity-row
                name: 'Телевизор Розетка'
+               toggle: true
+               entities:
+                - entity: sensor.0x4cf8cdf3c764d02_power
+                  name: потребление
              - entity: switch.0x4cf8cdf3c777c79_switch
+               type: custom:multiple-entity-row
                name: 'Альтрон розетка'
+               toggle: true
+               entities:
+                - entity: sensor.0x4cf8cdf3c777c79_power
+                  name: потребление
        
-          - type: horizontal-stack
-            cards:
-              - type: custom:mini-graph-card
-                name: 'Потребление Телевизора'
-                animate: true
-                hour24: true
-                line_color: "#f39c12"
-                hours_to_show: 24
-                points_per_hour: 12
-                update_interval: 300
-                line_width: 3
-                entities:
-                  - entity: sensor.0x4cf8cdf3c764d02_power
+        #   - type: horizontal-stack
+        #     cards:
+        #       - type: custom:mini-graph-card
+        #         name: 'Потребление Телевизора'
+        #         animate: true
+        #         hour24: true
+        #         line_color: "#f39c12"
+        #         hours_to_show: 24
+        #         points_per_hour: 12
+        #         update_interval: 300
+        #         line_width: 3
+        #         entities:
+        #           - entity: sensor.0x4cf8cdf3c764d02_power
               
-              - type: custom:mini-graph-card
-                name: 'Потребление сервера'
-                animate: true
-                hour24: true
-                line_color: "#f39c12"
-                hours_to_show: 24
-                points_per_hour: 12
-                update_interval: 300
-                line_width: 3
-                entities:
-                  - entity: sensor.0x4cf8cdf3c777c79_power
+        #       - type: custom:mini-graph-card
+        #         name: 'Потребление сервера'
+        #         animate: true
+        #         hour24: true
+        #         line_color: "#f39c12"
+        #         hours_to_show: 24
+        #         points_per_hour: 12
+        #         update_interval: 300
+        #         line_width: 3
+        #         entities:
+        #           - entity: sensor.0x4cf8cdf3c777c79_power
               
         #   - type: glance
         #     show_name: false
@@ -95,14 +106,40 @@ cards:
         #       service: xiaomi_miio.remote_learn_command
         #       service_data:
         #         entity_id: remote.xiaomi_ir_remote
+        
+  - type: vertical-stack
+    cards:
 #######   Коридор   #######
       - type: custom:vertical-stack-in-card
         title: Коридор
         cards:
           - type: entities
             entities:
-             - sensor.last_clean_custom
-             - vacuum.roborock_s5
+              - entity: vacuum.roborock_s5
+                type: custom:multiple-entity-row
+                secondary_info:
+                  attribute: battery_level
+                  name: Заряд
+                  unit: '%'
+                show_state: true
+                
+              - entity: sensor.last_clean_custom
+                type: custom:multiple-entity-row
+                secondary_info:
+                  entity: sensor.last_clean_custom
+                  name: ' '
+                  unit: 'назад'
+                show_state: false
+                entities:
+                - entity: sensor.roborock_s5_cleaned_area
+                  name: площадь
+                - entity: sensor.roborock_s5_cleaning_time
+                  name: длительность
+             
+          - type: picture-glance
+            camera_image: camera.roborock_s50
+            camera_view: live
+            entities: []
 #######   Гардероб   #######
       - type: custom:vertical-stack-in-card
         title: Гардероб

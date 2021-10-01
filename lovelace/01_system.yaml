@@ -37,7 +37,7 @@ cards:
             #     show_line: false
             #     show_points: false
             #     show_legend: false
-                # y_axis: secondary
+            #     y_axis: secondary
             animate: true
             hour24: true
             color_thresholds_transition: hard

@@ -112,12 +112,25 @@ cards:
             name: 'Ultron Admin Panel'
             url: http://192.168.1.11/
             icon: mdi:database
+          - type: divider
           - switch.vm_windows_10
           - switch.vm_gaming_center
           - switch.vm_pop_os
           - type: divider
           - switch.docker_transmission
           - switch.docker_transmission_telegram
+          - type: divider
+      - type: custom:mini-graph-card
+        name: 'Потребление сервера'
+        animate: true
+        hour24: true
+        line_color: "#f39c12"
+        hours_to_show: 24
+        points_per_hour: 12
+        update_interval: 300
+        line_width: 3
+        entities:
+          - entity: sensor.0x4cf8cdf3c777c79_power
           
   - type: custom:vertical-stack-in-card
     title: Ultron Metrics
@@ -172,22 +185,53 @@ cards:
             update_interval: 30
             entities:
               - entity: sensor.ultron_ram_usage
+          
+      - type: horizontal-stack
+        cards:
           - type: custom:mini-graph-card
-            name: 'SWAP'
-            animate: true
-            hour24: true
-            color_thresholds:
-              - value: 35
-                color: "#539652"
-              - value: 50
-                color: "#f39c12"
-              - value: 80
-                color: "#c0392b"
-            hours_to_show: 24
-            points_per_hour: 12
-            update_interval: 30
+            name: Parity
             entities:
-              - entity: sensor.ultron_swap_usage
+              - sensor.ultron_parity_disk_temperature
+            hour24: true
+            show:
+              graph: false
+              icon: true
+              extrema: true
+              fill: false
+            align_state: center
+          - type: custom:mini-graph-card
+            name: Disk 1
+            entities:
+              - sensor.ultron_disk_1_temperature
+            hour24: true
+            show:
+              graph: false
+              icon: true
+              extrema: true
+              fill: false
+            align_state: center
+          - type: custom:mini-graph-card
+            name: Cache
+            entities:
+              - sensor.ultron_cache_temperature
+            hour24: true
+            show:
+              graph: false
+              icon: true
+              extrema: true
+              fill: false
+            align_state: center
+          - type: custom:mini-graph-card
+            name: 970 EVO
+            entities:
+              - sensor.ultron_970_evo_temperature
+            hour24: true
+            show:
+              graph: false
+              icon: true
+              extrema: true
+              fill: false
+            align_state: center
 
           
   - type: custom:vertical-stack-in-card

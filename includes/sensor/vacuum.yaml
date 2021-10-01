@@ -13,9 +13,12 @@
         value_template: "{{ state_attr('vacuum.roborock_s5', 'cleaned_area') }}"
         unit_of_measurement: "m2"
       roborock_s5_cleaning_time:
-        friendly_name: "Убраная площадь"
+        friendly_name: "Длительность уборки"
         value_template: "{{ state_attr('vacuum.roborock_s5', 'cleaning_time') }}"
         unit_of_measurement: "мин"
+      roborock_s5_status:
+        friendly_name: "Статус пылесоса"
+        value_template: "{{ state_attr('vacuum.roborock_s5', 'status') }}"
         
  
   - platform: template
