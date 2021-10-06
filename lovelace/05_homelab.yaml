@@ -119,6 +119,7 @@ cards:
           - type: divider
           - switch.docker_transmission
           - switch.docker_transmission_telegram
+          - switch.docker_homebridge
           - type: divider
       - type: custom:mini-graph-card
         name: 'Потребление сервера'

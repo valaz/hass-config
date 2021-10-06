@@ -52,3 +52,10 @@
         command_off: "ssh -i /config/ultron.key -o StrictHostKeyChecking=no root@192.168.1.11 docker stop transmission-telegram"
         command_state: "ssh -i /config/ultron.key -o StrictHostKeyChecking=no root@192.168.1.11 docker inspect transmission-telegram | jq '.[0].State.Status' -r "
         value_template: '{{ value == "running" }}'
+        
+      docker_homebridge:
+        friendly_name: "Docker Homebridge"
+        command_on: "ssh -i /config/ultron.key -o StrictHostKeyChecking=no root@192.168.1.11 docker start homebridge"
+        command_off: "ssh -i /config/ultron.key -o StrictHostKeyChecking=no root@192.168.1.11 docker stop homebridge"
+        command_state: "ssh -i /config/ultron.key -o StrictHostKeyChecking=no root@192.168.1.11 docker inspect homebridge | jq '.[0].State.Status' -r "
+        value_template: '{{ value == "running" }}'
