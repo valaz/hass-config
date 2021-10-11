@@ -79,7 +79,7 @@ cards:
             entities:
               - type: weblink
                 name: 'Pi-hole Panel'
-                url: http://192.168.1.115/admin/index.php
+                url: http://192.168.1.42/admin/index.php
                 icon: mdi:pi-hole
               - entity: switch.pi_hole
                 name: Вкл/Выкл
