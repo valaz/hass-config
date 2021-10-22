@@ -95,7 +95,7 @@ influxdb:
       override_measurement: battery
     sensor.*power*:
       override_measurement: energy
-    sensor.*consumption*:
+    sensor.*energy*:
       override_measurement: energy
   tags_attributes:
     - room

@@ -5,3 +5,12 @@
     device_class: androidtv
     host: 192.168.1.55
     port: 5555
+    apps:
+        Android TV Launcher: "Home"
+        YouTube Kids: "YouTube Kids"
+        YouTube: "YouTube"
+        Plex: "Plex"
+        net.gtvbox.videoplayer: "Vimu"
+        com.lazycatsoftware.lmd: "Lazy Media"
+        Kodi: "Kodi"
+        IPTV: "IPTV"

@@ -33,7 +33,7 @@ cards:
           - type: custom:mini-graph-card
             name: Лоджия
             entities:
-              - sensor.0x158d0005800735_temperature
+              - sensor.0x00158d0005800735_temperature
             hour24: true
             show:
               graph: false
@@ -57,7 +57,7 @@ cards:
           - type: custom:mini-graph-card
             name: Детская
             entities:
-              - sensor.0x158d000586695c_temperature
+              - sensor.0x00158d000586695c_temperature
             hour24: true
             show:
               graph: false
@@ -98,7 +98,7 @@ cards:
           - type: custom:mini-graph-card
             name: Лоджия
             entities:
-              - sensor.0x158d0005800735_humidity
+              - sensor.0x00158d0005800735_humidity
             hour24: true
             show:
               graph: false
@@ -122,7 +122,7 @@ cards:
           - type: custom:mini-graph-card
             name: Детская
             entities:
-              - sensor.0x158d000586695c_humidity
+              - sensor.0x00158d000586695c_humidity
             hour24: true
             show:
               graph: false

@@ -3,4 +3,8 @@
       roborock_is_charged:
         friendly_name: "Roborock is charged"
         value_template: >-
-          {{ state_attr('vacuum.roborock_s5', 'battery_level')|float > 90 }}
+            {% if states('vacuum.roborock_s5') not in ['unavailable'] %}
+              {{ state_attr('vacuum.roborock_s5', 'battery_level') | float > 95 }}
+            {% else %}
+               {{ states('binary_sensor.roborock_is_charged')  }}
+            {% endif %}

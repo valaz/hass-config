@@ -19,10 +19,10 @@
     switches:    
     
       vm_windows_10:
-        friendly_name: "VM Windows 10"
-        command_on: "ssh -i /config/ultron.key -o StrictHostKeyChecking=no root@192.168.1.11 virsh start Windows10"
-        command_off: "ssh -i /config/ultron.key -o StrictHostKeyChecking=no root@192.168.1.11 virsh shutdown Windows10"
-        command_state: "ssh -i /config/ultron.key -o StrictHostKeyChecking=no root@192.168.1.11 virsh list --all | grep Windows10 | awk '{print $3}' "
+        friendly_name: "HTPC"
+        command_on: "ssh -i /config/ultron.key -o StrictHostKeyChecking=no root@192.168.1.11 virsh start HTPC"
+        command_off: "ssh -i /config/ultron.key -o StrictHostKeyChecking=no root@192.168.1.11 virsh shutdown HTPC"
+        command_state: "ssh -i /config/ultron.key -o StrictHostKeyChecking=no root@192.168.1.11 virsh list --all | grep HTPC | awk '{print $3}' "
         value_template: '{{ value == "running" }}'
         
       vm_gaming_center:

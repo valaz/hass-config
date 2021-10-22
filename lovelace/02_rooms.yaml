@@ -25,21 +25,20 @@ cards:
              - entity: switch.philips_wol
              - entity: switch.philips_wwol
              - entity: switch.sven_volume
-             - entity: media_player.pop_os
              - entity: alarm_control_panel.0x842e14fffe54c44d_alarm
-             - entity: switch.0x4cf8cdf3c764d02_switch
+             - entity: switch.0x04cf8cdf3c764d02
                type: custom:multiple-entity-row
                name: 'Телевизор Розетка'
                toggle: true
                entities:
-                - entity: sensor.0x4cf8cdf3c764d02_power
+                - entity: sensor.0x04cf8cdf3c764d02_power
                   name: потребление
-             - entity: switch.0x4cf8cdf3c777c79_switch
+             - entity: switch.0x04cf8cdf3c777c79
                type: custom:multiple-entity-row
                name: 'Альтрон розетка'
                toggle: true
                entities:
-                - entity: sensor.0x4cf8cdf3c777c79_power
+                - entity: sensor.0x04cf8cdf3c777c79_power
                   name: потребление
        
         #   - type: horizontal-stack
@@ -115,6 +114,7 @@ cards:
         cards:
           - type: entities
             entities:
+              - entity: binary_sensor.roborock_is_charged
               - entity: vacuum.roborock_s5
                 type: custom:multiple-entity-row
                 secondary_info:
@@ -139,6 +139,7 @@ cards:
           - type: picture-glance
             camera_image: camera.roborock_s50
             camera_view: live
+            show_state: true
             entities: []
 #######   Гардероб   #######
       - type: custom:vertical-stack-in-card
@@ -147,13 +148,17 @@ cards:
           - type: glance
             show_name: false
             entities:
-             - entity: light.0x158d00052b3ad9_light
+            #  - entity: light.0x158d00052b3ad9_light
+            #   name: Лампа
+            #   double_tap_action:
+            #      action: toggle
+             - entity: light.0x00158d00052b3ad9
                name: Лампа
                double_tap_action:
                  action: toggle
-             - entity: sensor.0x158d00054cd813_illuminance
+             - entity: sensor.0x00158d00054cd813_illuminance_lux
                name: Освещение
-             - entity: binary_sensor.0x158d00054cd813_motion
+             - entity: binary_sensor.0x00158d00054cd813_occupancy
                name: Движение
           - type: entities
             entities:
@@ -183,8 +188,11 @@ cards:
               - type: glance
                 show_name: false
                 entities:
-                  - sensor.0x158d000586695c_temperature
-                  - sensor.0x158d000586695c_humidity
+                  - sensor.0x00158d000586695c_temperature
+                  - sensor.0x00158d000586695c_humidity
+              - type: entities
+                entities:
+                 - entity: media_player.mi_box
       - type: horizontal-stack
         cards:
 #######   Кухня   #######
@@ -203,5 +211,5 @@ cards:
               - type: glance
                 show_name: false
                 entities:
-                  - sensor.0x158d0005800735_temperature
-                  - sensor.0x158d0005800735_humidity
+                  - sensor.0x00158d0005800735_temperature
+                  - sensor.0x00158d0005800735_humidity

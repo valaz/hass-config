@@ -189,10 +189,10 @@ telegram:
                 
         - id: Лампа недоступна
           alias: light_is_offline 
-          initial_state: true
+          initial_state: false
           trigger:   
              - platform: state
-               entity_id: light.0x158d00052b3ad9_light
+               entity_id: light.0x00158d00052b3ad9
                to: "unavailable"
                for:
                  minutes: 2
@@ -204,10 +204,10 @@ telegram:
                      
         - id: Лампа доступна
           alias: light_is_online 
-          initial_state: true
+          initial_state: false
           trigger:   
              - platform: state
-               entity_id: light.0x158d00052b3ad9_light
+               entity_id: light.0x00158d00052b3ad9
                from: "unavailable"
           action:
              - service: notify.tg_valaz
@@ -279,9 +279,10 @@ telegram:
                   entity_id: vacuum.roborock_s5
                   state: 'docked'
           trigger:   
-             - platform: numeric_state
-               entity_id: sensor.roborock_s5_battery
-               above: 95
+             - platform: state
+               entity_id: binary_sensor.roborock_is_charged
+               from: 'off'
+               to: 'on'
           action:
              - service: notify.tg_valaz
                data:
