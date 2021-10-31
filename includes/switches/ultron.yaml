@@ -67,9 +67,9 @@
         command_state: "ssh -i /config/ultron.key -o StrictHostKeyChecking=no root@192.168.1.11 docker inspect homebridge | jq '.[0].State.Status' -r "
         value_template: '{{ value == "running" }}'
         
-      docker_zigbee2mqtt:
-        friendly_name: "Docker zigbee2mqtt"
-        command_on: "ssh -i /config/ultron.key -o StrictHostKeyChecking=no root@192.168.1.11 docker start zigbee2mqtt"
-        command_off: "ssh -i /config/ultron.key -o StrictHostKeyChecking=no root@192.168.1.11 docker stop zigbee2mqtt"
-        command_state: "ssh -i /config/ultron.key -o StrictHostKeyChecking=no root@192.168.1.11 docker inspect zigbee2mqtt | jq '.[0].State.Status' -r "
+      docker_telegraf:
+        friendly_name: "Docker telegraf"
+        command_on: "ssh -i /config/ultron.key -o StrictHostKeyChecking=no root@192.168.1.11 docker start telegraf"
+        command_off: "ssh -i /config/ultron.key -o StrictHostKeyChecking=no root@192.168.1.11 docker stop telegraf"
+        command_state: "ssh -i /config/ultron.key -o StrictHostKeyChecking=no root@192.168.1.11 docker inspect telegraf | jq '.[0].State.Status' -r "
         value_template: '{{ value == "running" }}'

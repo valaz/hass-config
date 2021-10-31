@@ -131,9 +131,9 @@ cards:
           - entity: switch.docker_homebridge
             icon: mdi:docker
             name: homebridge
-          - entity: switch.docker_zigbee2mqtt
+          - entity: switch.docker_telegraf
             icon: mdi:docker
-            name: zigbee2mqtt
+            name: telegraf
           - type: divider
       - type: custom:mini-graph-card
         name: 'Потребление сервера'

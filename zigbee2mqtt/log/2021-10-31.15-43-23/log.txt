@@ -1,0 +1,15 @@
+info  2021-10-31 15:43:24: Logging to console and directory: '/config/zigbee2mqtt/log/2021-10-31.15-43-23' filename: log.txt
+info  2021-10-31 15:43:24: Starting Zigbee2MQTT version 1.21.2 (commit #unknown)
+info  2021-10-31 15:43:24: Starting zigbee-herdsman (0.13.149)
+info  2021-10-31 15:43:24: zigbee-herdsman started (resumed)
+info  2021-10-31 15:43:24: Coordinator firmware version: '{"meta":{"maintrel":1,"majorrel":2,"minorrel":7,"product":1,"revision":20210319,"transportrev":2},"type":"zStack3x0"}'
+info  2021-10-31 15:43:24: Currently 0 devices are joined:
+info  2021-10-31 15:43:24: Zigbee: disabling joining new devices.
+info  2021-10-31 15:43:24: Connecting to MQTT server at mqtt://core-mosquitto
+info  2021-10-31 15:43:24: Connected to MQTT server
+info  2021-10-31 15:43:24: MQTT publish: topic 'zigbee2mqtt/bridge/state', payload 'online'
+info  2021-10-31 15:43:24: MQTT publish: topic 'zigbee2mqtt/bridge/config', payload '{"commit":"unknown","coordinator":{"meta":{"maintrel":1,"majorrel":2,"minorrel":7,"product":1,"revision":20210319,"transportrev":2},"type":"zStack3x0"},"log_level":"info","network":{"channel":11,"extendedPanID":"0x00124b002291d5c5","panID":6754},"permit_join":false,"version":"1.21.2"}'
+info  2021-10-31 15:43:24: Started frontend on port 0.0.0.0:8099
+info  2021-10-31 15:43:31: MQTT publish: topic 'zigbee2mqtt/bridge/state', payload 'offline'
+info  2021-10-31 15:43:31: Disconnecting from MQTT server
+info  2021-10-31 15:43:31: Stopping zigbee-herdsman...
