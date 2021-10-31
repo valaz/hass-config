@@ -222,52 +222,78 @@ telegram:
           initial_state: true
           trigger:   
              - platform: numeric_state
-               entity_id: sensor.cpu_temp_package
+               entity_id: sensor.ultron_cpu_temperature
                above: 84
           action:
              - service: notify.tg_valaz
                data:
                  message: | 
-                     {{"\U0001F975"}} Температура CPU увеличилась - {{ states('sensor.proxmox_cpu_temperature') }} °C.
+                     {{"\U0001F975"}} Температура CPU увеличилась - {{ states('sensor.ultron_cpu_temperature') }} °C.
                      
         - id: CPU теплый
           alias: cpu_temp_is_ok 
           initial_state: true
           trigger:   
              - platform: numeric_state
-               entity_id: sensor.cpu_temp_package
+               entity_id: sensor.ultron_cpu_temperature
                below: 85
           action:
              - service: notify.tg_valaz
                data:
                  message: | 
-                     {{"\U0001F976"}} Температура CPU уменьшилась - {{ states('sensor.proxmox_cpu_temperature') }} °C.
+                     {{"\U0001F976"}} Температура CPU уменьшилась - {{ states('sensor.ultron_cpu_temperature') }} °C.
                      
-        - id: WD Elements горячий
+        - id: WD Elements Parity горячий
           alias: wd_elements_is_hot 
           initial_state: true
           trigger:   
              - platform: numeric_state
-               entity_id: sensor.omv_sdc
+               entity_id: sensor.ultron_parity_disk_temperature
                above: 44
           action:
              - service: notify.tg_valaz
                data:
                  message: | 
-                     {{"\U0001F4BD"}} Температура WD Elements увеличилась - {{ states('sensor.omv_sdc') }} °C.
+                     {{"\U0001F4BD"}} Температура WD Elements Parity увеличилась - {{ states('sensor.ultron_parity_disk_temperature') }} °C.
                      
-        - id: WD Elements теплый
+        - id: WD Elements Parity теплый
           alias: wd_elements_is_ok 
           initial_state: true
           trigger:   
              - platform: numeric_state
-               entity_id: sensor.omv_sdc
+               entity_id: sensor.ultron_parity_disk_temperature
                below: 45
           action:
              - service: notify.tg_valaz
                data:
                  message: | 
-                     {{"\U0001F4BD"}} Температура WD Elements уменьшилась - {{ states('sensor.omv_sdc') }} °C.
+                     {{"\U0001F4BD"}} Температура WD Elements Parity уменьшилась - {{ states('sensor.ultron_parity_disk_temperature') }} °C.
+                     
+        - id: WD Elements Disk1 горячий
+          alias: wd_elements_is_hot 
+          initial_state: true
+          trigger:   
+             - platform: numeric_state
+               entity_id: sensor.ultron_disk_1_temperature
+               above: 44
+          action:
+             - service: notify.tg_valaz
+               data:
+                 message: | 
+                     {{"\U0001F4BD"}} Температура WD Elements Disk1 увеличилась - {{ states('sensor.ultron_disk_1_temperature') }} °C.
+                     
+        - id: WD Elements Disk1 теплый
+          alias: wd_elements_is_ok 
+          initial_state: true
+          trigger:   
+             - platform: numeric_state
+               entity_id: sensor.ultron_disk_1_temperature
+               below: 45
+          action:
+             - service: notify.tg_valaz
+               data:
+                 message: | 
+                     {{"\U0001F4BD"}} Температура WD Elements Disk1 уменьшилась - {{ states('sensor.ultron_disk_1_temperature') }} °C.
 
         - id: Roborock зараяжен
           alias: roborock_is_charged 

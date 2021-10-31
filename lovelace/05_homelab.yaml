@@ -113,13 +113,27 @@ cards:
             url: http://192.168.1.11/
             icon: mdi:database
           - type: divider
-          - switch.vm_windows_10
-          - switch.vm_gaming_center
-          - switch.vm_pop_os
+          - entity: switch.vm_gaming_center
+            icon: mdi:microsoft-windows
+          - entity: switch.vm_htpc
+            icon: mdi:youtube-tv
+          - entity: switch.vm_pop_os
+            icon: mdi:ubuntu
+          - entity: switch.vm_hive_os
+            icon: mdi:expansion-card
           - type: divider
-          - switch.docker_transmission
-          - switch.docker_transmission_telegram
-          - switch.docker_homebridge
+          - entity: switch.docker_transmission
+            icon: mdi:docker
+            name: transmission
+          - entity: switch.docker_transmission_telegram
+            icon: mdi:docker
+            name: transmission_telegram
+          - entity: switch.docker_homebridge
+            icon: mdi:docker
+            name: homebridge
+          - entity: switch.docker_zigbee2mqtt
+            icon: mdi:docker
+            name: zigbee2mqtt
           - type: divider
       - type: custom:mini-graph-card
         name: 'Потребление сервера'
