@@ -6,13 +6,14 @@
   action:
     - service: fan.set_preset_mode
       target:
-        entity_id: fan.xiaomi_air_purifier_2s
+        entity_id: fan.air_purifier
       data:
         preset_mode: '{{ states.input_select.xiaomi_airpurifier_mode.state }}'
+        
 - alias: Air Purifier mode changed
   trigger:
     platform: state
-    entity_id: fan.xiaomi_air_purifier_2s
+    entity_id: fan.air_purifier
   condition:
     alias: "airpurifier preset_mode is not Unknown"
     condition: not
@@ -24,7 +25,8 @@
     service: input_select.select_option
     entity_id: input_select.xiaomi_airpurifier_mode
     data_template:
-      option: '{{ states.fan.xiaomi_air_purifier_2s.attributes.preset_mode }}'
+      option: '{{ states.fan.air_purifier.attributes.preset_mode }}'
+      
 - alias: Air Purifier favorite level change
   trigger:
     entity_id: input_number.xiaomi_airpurifier_favorite_level
@@ -32,8 +34,9 @@
   action:
     service: number.set_value
     data_template:
-      entity_id: number.xiaomi_air_purifier_2s_favorite_level
+      entity_id: number.air_purifier_favorite_level
       value: '{{ states.input_number.xiaomi_airpurifier_favorite_level.state | int }}'
+      
 - alias: Air Purifier favorite level changed
   trigger:
     platform: state
@@ -62,7 +65,7 @@
     - condition: and
       conditions:
         - condition: state
-          entity_id: fan.xiaomi_air_purifier_2s
+          entity_id: fan.air_purifier
           state: 'on'
         - condition: numeric_state
           entity_id: sensor.xiaomi_air_purifier_2s_pm2_5
@@ -75,11 +78,11 @@
         message: "Air is good!!"
     - service: fan.set_preset_mode
       target:
-        entity_id: fan.xiaomi_air_purifier_2s
+        entity_id: fan.air_purifier
       data:
         preset_mode: 'Auto'
     - service: homeassistant.turn_off
-      entity_id: fan.xiaomi_air_purifier_2s
+      entity_id: fan.air_purifier
       
 # Автовключение
 - alias: air_putifier_auto_on
@@ -91,7 +94,7 @@
     - condition: and
       conditions:
         - condition: state
-          entity_id: fan.xiaomi_air_purifier_2s
+          entity_id: fan.air_purifier
           state: 'off'
         - condition: numeric_state
           entity_id: sensor.xiaomi_air_purifier_2s_pm2_5
@@ -103,7 +106,7 @@
         logger: automation_air-purifier-2s
         message: "Air is bad!!"
     - service: homeassistant.turn_on
-      entity_id: fan.xiaomi_air_purifier_2s
+      entity_id: fan.air_purifier
       
       
       

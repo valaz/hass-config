@@ -5,7 +5,7 @@ cards:
     cards:
       - type: conditional
         conditions:
-          - entity: fan.xiaomi_air_purifier_2s
+          - entity: fan.air_purifier
             state: 'on'
         card:
           type: horizontal-stack
@@ -13,29 +13,30 @@ cards:
               - type: entities
                 show_header_toggle: false
                 entities:
-                  - entity: sensor.xiaomi_air_purifier_2s_pm2_5
-                  - entity: fan.xiaomi_air_purifier_2s
+                  - entity: sensor.air_purifier_pm2_5
+                  - entity: fan.air_purifier
                   - entity: input_select.xiaomi_airpurifier_mode
                   - entity: input_number.xiaomi_airpurifier_favorite_level
-                  - entity: number.xiaomi_air_purifier_2s_favorite_level
-                  - entity: switch.xiaomi_air_purifier_2s_child_lock
-                  - entity: switch.xiaomi_air_purifier_2s_led
-                  - entity: sensor.xiaomi_air_purifier_2s_motor_speed
-                  - entity: sensor.xiaomi_air_purifier_2s_filter_life_remaining
+                  - entity: number.air_purifier_favorite_level
+                  - entity: switch.air_purifier_child_lock
+                  - entity: switch.air_purifier_led
+                  - entity: switch.air_purifier_buzzer
+                  - entity: sensor.air_purifier_motor_speed
+                  - entity: sensor.air_purifier_filter_life_remaining
                 theme: default
                 title: Очиститель воздуха
         
       - type: conditional
         conditions:
-          - entity: fan.xiaomi_air_purifier_2s
+          - entity: fan.air_purifier
             state: 'off'
         card:
           type: horizontal-stack
           cards:
             - type: entities
               entities:
-                  - entity: sensor.xiaomi_air_purifier_2s_pm2_5
-                  - entity: fan.xiaomi_air_purifier_2s
+                  - entity: sensor.air_purifier_pm2_5
+                  - entity: fan.air_purifier
               state_color: true
               theme: default
               title: Очиститель воздуха

@@ -11,7 +11,7 @@ cards:
           - type: custom:mini-graph-card
             name: Гостиная
             entities:
-              - sensor.xiaomi_air_purifier_2s_temperature
+              - sensor.air_purifier_temperature
             hour24: true
             show:
               graph: false
@@ -76,7 +76,7 @@ cards:
           - type: custom:mini-graph-card
             name: Гостиная
             entities:
-              - sensor.xiaomi_air_purifier_2s_humidity
+              - sensor.air_purifier_humidity
             hour24: true
             show:
               graph: false

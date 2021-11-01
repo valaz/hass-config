@@ -13,13 +13,12 @@ cards:
           - type: glance
             show_name: false
             entities:
-              - sensor.xiaomi_air_purifier_2s_temperature
-              - sensor.xiaomi_air_purifier_2s_humidity
-              - sensor.xiaomi_air_purifier_2s_pm2_5
+              - sensor.air_purifier_temperature
+              - sensor.air_purifier_humidity
+              - sensor.air_purifier_pm2_5
           - type: entities
             entities:
-             - entity: fan.xiaomi_air_purifier_2s
-            #  - entity: media_player.mi_box
+             - entity: fan.air_purifier
             #  - entity: media_player.android_tv
              - entity: binary_sensor.philips_tv_screen
              - entity: switch.philips_wol
