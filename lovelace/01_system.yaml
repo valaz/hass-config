@@ -23,32 +23,9 @@ cards:
               hide_unavailable: true
             - entity: sensor.time
               name: Время
-          - type: custom:mini-graph-card
-            height: 200
-            show:
-              name: false
-              icon: false
-              state: false
-            entities:
-              - entity: sensor.sun_elevation
-            #   - color: gray
-            #     entity: sensor.nighttime
-            #     name: Night
-            #     show_line: false
-            #     show_points: false
-            #     show_legend: false
-            #     y_axis: secondary
-            animate: true
-            hour24: true
-            color_thresholds_transition: hard
-            color_thresholds:
-              - value: -50
-                color: "#3293a8"
-              - value: 0
-                color: "#fa7d3e"
-            hours_to_show: 24
-            points_per_hour: 5
-            update_interval: 10
+      - type: 'custom:sun-card'
+        language: ru
+
   
       - type: entities
         title: 'Текущее состояние'

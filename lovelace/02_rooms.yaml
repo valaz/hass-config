@@ -111,9 +111,25 @@ cards:
       - type: custom:vertical-stack-in-card
         title: Коридор
         cards:
+          - type: picture-entity
+            entity: camera.tapo_camera_c110_sd
+            camera_image: camera.tapo_camera_c110_sd
+            camera_view: live
+            show_state: false
+            show_name: false
+            double_tap_action :
+                action: call-service
+                service: script.tapo_c110_privacy_off
+                confirmation:
+                    text: Включить камеру?
+            hold_action:
+                action: call-service
+                service: script.tapo_c110_privacy_on
+                confirmation:
+                    text: Выключить камеру?
+                    
           - type: entities
             entities:
-              - entity: binary_sensor.roborock_is_charged
               - entity: vacuum.roborock_s5
                 type: custom:multiple-entity-row
                 secondary_info:
@@ -135,11 +151,13 @@ cards:
                 - entity: sensor.roborock_s5_cleaning_time
                   name: длительность
              
-          - type: picture-glance
+          - type: picture-entity
+            entity: camera.roborock_s50
             camera_image: camera.roborock_s50
             camera_view: live
-            show_state: true
-            entities: []
+            show_state: false
+            show_name: false
+            
 #######   Гардероб   #######
       - type: custom:vertical-stack-in-card
         title: Гардероб

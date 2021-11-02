@@ -17,7 +17,7 @@ telegram:
             
           unavailable_now_sensor:
             friendly_name: "Всего недоступных сенсоров - "
-            value_template: "{{states.sensor | selectattr ('state', 'equalto', 'unavailable') | list | length}}"
+            value_template: "{{states.sensor | selectattr ('state', 'equalto', 'unavailable') | list | length - 1 }}"
             icon_template: mdi:counter
             
           unavailable_now_binary_sensor:
@@ -381,6 +381,17 @@ telegram:
                 title: "Торрент удален!"
                 message: |
                     {{"\U00002796"}} {{trigger.event.data.name}}
+                     
+        - id: Door Movements
+          alias: door_movements
+          trigger:
+            platform: state
+            entity_id: binary_sensor.tapo_camera_c110_motion
+            to: "on"
+          action:
+            - service: script.turn_on
+              entity_id: 
+                - script.video_tapo_c110_telegram
                      
 
           

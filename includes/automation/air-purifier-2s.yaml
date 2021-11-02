@@ -40,19 +40,19 @@
 - alias: Air Purifier favorite level changed
   trigger:
     platform: state
-    entity_id: number.xiaomi_air_purifier_2s_favorite_level
+    entity_id: number.air_purifier_favorite_level
   condition:
     alias: "airpurifier favorite_level is not Unknown"
     condition: not
     conditions:
         - condition: state
-          entity_id: number.xiaomi_air_purifier_2s_favorite_level
+          entity_id: number.air_purifier_favorite_level
           state: "unknown"
   action:
     service: input_number.set_value
     entity_id: input_number.xiaomi_airpurifier_favorite_level
     data_template:
-      value: '{{ states.number.xiaomi_air_purifier_2s_favorite_level.state | int  }}'
+      value: '{{ states.number.air_purifier_favorite_level.state | int  }}'
       
       
 # Автовыключение
