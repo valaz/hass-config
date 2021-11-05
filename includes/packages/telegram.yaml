@@ -54,11 +54,12 @@ telegram:
              message: | 
                  {{"\U0001F333"}} Климат в квартире
                  {{"\U0001F567"}} Отчет за {{ states('sensor.time_date') }}
-                 {{"\U0001F4FA"}} Гостиная - {{ states('sensor.xiaomi_air_purifier_2s_temperature') }} °C, {{ states('sensor.xiaomi_air_purifier_2s_humidity') }} %
+                 {{"\U0001F4FA"}} Гостиная - {{ states('sensor.air_purifier_temperature') }} °C, {{ states('sensor.air_purifier_humidity') }} %
                  {{"\U0001F468"}} Спальня - {{ states('sensor.rm4_mini_temperature') }} °C, {{ states('sensor.rm4_mini_humidity') }} %
-                 {{"\U0001F476"}} Детская - {{ states('sensor.0x158d000586695c_temperature') }} °C, {{ states('sensor.0x158d000586695c_humidity') }} %
-                 {{"\U0001F487"}} Лоджия - {{ states('sensor.0x158d0005800735_temperature') }} °C, {{ states('sensor.0x158d0005800735_humidity') }} %
+                 {{"\U0001F476"}} Детская - {{ states('sensor.0x00158d000586695c_temperature') }} °C, {{ states('sensor.0x00158d000586695c_humidity') }} %
+                 {{"\U0001F487"}} Лоджия - {{ states('sensor.0x00158d0005800735_temperature') }} °C, {{ states('sensor.0x00158d0005800735_humidity') }} %
                  {{"\U0001F52A"}} Кухня - {{ states('sensor.e72e01500c8f_temperature') }} °C, {{ states('sensor.e72e01500c8f_humidity') }} %
+                 
       homelab_report:
         alias: Отправка отчета о состоянии homelab
         sequence:
@@ -68,6 +69,16 @@ telegram:
                  {{"\U00002699"}} Homelab
                  {{"\U0001F567"}} Отчет за {{ states('sensor.time_date') }}
                  {{"\U00002600"}} Ultron CPU - {{ states('sensor.ultron_cpu_temperature') }} °C
+                 
+      people_report:
+        alias: Отправка отчета о состоянии people
+        sequence:
+         - service: notify.tg_valaz
+           data:
+             message: | 
+                 {{"\U0001F3E0"}} Люди
+                 {{"\U0001F468"}} {% if is_state('binary_sensor.azat_at_home', 'on') %}Азат дома{% else %}Азат НЕ дома{% endif %}
+                 {{"\U0001F469"}} {% if is_state('binary_sensor.elia_at_home', 'on') %}Элия дома{% else %}Элия НЕ дома{% endif %}
         
 # https://apps.timwhitlock.info/emoji/tables/unicode         
     automation:  
@@ -85,9 +96,8 @@ telegram:
               message: 'commands'
               data:
                 keyboard:
-                  - '/report' 
-                  - '/climate' 
-                  - '/homelab'
+                  - '/report, /homelab'
+                  - '/climate, /people'
 
         - id: Отчет при запуске системы
           alias: start_message
@@ -144,6 +154,19 @@ telegram:
            - service: script.turn_on
              entity_id: 
                 - script.homelab_report
+                
+        - id: Запрос на people             
+          alias: send_people_report
+          initial_state: true
+          trigger:
+          - platform: event
+            event_type: telegram_command
+            event_data:
+              command: '/people'
+          action:
+           - service: script.turn_on
+             entity_id: 
+                - script.people_report
                 
                 
         - id: Увлажнитель выключился
@@ -392,6 +415,22 @@ telegram:
             - service: script.turn_on
               entity_id: 
                 - script.video_tapo_c110_telegram
+                
+     
+                
+        - id: Видеокарат не работает
+          alias: ultron_gpu_is_idle 
+          initial_state: true
+          trigger:   
+             - platform: state
+               entity_id: binary_sensor.ultron_gpu_on_load
+               to: "off"
+               for: "00:05:00"
+          action:
+             - service: notify.tg_valaz
+               data:
+                 message: | 
+                     {{"\U0001F914"}} Ultron не исползует видокарту уже 5 минут.
                      
 
           

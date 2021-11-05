@@ -39,32 +39,7 @@ cards:
                entities:
                 - entity: sensor.0x04cf8cdf3c777c79_power
                   name: потребление
-       
-        #   - type: horizontal-stack
-        #     cards:
-        #       - type: custom:mini-graph-card
-        #         name: 'Потребление Телевизора'
-        #         animate: true
-        #         hour24: true
-        #         line_color: "#f39c12"
-        #         hours_to_show: 24
-        #         points_per_hour: 12
-        #         update_interval: 300
-        #         line_width: 3
-        #         entities:
-        #           - entity: sensor.0x4cf8cdf3c764d02_power
-              
-        #       - type: custom:mini-graph-card
-        #         name: 'Потребление сервера'
-        #         animate: true
-        #         hour24: true
-        #         line_color: "#f39c12"
-        #         hours_to_show: 24
-        #         points_per_hour: 12
-        #         update_interval: 300
-        #         line_width: 3
-        #         entities:
-        #           - entity: sensor.0x4cf8cdf3c777c79_power
+
               
         #   - type: glance
         #     show_name: false
@@ -111,12 +86,12 @@ cards:
       - type: custom:vertical-stack-in-card
         title: Коридор
         cards:
-          - type: picture-entity
-            entity: camera.tapo_camera_c110_sd
-            camera_image: camera.tapo_camera_c110_sd
+          - type: picture-glance
+            entities:
+              - binary_sensor.azat_at_home
+              - binary_sensor.elia_at_home
+            camera_image: camera.tapo_camera_c110_hd
             camera_view: live
-            show_state: false
-            show_name: false
             double_tap_action :
                 action: call-service
                 service: script.tapo_c110_privacy_off
@@ -127,6 +102,7 @@ cards:
                 service: script.tapo_c110_privacy_on
                 confirmation:
                     text: Выключить камеру?
+
                     
           - type: entities
             entities:
@@ -146,9 +122,9 @@ cards:
                   unit: 'назад'
                 show_state: false
                 entities:
-                - entity: sensor.roborock_s5_cleaned_area
+                - entity: sensor.roborock_s5_last_clean_area
                   name: площадь
-                - entity: sensor.roborock_s5_cleaning_time
+                - entity: sensor.roborock_last_clean_duration
                   name: длительность
              
           - type: picture-entity
@@ -165,10 +141,6 @@ cards:
           - type: glance
             show_name: false
             entities:
-            #  - entity: light.0x158d00052b3ad9_light
-            #   name: Лампа
-            #   double_tap_action:
-            #      action: toggle
              - entity: light.0x00158d00052b3ad9
                name: Лампа
                double_tap_action:

@@ -1,0 +1,27 @@
+- alias: "Disable Camera When People At Home"
+  trigger:
+      - platform: state
+        entity_id: binary_sensor.people_at_home
+        to: "on"
+        for: "00:01:00"
+  action:
+    - service: notify.tg_valaz
+      data:
+        title: "Дома есть люди"
+        message: |
+             {{"\U0001F4F9"}} Камера выключается.
+    - service: script.tapo_c110_privacy_on
+
+- alias: "Enable Camera When People Out Of Home"
+  trigger:
+      - platform: state
+        entity_id: binary_sensor.people_at_home
+        to: "off"
+        for: "00:01:00"
+  action:
+    - service: notify.tg_valaz
+      data:
+        title: "Дома никого нет"
+        message: |
+             {{"\U0001F4F9"}} Камера включается.
+    - service: script.tapo_c110_privacy_off

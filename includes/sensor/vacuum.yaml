@@ -1,21 +1,21 @@
   - platform: template
     sensors:
-      roborock_s5_clean_stop:
-        friendly_name: "Время последней уборки"
-        value_template: "{{ state_attr('vacuum.roborock_s5', 'clean_start') }}"
-        device_class: "timestamp"
+    #   roborock_s5_clean_stop:
+    #     friendly_name: "Время последней уборки"
+    #     value_template: "{{ state_attr('vacuum.roborock_s5', 'clean_start') }}"
+    #     device_class: "timestamp"
       roborock_s5_battery:
         friendly_name: "Уровень заряда"
         value_template: "{{ state_attr('vacuum.roborock_s5', 'battery_level') | round(0) }}"
         unit_of_measurement: "%"
-      roborock_s5_cleaned_area:
-        friendly_name: "Убраная площадь"
-        value_template: "{{ state_attr('vacuum.roborock_s5', 'cleaned_area') }}"
-        unit_of_measurement: "m2"
-      roborock_s5_cleaning_time:
-        friendly_name: "Длительность уборки"
-        value_template: "{{ state_attr('vacuum.roborock_s5', 'cleaning_time') }}"
-        unit_of_measurement: "мин"
+    #   roborock_s5_cleaned_area:
+    #     friendly_name: "Убраная площадь"
+    #     value_template: "{{ state_attr('vacuum.roborock_s5', 'cleaned_area') }}"
+    #     unit_of_measurement: "m2"
+    #   roborock_s5_cleaning_time:
+    #     friendly_name: "Длительность уборки"
+    #     value_template: "{{ state_attr('vacuum.roborock_s5', 'cleaning_time') }}"
+    #     unit_of_measurement: "мин"
       roborock_s5_status:
         friendly_name: "Статус пылесоса"
         value_template: "{{ state_attr('vacuum.roborock_s5', 'status') }}"
@@ -23,11 +23,18 @@
  
   - platform: template
     sensors:
+      roborock_last_clean_duration:
+        icon_template: mdi:texture-box
+        unit_of_measurement: "мин"
+        friendly_name: "Площадь последней уборки"
+        value_template: >
+            {{ (states('sensor.roborock_s5_last_clean_duration') | float / 60) | round(2) }}
+            
 # Время с последней уборки
       last_clean_custom:
         friendly_name: "Последняя уборка"
         value_template: >
-           {% set uptime = as_timestamp (now()) -as_timestamp(states('sensor.roborock_s5_clean_stop')) | int %}
+           {% set uptime = as_timestamp (now()) -as_timestamp(states('sensor.roborock_s5_last_clean_end')) | int %}
            {% set minutes = (( uptime % 3600) / 60) | int %}
            {% set hours = ((uptime % 86400) / 3600) | int %}
            {% set days = (uptime / 86400) | int %}
