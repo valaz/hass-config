@@ -44,6 +44,7 @@ from .core.miot_spec import (
 from .core.xiaomi_cloud import (
     MiotCloud,
     MiCloudException,
+    MiCloudAccessDenied,
 )
 from .core.templates import CUSTOM_TEMPLATES
 
@@ -209,7 +210,7 @@ async def async_setup(hass, hass_config: dict):
             hass.data[DOMAIN]['devices_by_mac'] = await mic.async_get_devices_by_key('mac') or {}
             cnt = len(hass.data[DOMAIN]['devices_by_mac'])
             _LOGGER.debug('Setup xiaomi cloud for user: %s, %s devices', config.get(CONF_USERNAME), cnt)
-        except MiCloudException as exc:
+        except (MiCloudException, MiCloudAccessDenied) as exc:
             _LOGGER.warning('Setup xiaomi cloud for user: %s failed: %s', config.get(CONF_USERNAME), exc)
 
     await _handle_device_registry_event(hass)
@@ -265,7 +266,7 @@ async def async_setup_xiaomi_cloud(hass: hass_core.HomeAssistant, config_entry: 
         await mic.async_check_auth(notify=True)
         config[CONF_XIAOMI_CLOUD] = mic
         config['devices_by_mac'] = await mic.async_get_devices_by_key('mac', filters=entry) or {}
-    except MiCloudException as exc:
+    except (MiCloudException, MiCloudAccessDenied) as exc:
         _LOGGER.error('Setup xiaomi cloud for user: %s failed: %s', entry.get(CONF_USERNAME), exc)
         return False
     if not config.get('devices_by_mac'):
@@ -771,8 +772,7 @@ class MiioEntity(BaseEntity):
         self._state = attrs.get('power') == 'on'
         self.update_attrs(attrs)
 
-    def _update_attr_sensor_entities(self, attrs, option=None):
-        domain = 'sensor'
+    def _update_attr_sensor_entities(self, attrs, domain='sensor', option=None):
         add_sensors = self._add_entities.get(domain)
         opt = {**(option or {})}
         for a in attrs:
@@ -792,10 +792,17 @@ class MiioEntity(BaseEntity):
                 if tms <= 1:
                     self.logger.info('%s: Device sub entity %s: %s already exists.', self.name, domain, p)
                 continue
-            elif add_sensors:
+            elif not add_sensors:
+                pass
+            elif domain == 'sensor':
                 from .sensor import BaseSensorSubEntity
                 option = {'unique_id': f'{self._unique_did}-{p}', **opt}
                 self._subs[p] = BaseSensorSubEntity(self, a, option=option)
+                add_sensors([self._subs[p]])
+                self._check_same_sub_entity(p, domain, add=1)
+            elif domain == 'binary_sensor':
+                option = {'unique_id': f'{self._unique_did}-{p}', **opt}
+                self._subs[p] = ToggleSubEntity(self, a, option=option)
                 add_sensors([self._subs[p]])
                 self._check_same_sub_entity(p, domain, add=1)
 
@@ -825,9 +832,10 @@ class MiioEntity(BaseEntity):
         if update_parent and hasattr(self, '_parent'):
             if self._parent and hasattr(self._parent, 'update_attrs'):
                 getattr(self._parent, 'update_attrs')(attrs or {}, update_parent=False)
-        pls = self.custom_config_list('sensor_attributes')
-        if pls:
-            self._update_attr_sensor_entities(pls)
+        if pls := self.custom_config_list('sensor_attributes'):
+            self._update_attr_sensor_entities(pls, domain='sensor')
+        if pls := self.custom_config_list('binary_sensor_attributes'):
+            self._update_attr_sensor_entities(pls, domain='binary_sensor')
         return self._state_attrs
 
 
@@ -1025,6 +1033,7 @@ class MiotEntity(MiioEntity):
             self._vars.pop('delay_update', 0)
         updater = 'none'
         results = None
+        errors = None
         mapping = self.miot_mapping
         max_properties = 10
         try:
@@ -1045,7 +1054,22 @@ class MiotEntity(MiioEntity):
                 updater = 'lan'
                 if self._vars.get('has_local_mapping'):
                     mapping = self._device.mapping
-                max_properties = self.custom_config_integer('chunk_properties') or max_properties
+                max_properties = self.custom_config_integer('chunk_properties')
+                if not max_properties:
+                    idx = len(mapping)
+                    if idx >= 10:
+                        idx -= 10
+                    chunks = [
+                        # 10,11,12,13,14,15,16,17,18,19
+                        10, 6, 6, 7, 7, 8, 8, 9, 9, 10,
+                        # 20,21,22,23,24,25,26,27,28,29
+                        10, 7, 8, 8, 8, 9, 9, 9, 10, 10,
+                        # 30,31,32,33,34,35,36,37,38,39
+                        10, 8, 8, 7, 7, 7, 9, 9, 10, 10,
+                        # 40,41,42,43,44,45,46,47,48,49
+                        10, 9, 9, 9, 9, 9, 10, 10, 10, 10,
+                    ]
+                    max_properties = 10 if idx >= len(chunks) else chunks[idx]
                 results = await self.hass.async_add_executor_job(
                     partial(
                         self._device.get_properties_for_mapping,
@@ -1058,12 +1082,14 @@ class MiotEntity(MiioEntity):
                 self.logger.error('%s: Local device and miot cloud not ready.', self.name)
         except DeviceException as exc:
             self._available = False
+            errors = f'{exc}'
             self.logger.error(
-                '%s: Got MiioException while fetching the state: %s, mapping: %s, max_properties: %s',
-                self.name, exc, mapping, max_properties,
+                '%s: Got MiioException while fetching the state: %s, mapping: %s, max_properties: %s/%s',
+                self.name, exc, mapping, max_properties, len(mapping)
             )
         except MiCloudException as exc:
             self._available = False
+            errors = f'{exc}'
             self.logger.error(
                 '%s: Got MiCloudException while fetching the state: %s, mapping: %s',
                 self.name, exc, mapping,
@@ -1071,11 +1097,13 @@ class MiotEntity(MiioEntity):
         result = MiotResults(results, mapping)
         if not result.is_valid:
             self._available = False
-            if self._vars.get('track_miot_error') and updater == 'lan':
+            if errors and 'Unable to discover the device' in errors:
+                pass
+            elif self._vars.get('track_miot_error') and updater == 'lan':
                 await async_analytics_track_event(
                     self.hass, 'miot', 'error', self._model,
                     firmware=self.device_info.get('sw_version'),
-                    results=results,
+                    results=results or errors,
                 )
                 self._vars.pop('track_miot_error', None)
             if result.is_empty and results:
@@ -1133,11 +1161,17 @@ class MiotEntity(MiioEntity):
                 'physical_controls_locked',
                 ['physical_controls_locked', self._miot_service.name],
                 domain='switch',
+                option={
+                    'entity_category': ENTITY_CATEGORY_CONFIG,
+                },
             )
             self._update_sub_entities(
                 None,
                 ['indicator_light', 'night_light', 'ambient_light', 'plant_light'],
                 domain='light',
+                option={
+                    'entity_category': ENTITY_CATEGORY_CONFIG,
+                },
             )
         if self._subs:
             attrs['sub_entities'] = list(self._subs.keys())
@@ -1152,7 +1186,18 @@ class MiotEntity(MiioEntity):
             await self.hass.async_add_executor_job(partial(self.update_miio_cloud_props, pls))
 
         # update micloud statistics in cloud
-        if cls := self.custom_config_list('micloud_statistics'):
+        cls = self.custom_config_list('micloud_statistics') or []
+        if key := self.custom_config('stat_power_cost_key'):
+            dic = {
+                'type': self.custom_config('stat_power_cost_type', 'stat_day_v3'),
+                'key': key,
+                'day': 32,
+                'limit': 31,
+                'attribute': None,
+                'template': 'micloud_statistics_power_cost',
+            }
+            cls = [*cls, dic]
+        if cls:
             await self.hass.async_add_executor_job(partial(self.update_micloud_statistics, cls))
 
         # update miio properties in lan
@@ -1451,7 +1496,7 @@ class MiotEntity(MiioEntity):
                 result = mca.do_action(pms)
                 dly = self.custom_config_integer('cloud_delay_update', 5)
             else:
-                pms = action.in_params(params or [])
+                pms['in'] = action.in_params(params or [])
                 result = self.miot_device.send('action', pms)
             eno = dict(result or {}).get('code', eno)
         except (DeviceException, MiCloudException) as exc:
@@ -1569,7 +1614,7 @@ class MiotEntity(MiioEntity):
                         self._subs[fnm] = MiotSwitchActionSubEntity(self, p, act, option=opt)
                         add_switches([self._subs[fnm]])
                     continue
-                elif add_switches and domain == 'switch' and p.format == 'bool' and p.writeable:
+                elif add_switches and domain == 'switch' and p.format in ['bool', 'uint8'] and p.writeable:
                     self._subs[fnm] = MiotSwitchSubEntity(self, p, option=opt)
                     add_switches([self._subs[fnm]])
                 elif add_binary_sensors and domain == 'binary_sensor' and p.format == 'bool':
@@ -1586,10 +1631,10 @@ class MiotEntity(MiioEntity):
                 elif add_covers and domain == 'cover':
                     self._subs[fnm] = MiotCoverSubEntity(self, p, option=opt)
                     add_covers([self._subs[fnm]])
-                elif add_numbers and domain == 'number':
+                elif add_numbers and domain in ['number', 'number_select'] and p.value_range:
                     self._subs[fnm] = MiotNumberSubEntity(self, p, option=opt)
                     add_numbers([self._subs[fnm]])
-                elif add_selects and domain == 'select' and (p.value_list or p.value_range):
+                elif add_selects and domain in ['select', 'number_select'] and (p.value_list or p.value_range):
                     from .select import MiotSelectSubEntity
                     self._subs[fnm] = MiotSelectSubEntity(self, p, option=opt)
                     add_selects([self._subs[fnm]])
@@ -1623,9 +1668,7 @@ class MiotEntity(MiioEntity):
         if not isinstance(mic, MiotCloud):
             return None
         dat = {'did': did or self.miot_did, 'pdid': 1}
-        result = await self.hass.async_add_executor_job(
-            partial(mic.request_miot_api, 'v2/device/blt_get_beaconkey', dat)
-        )
+        result = await mic.async_request_api('v2/device/blt_get_beaconkey', dat)
         persistent_notification.async_create(
             self.hass,
             f'{result}',
@@ -1643,8 +1686,7 @@ class MiotEntity(MiioEntity):
         if not isinstance(mic, MiotCloud):
             return None
         dat = data or kwargs.get('params')
-        fun = partial(mic.request_miot_api, api, data=dat, method=method, crypt=crypt)
-        result = await self.hass.async_add_executor_job(fun)
+        result = await mic.async_request_api(api, data=dat, method=method, crypt=crypt)
         persistent_notification.async_create(
             self.hass,
             f'{result}',
@@ -1715,6 +1757,7 @@ class BaseSubEntity(BaseEntity):
                     suf = f'{suf}_{self._dict_key}'
                 self.entity_id = f'{eip}_{suf}'
         self._supported_features = int(self._option.get('supported_features', 0))
+        self._attr_entity_category = self._option.get('entity_category')
         self._extra_attrs = {
             'entity_class': self.__class__.__name__,
             'parent_entity_id': parent.entity_id,
@@ -1776,11 +1819,7 @@ class BaseSubEntity(BaseEntity):
     @property
     def unit_of_measurement(self):
         return self._option.get('unit')
-        
-    @property
-    def state_class(self):
-        return self._option.get('state_class')
-        
+
     @property
     def miot_cloud(self):
         mic = self._parent.miot_cloud
@@ -1824,6 +1863,7 @@ class BaseSubEntity(BaseEntity):
             self.update_custom_scan_interval(only_custom=True)
         self._option['icon'] = self.custom_config('icon', self.icon)
         self._option['unit'] = self.custom_config('unit_of_measurement', self.unit_of_measurement)
+        self._attr_entity_category = self.custom_config('entity_category', self.entity_category)
         if not self.device_class:
             self._option['device_class'] = self.custom_config('device_class')
 
@@ -1892,14 +1932,14 @@ class MiotPropertySubEntity(BaseSubEntity):
         if not self._option.get('unique_id'):
             self._unique_id = f'{parent.unique_did}-{miot_property.unique_name}'
         self.entity_id = miot_property.generate_entity_id(self)
-        if 'state_class' not in self._option:
-            self._option['state_class'] = miot_property.state_class
         if 'icon' not in self._option:
             self._option['icon'] = miot_property.entity_icon
         if 'unit' not in self._option:
             self._option['unit'] = miot_property.unit_of_measurement
         if 'device_class' not in self._option:
             self._option['device_class'] = miot_property.device_class
+        if self._attr_entity_category is None:
+            self._attr_entity_category = miot_property.entity_category
         self._extra_attrs.update({
             'service_description': miot_property.service.description,
             'property_description': miot_property.description,

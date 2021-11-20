@@ -147,7 +147,7 @@ class BaseMediaPlayerEntity(MediaPlayerEntity, MiotEntityInterface):
         if self._prop_state:
             sta = self._prop_state.from_dict(self._state_attrs)
             if sta is not None:
-                if sta == self._prop_state.list_value('Playing'):
+                if sta in self._prop_state.list_search('Playing', 'Play'):
                     return STATE_PLAYING
                 if sta == self._prop_state.list_value('Pause'):
                     return STATE_PAUSED
@@ -336,14 +336,15 @@ class MiotMediaPlayerEntity(MiotEntity, BaseMediaPlayerEntity):
 class MitvMediaPlayerEntity(MiotMediaPlayerEntity):
     def __init__(self, config: dict, miot_service: MiotService):
         super().__init__(config, miot_service)
-        host = self._config.get(CONF_HOST) or ''
-        self._mitv_api = f'http://{host}:6095/'
+        self._host = self._config.get(CONF_HOST) or ''
+        self._mitv_api = f'http://{self._host}:6095/'
         self._api_key = '881fd5a8c94b4945b46527b07eca2431'
         self._hmac_key = '2840d5f0d078472dbc5fb78e39da123e'
         self._state_attrs['6095_state'] = True
         self._keycodes = [
             'power',
             'home',
+            'menu',
             'enter',
             'back',
             'up',
@@ -380,7 +381,7 @@ class MitvMediaPlayerEntity(MiotMediaPlayerEntity):
         if 'url' in rdt:
             url = rdt.get('url', '')
             pms = urlparse(url).query
-            url = f'{url}'.replace(pms, '')
+            url = f'{url}'.replace(pms, '').replace('//null:', f'//{self._host}:')
             pms = dict(parse_qsl(pms))
             pms = self.with_opaque(pms, token=rdt.get('token'))
             self._attr_media_image_url = url + urlencode(pms)
@@ -431,6 +432,21 @@ class MitvMediaPlayerEntity(MiotMediaPlayerEntity):
             sta = STATE_OFF
         return sta
 
+    def turn_on(self):
+        if eid := self.custom_config('bind_xiaoai'):
+            nam = self.device_info.get('name')
+            if not nam:
+                sta = self.hass.states.get(self.entity_id)
+                nam = sta.attributes.get(ATTR_FRIENDLY_NAME)
+            if nam and self.hass.states.get(eid):
+                self.hass.services.call(DOMAIN, 'intelligent_speaker', {
+                    'entity_id': eid,
+                    'text': f'打开{nam}',
+                    'execute': True,
+                    'silent': False,
+                })
+        return super().turn_on()
+
     @property
     def device_class(self):
         return DEVICE_CLASS_TV
@@ -450,7 +466,7 @@ class MitvMediaPlayerEntity(MiotMediaPlayerEntity):
         self.logger.debug('%s: Play media: %s', self.name, [pms, rdt])
         return not not rdt
 
-    def start_app(self, app):
+    def start_app(self, app, **kwargs):
         pkg = f'{app}'.split(' - ').pop(-1).strip()
         pms = {
             'action': 'startapp',

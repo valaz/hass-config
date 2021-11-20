@@ -90,6 +90,7 @@ cards:
             entities:
               - binary_sensor.azat_at_home
               - binary_sensor.elia_at_home
+              - binary_sensor.tapo_camera_c110_motion
             camera_image: camera.tapo_camera_c110_hd
             camera_view: live
             double_tap_action :

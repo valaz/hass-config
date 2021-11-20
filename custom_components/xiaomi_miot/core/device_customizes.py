@@ -9,16 +9,7 @@ DEVICE_CUSTOMIZES = {
     'chuangmi.plug.212a01': {
         'chunk_properties': 7,
         'sensor_attributes': 'power_cost_today,power_cost_month',
-        'micloud_statistics': [
-            {
-                'type': 'stat_day_v3',
-                'key': 'prop.5.1',
-                'day': 32,
-                'limit': 31,
-                'attribute': None,
-                'template': 'micloud_statistics_power_cost',
-            },
-        ],
+        'stat_power_cost_key': 'prop.5.1',
     },
     'chuangmi.plug.v3': {
         'sensor_attributes': 'electric_power,prop_cal_day.power_cost:today,prop_cal_day.power_cost:month',
@@ -47,13 +38,13 @@ DEVICE_CUSTOMIZES = {
         'unit_of_measurement': 'kWh',
     },
     'chuangmi.plug.*:power_cost_today': {
-        'value_ratio': 0.0001,
+        'value_ratio': 0.000001,
         'state_class': 'total_increasing',
         'device_class': 'energy',
         'unit_of_measurement': 'kWh',
     },
     'chuangmi.plug.*:power_cost_month': {
-        'value_ratio': 0.0001,
+        'value_ratio': 0.000001,
         'state_class': 'total_increasing',
         'device_class': 'energy',
         'unit_of_measurement': 'kWh',
@@ -74,7 +65,58 @@ DEVICE_CUSTOMIZES = {
         'miot_local': True,
     },
     'cuco.plug.cp1m': {
-        'sensor_properties': 'power_consumption,voltage,electric_current',
+        'sensor_properties': 'power,voltage,electric_current',
+        'sensor_attributes': 'power_cost_today,power_cost_month',
+        'stat_power_cost_key': '2.2',
+    },
+    'cuco.plug.cp2': {
+        'sensor_properties': 'power,voltage,electric_current',
+        'sensor_attributes': 'power_cost_today,power_cost_month',
+        'stat_power_cost_key': '2.2',
+    },
+    'cuco.plug.cp4': {
+        'sensor_properties': 'voltage,electric_current',
+        'sensor_attributes': 'power_cost_today,power_cost_month',
+        'stat_power_cost_key': '2.2',
+    },
+    'cuco.plug.cp4am': {
+        'sensor_properties': 'voltage,electric_current',
+        'sensor_attributes': 'power_cost_today,power_cost_month',
+        'stat_power_cost_key': '2.2',
+    },
+    'cuco.plug.cp4m': {
+        'sensor_properties': 'voltage,electric_current',
+        'sensor_attributes': 'power_cost_today,power_cost_month',
+        'stat_power_cost_key': '2.2',
+    },
+    'cuco.plug.*:electric_current': {
+        'state_class': 'measurement',
+        'device_class': 'current',
+        'unit_of_measurement': 'mA',
+    },
+    'cuco.plug.*:power': {
+        'value_ratio': 0.1,
+        'state_class': 'measurement',
+        'device_class': 'power',
+        'unit_of_measurement': 'W',
+    },
+    'cuco.plug.*:power_cost_today': {
+        'value_ratio': 0.001,
+        'state_class': 'total_increasing',
+        'device_class': 'energy',
+        'unit_of_measurement': 'kWh',
+    },
+    'cuco.plug.*:power_cost_month': {
+        'value_ratio': 0.001,
+        'state_class': 'total_increasing',
+        'device_class': 'energy',
+        'unit_of_measurement': 'kWh',
+    },
+    'cuco.plug.*:voltage': {
+        'value_ratio': 0.1,
+        'state_class': 'measurement',
+        'device_class': 'voltage',
+        'unit_of_measurement': 'V',
     },
     'deerma.humidifier.jsq3': {
         'chunk_properties': 6,
@@ -97,16 +139,8 @@ DEVICE_CUSTOMIZES = {
         'sensor_attributes': 'electric_power,power_cost_today,power_cost_month',
         'miio_cloud_props': 'ac_power',
         'miio_cloud_props_template': 'lumi_acpartner_electric_power',
-        'micloud_statistics': [
-            {
-                'type': 'stat_day',
-                'key': 'powerCost',
-                'day': 32,
-                'limit': 31,
-                'attribute': None,
-                'template': 'micloud_statistics_power_cost',
-            },
-        ],
+        'stat_power_cost_type': 'stat_day',
+        'stat_power_cost_key': 'powerCost',
     },
     'lumi.acpartner.*:electric_power': {
         'state_class': 'measurement',
@@ -114,13 +148,37 @@ DEVICE_CUSTOMIZES = {
         'unit_of_measurement': 'W',
     },
     'lumi.acpartner.*:power_cost_today': {
-        'value_ratio': 0.1,
+        'value_ratio': 0.001,
         'state_class': 'total_increasing',
         'device_class': 'energy',
         'unit_of_measurement': 'kWh',
     },
     'lumi.acpartner.*:power_cost_month': {
-        'value_ratio': 0.1,
+        'value_ratio': 0.001,
+        'state_class': 'total_increasing',
+        'device_class': 'energy',
+        'unit_of_measurement': 'kWh',
+    },
+    'lumi.aircondition.acn05': {
+        'sensor_attributes': 'power_cost_today',
+        'stat_power_cost_key': '12.1',
+    },
+    'lumi.aircondition.*:electric_power': {
+        'state_class': 'measurement',
+        'device_class': 'power',
+        'unit_of_measurement': 'W',
+    },
+    'lumi.aircondition.*:power_consumption': {
+        'state_class': 'total_increasing',
+        'device_class': 'energy',
+        'unit_of_measurement': 'kWh',
+    },
+    'lumi.aircondition.*:power_cost_today': {
+        'state_class': 'total_increasing',
+        'device_class': 'energy',
+        'unit_of_measurement': 'kWh',
+    },
+    'lumi.aircondition.*:power_cost_month': {
         'state_class': 'total_increasing',
         'device_class': 'energy',
         'unit_of_measurement': 'kWh',
@@ -133,6 +191,8 @@ DEVICE_CUSTOMIZES = {
     },
     'lumi.motion.bmgl01': {
         'use_ble_object': True,
+        'sensor_attributes': 'trigger_at',
+        'binary_sensor_attributes': 'light_strong',
     },
     'lumi.motion.*': {
         'interval_seconds': 15,
@@ -178,6 +238,21 @@ DEVICE_CUSTOMIZES = {
             'light.color_temperature': {'siid': 2, 'piid': 5},
         },
     },
+    'roborock.vacuum.*': {
+        'sensor_attributes': 'props:clean_area,props:clean_time',
+        'sensor_miio_commands': {
+            'get_status': ['props'],
+            'get_consumable': ['consumables'],
+        },
+    },
+    'roborock.vacuum.*:props:clean_area': {
+        'value_ratio': 0.000001,
+        'unit_of_measurement': '㎡',
+    },
+    'roborock.vacuum.*:props:clean_time': {
+        'value_ratio': 0.016666,
+        'unit_of_measurement': 'min',
+    },
     'rockrobo.vacuum.*': {
         'sensor_attributes': 'props:clean_area,props:clean_time',
         'sensor_miio_commands': {
@@ -193,6 +268,9 @@ DEVICE_CUSTOMIZES = {
         'value_ratio': 0.016666,
         'unit_of_measurement': 'min',
     },
+    'suittc.airrtc.wk168': {
+        'switch_properties': 'on',
+    },
     'viomi.vacuum.*': {
         'sensor_attributes': 'miio.s_area,miio.s_time',
         'miio_properties': 'run_state,mode,err_state,battary_life,box_type,mop_type,s_time,s_area,'
@@ -201,6 +279,10 @@ DEVICE_CUSTOMIZES = {
     'viomi.waterheater.e1': {
         'miio_properties': 'washStatus,velocity,waterTemp,targetTemp,errStatus,'
                            'hotWater,needClean,modeType,appointStart,appointEnd',
+    },
+    'wise.wifispeaker.x7': {
+        'switch_properties': 'key_one,key_two,key_three,key_four,key_five,key_six,key_seven,key_eight,key_nine,'
+                             'key_ten,key_eleven,key_twelve,key_thirteen,key_fourteen,key_fifteen,key_sixteen',
     },
     'xiaomi.tv.*': {
         'number_properties': 'speaker.volume',
@@ -223,16 +305,7 @@ DEVICE_CUSTOMIZES = {
     },
     'zimi.plug.zncz01': {
         'sensor_attributes': 'power_cost_today,power_cost_month',
-        'micloud_statistics': [
-            {
-                'type': 'stat_day_v3',
-                'key': '3.2',
-                'day': 32,
-                'limit': 31,
-                'attribute': None,
-                'template': 'micloud_statistics_power_cost',
-            },
-        ],
+        'stat_power_cost_key': '3.2',
     },
     'zimi.plug.*:electric_power': {
         'value_ratio': 0.01,
@@ -241,11 +314,13 @@ DEVICE_CUSTOMIZES = {
         'unit_of_measurement': 'W',
     },
     'zimi.plug.*:power_cost_today': {
+        'value_ratio': 0.01,
         'state_class': 'total_increasing',
         'device_class': 'energy',
         'unit_of_measurement': 'kWh',
     },
     'zimi.plug.*:power_cost_month': {
+        'value_ratio': 0.01,
         'state_class': 'total_increasing',
         'device_class': 'energy',
         'unit_of_measurement': 'kWh',
@@ -259,21 +334,7 @@ DEVICE_CUSTOMIZES = {
             },
         },
         'miio_cloud_records': 'store.powerCost:31:day',
-        'miio_store_powerCost_template': "{%- set val = (result.0 | default({})).get('value','[0]') %}"
-                                         "{%- set day = now().day %}"
-                                         "{%- set vls = (val | from_json)[0-day:] %}"
-                                         "{%- set dat = namespace(today=0,month=0) %}"
-                                         "{%- for v in vls %}"
-                                         "{%-   set v = (v | string).split(',') %}"
-                                         "{%-   if v[0] | default(0) | int(0) > 86400 %}"
-                                         "{%-     set dat.today = v[1] | default(0) | round(3) %}"
-                                         "{%-     set dat.month = dat.month + dat.today %}"
-                                         "{%-   endif %}"
-                                         "{%- endfor %}"
-                                         "{{ {"
-                                         "'today': dat.today,"
-                                         "'month': dat.month | round(3),"
-                                         "} }}",
+        'miio_store_powerCost_template': 'zimi_powerstrip_v2_power_cost',
     },
     'zimi.powerstrip.*:electric_power': {
         'state_class': 'measurement',
@@ -296,6 +357,9 @@ DEVICE_CUSTOMIZES = {
         'switch_properties': 'dryer,uv',
         'fan_properties': 'drying_level',
     },
+    '*.airpurifier.*': {
+        'switch_properties': 'air_purifier.on',
+    },
     '*.camera.*': {
         'miot_cloud_action': True,
     },
@@ -307,42 +371,39 @@ DEVICE_CUSTOMIZES = {
         'switch_properties': 'cooker.on,auto_keep_warm',
     },
     '*.door.*': {},
+    '*.fan.*': {
+        'number_properties': 'off_delay_time',
+        'switch_properties': 'fan_init_power_opt',
+    },
     '*.feeder.*': {
         'switch_properties': 'feeding_measure',
     },
     '*.fishbowl.*': {
         'switch_properties': 'feeding_measure',
     },
+    '*.light.*': {
+        'number_properties': 'off_delay_time',
+        'switch_properties': 'init_power_opt,fan_init_power_opt',
+    },
     '*.lock.*': {
         'sensor_attributes': 'event.7:door_state,event.11:lock_state,event.11:key_id',
         'miio_cloud_records': 'event.7:1,event.11:1',
-        'miio_event_7_template':  "{%- set val = (result.0 | default({})).get('value','[-1]') %}"
-                                  "{%- set val = (val | from_json).0 | string %}"
-                                  "{%- set evt = val[:2] | int(-1,16) %}"
-                                  "{%- set els = ['open','close','close_timeout',"
-                                  "'knock','breaking','stuck','unknown'] %}"
-                                  "{{ {"
-                                  "'door_event': evt,"
-                                  "'door_state': els[evt] | default('unknown'),"
-                                  "} }}",
-        'miio_event_11_template': "{%- set val = (result.0 | default({})).get('value','[-1]') %}"
-                                  "{%- set val = (val | from_json).0 | string %}"
-                                  "{%- set evt = val[:2] | int(-1,16) % 16 %}"
-                                  "{%- set how = val[:2] | int(-1,16) // 16 %}"
-                                  "{%- set key = (0).from_bytes((0).to_bytes(0,'little')"
-                                  ".fromhex(val[2:10]), 'little') %}"
-                                  "{%- set els = ['outside_unlock','lock','anti_lock_on','anti_lock_off',"
-                                  "'inside_unlock','lock_inside','child_lock_on','child_lock_off','unknown'] %}"
-                                  "{%- set mls = ['bluetooth','password','biological','key','turntable',"
-                                  "'nfc','one-time password','two-step verification','coercion','homekit',"
-                                  "'manual','automatic','unknown'] %}"
-                                  "{{ {"
-                                  "'lock_event': evt,"
-                                  "'lock_state': els[evt] | default('unknown'),"
-                                  "'method_id': how,"
-                                  "'method': mls[how] | default('unknown'),"
-                                  "'key_id': key,"
-                                  "} }}",
+        'miio_event_7_template': 'lock_event_7_template',
+        'miio_event_11_template': 'lock_event_11_template',
+    },
+    '*.microwave.*': {
+        'sensor_properties': 'left_time,heat_level,cook_time',
+    },
+    '*.motion.*:light_strong': {
+        'device_class': 'light',
+    },
+    '*.motion.*:trigger_at': {
+        'device_class': 'timestamp',
+    },
+    '*.oven.*': {
+        'sensor_properties': 'temperature,left_time,cook_time,working_time',
+        'number_properties': 'target_temperature',
+        'switch_properties': 'oven.on',
     },
     '*.s_lamp.*': {
         'sensor_properties': 'left_time',

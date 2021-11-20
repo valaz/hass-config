@@ -8,14 +8,21 @@ import requests
 from datetime import datetime
 from functools import partial
 from urllib.parse import urlparse
-from micloud.micloudexception import MiCloudException  # noqa: F401
 
 from homeassistant.const import *
 from homeassistant.helpers.storage import Store
 from homeassistant.components import persistent_notification
 
-from micloud import miutils
 from .utils import RC4
+from micloud import miutils
+from micloud.micloudexception import MiCloudException
+
+try:
+    from micloud.micloudexception import MiCloudAccessDenied
+except (ModuleNotFoundError, ImportError):
+    class MiCloudAccessDenied(MiCloudException):
+        """ micloud==0.4 """
+
 
 _LOGGER = logging.getLogger(__name__)
 
@@ -128,6 +135,11 @@ class MiotCloud(micloud.MiCloud):
         else:
             _LOGGER.warning('Retry login xiaomi cloud failed: %s', self.username)
         return False
+
+    async def async_request_api(self, *args, **kwargs):
+        return await self.hass.async_add_executor_job(
+            partial(self.request_miot_api, *args, **kwargs)
+        )
 
     def request_miot_api(self, api, data, method='POST', crypt=False, debug=True):
         params = {}

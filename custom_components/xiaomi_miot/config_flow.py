@@ -34,7 +34,8 @@ DEFAULT_INTERVAL = 30
 
 # 0.1 support multiple integration to add the same device
 # 0.2 new entity id format (model_mac[-4:]_suffix)
-ENTRY_VERSION = 0.2
+# 0.3 washer modes via select
+ENTRY_VERSION = 0.3
 
 CLOUD_SERVERS = {
     'cn': 'China',
@@ -164,9 +165,14 @@ async def get_cloud_filter_schema(hass, user_input, errors, schema=None, via_did
             fl = f'{f}_list'
             lst = vls.get(f, {})
             lst = dict(sorted(lst.items()))
+            ols = [
+                v
+                for v in user_input.get(fl, [])
+                if v in lst
+            ]
             schema = schema.extend({
-                vol.Optional(fk, default=user_input.get(fk, 'exclude')): vol.In(ies),
-                vol.Optional(fl, default=user_input.get(fl, [])): cv.multi_select(lst),
+                vol.Required(fk, default=user_input.get(fk, 'exclude')): vol.In(ies),
+                vol.Optional(fl, default=ols): cv.multi_select(lst),
             })
         hass.data[DOMAIN]['prev_input'] = user_input
     return schema
@@ -270,7 +276,7 @@ class XiaomiMiotFlowHandler(config_entries.ConfigFlow, domain=DOMAIN):
             cfg[CONF_CONFIG_VERSION] = ENTRY_VERSION
             _LOGGER.debug('Setup xiaomi cloud: %s', {**cfg, CONF_PASSWORD: '*', 'service_token': '*'})
             return self.async_create_entry(
-                title=f"MiCloud: {cfg.get('user_id')}",
+                title=f"Xiaomi: {cfg.get('user_id')}",
                 data=cfg,
             )
         else:
