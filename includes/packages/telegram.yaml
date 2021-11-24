@@ -347,12 +347,15 @@ telegram:
                from: "returning"
                to: "docked"
           action:
+             - service: script.turn_on
+               entity_id: 
+               - script.roborock_map_to_telegram
              - service: notify.tg_valaz
                data:
                  message: | 
                      {{"\U0001F9F9"}} Пылесос завершил уборку.
-                     {{"\U0001F3E0"}} Площадь уборки - {{ states('sensor.roborock_s5_cleaned_area') }} m2.
-                     {{"\U000023F1"}} Время уборки - {{ states('sensor.roborock_s5_cleaning_time') }} мин.
+                     {{"\U0001F3E0"}} Площадь уборки - {{ states('sensor.roborock_s5_last_clean_area') }} m2.
+                     {{"\U000023F1"}} Время уборки - {{ states('sensor.roborock_last_clean_duration') }} мин.
                      {{"\U0001F50B"}} Уровень заряда - {{ states('sensor.roborock_s5_battery') }} %.
 
         - id: Roborock начал уборку
@@ -415,8 +418,6 @@ telegram:
             - service: script.turn_on
               entity_id: 
                 - script.video_tapo_c110_telegram
-                
-     
                 
         - id: Видеокарат не работает
           alias: ultron_gpu_is_idle 

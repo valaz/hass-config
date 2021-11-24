@@ -1,0 +1,14 @@
+  roborock_map_to_telegram:
+    alias: Карта пылесоса и отправка в телеграм
+    sequence:
+       - service: camera.snapshot
+         data:
+              entity_id: camera.roborock_s50
+              filename: "/config/www/cam_captures/roborock.jpg"
+       - delay: 00:00:03
+       - service: telegram_bot.send_photo
+         data_template:
+           target:
+            - !secret tg_valaz_id
+           file: "/config/www/cam_captures/roborock.jpg" 
+          
