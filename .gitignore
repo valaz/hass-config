@@ -23,3 +23,5 @@ secrets.yaml
 known_devices.yaml
 
 ultron.key
+
+www/cam_captures/**

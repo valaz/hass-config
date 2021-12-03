@@ -8,29 +8,29 @@
     "0x04cf8cdf3c764d02": {
         "state": "ON",
         "temperature": 33,
-        "power": 9.52,
-        "energy": 87.42,
-        "consumption": 87.42,
-        "voltage": 224,
-        "current": 0.0425,
+        "power": 9.33,
+        "energy": 88.8,
+        "consumption": 88.8,
+        "voltage": 227,
+        "current": 0.0411,
         "consumer_connected": true
     },
     "0x00158d000586695c": {
-        "temperature": 25.4,
-        "humidity": 20.1,
-        "pressure": 993.1,
-        "voltage": 3015,
+        "temperature": 25.87,
+        "humidity": 27.12,
+        "pressure": 979,
+        "voltage": 3025,
         "battery": 100
     },
     "0x00158d0005800735": {
-        "temperature": 23.28,
-        "humidity": 24.67,
-        "pressure": 991,
+        "temperature": 23.81,
+        "humidity": 29.92,
+        "pressure": 979,
         "voltage": 3015,
         "battery": 100
     },
     "0x00158d00054cd813": {
-        "voltage": 3025,
+        "voltage": 3035,
         "battery": 100,
         "illuminance": 0,
         "illuminance_lux": 0,
@@ -40,11 +40,11 @@
     "0x04cf8cdf3c777c79": {
         "state": "ON",
         "temperature": 30,
-        "power": 347.12,
-        "energy": 555.75,
-        "consumption": 555.75,
-        "voltage": 218,
-        "current": 1.5923,
+        "power": 302.38,
+        "energy": 615.08,
+        "consumption": 615.08,
+        "voltage": 226,
+        "current": 1.3356,
         "consumer_connected": false
     }
 }
