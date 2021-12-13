@@ -116,6 +116,7 @@ SERVICE_TO_METHOD_BASE = {
                 vol.Required('aiid'): int,
                 vol.Optional('did'): cv.string,
                 vol.Optional('params', default=[]): cv.ensure_list,
+                vol.Optional('force_params', default=False): cv.boolean,
                 vol.Optional('throw', default=False): cv.boolean,
             },
         ),
@@ -276,17 +277,18 @@ async def async_setup_xiaomi_cloud(hass: hass_core.HomeAssistant, config_entry: 
         _LOGGER.debug('Setup xiaomi cloud for user: %s, %s devices', entry.get(CONF_USERNAME), cnt)
     for mac, d in config['devices_by_mac'].items():
         model = d.get(CONF_MODEL)
-        if not model:
-            continue
-        urn = await MiotSpec.async_get_model_type(hass, model)
+        urn = None
+        if model:
+            urn = await MiotSpec.async_get_model_type(hass, model)
         if not urn:
             _LOGGER.info('Xiaomi device: %s has no urn', [d.get('name'), model])
             continue
+        ext = d.get('extra') or {}
         mif = {
             'ap':     {'ssid': d.get('ssid'), 'bssid': d.get('bssid'), 'rssi': d.get('rssi')},
             'netif':  {'localIp': d.get('localip'), 'gw': '', 'mask': ''},
-            'fw_ver': d.get('extra', {}).get('fw_version', ''),
-            'hw_ver': d.get('extra', {}).get('hw_version', ''),
+            'fw_ver': ext.get('fw_version', ''),
+            'hw_ver': ext.get('hw_version', ''),
             'mac':    d.get('mac'),
             'model':  model,
             'token':  d.get(CONF_TOKEN),
@@ -302,6 +304,8 @@ async def async_setup_xiaomi_cloud(hass: hass_core.HomeAssistant, config_entry: 
             'miio_info': mif,
             CONF_CONN_MODE: conn,
             'miot_cloud': conn != 'local',
+            'home_name': d.get('home_name') or '',
+            'room_name': d.get('room_name') or '',
             'entry_id': entry_id,
             CONF_CONFIG_VERSION: entry.get(CONF_CONFIG_VERSION) or 0,
         }
@@ -626,10 +630,10 @@ class MiioEntity(BaseEntity):
             CONF_MODEL: self._model,
             'lan_ip': self._miio_info.network_interface.get('localIp'),
             'mac_address': self._miio_info.mac_address,
-            'firmware_version': self._miio_info.firmware_version,
-            'hardware_version': self._miio_info.hardware_version,
             'entity_class': self.__class__.__name__,
         }
+        if hnm := self._config.get('home_name'):
+            self._state_attrs['home_room'] = f"{hnm} {self._config.get('room_name')}"
         self._supported_features = 0
         self._props = ['power']
         self._success_result = ['ok']
@@ -683,12 +687,16 @@ class MiioEntity(BaseEntity):
 
     @property
     def device_info(self):
+        swv = self._miio_info.firmware_version
+        if self._miio_info.hardware_version:
+            swv = f'{swv}@{self._miio_info.hardware_version}'
         return {
             'identifiers': {(DOMAIN, self._unique_did)},
             'name': self.device_name,
             'model': self._model,
             'manufacturer': (self._model or 'Xiaomi').split('.', 1)[0],
-            'sw_version': self._miio_info.firmware_version,
+            'sw_version': swv,
+            'suggested_area': self._config.get('room_name'),
             'configuration_url': f'https://home.miot-spec.com/s/{self._model}',
         }
 
@@ -1505,7 +1513,8 @@ class MiotEntity(MiioEntity):
                 result = mca.do_action(pms)
                 dly = self.custom_config_integer('cloud_delay_update', 5)
             else:
-                pms['in'] = action.in_params(params or [])
+                if not kwargs.get('force_params'):
+                    pms['in'] = action.in_params(params or [])
                 result = self.miot_device.send('action', pms)
             eno = dict(result or {}).get('code', eno)
         except (DeviceException, MiCloudException) as exc:

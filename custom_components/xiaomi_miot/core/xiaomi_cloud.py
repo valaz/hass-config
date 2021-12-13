@@ -180,12 +180,31 @@ class MiotCloud(micloud.MiCloud):
     def get_device_list(self):
         rdt = self.request_miot_api('home/device_list', {
             'getVirtualModel': True,
-            'getHuamiDevices': 0,
+            'getHuamiDevices': 1,
+            'get_split_device': False,
+            'support_smart_home': True,
         }, debug=False) or {}
         if rdt and 'result' in rdt:
             return rdt['result']['list']
         _LOGGER.warning('Got xiaomi cloud devices for %s failed: %s', self.username, rdt)
         return None
+
+    def get_home_devices(self):
+        rdt = self.request_miot_api('homeroom/gethome', {
+            'fetch_share_dev': True,
+        }, debug=False) or {}
+        rdt = rdt.get('result') or {}
+        rdt.setdefault('devices', {})
+        for h in rdt.get('homelist', []):
+            for r in h.get('roomlist', []):
+                for did in r.get('dids', []):
+                    rdt['devices'][did] = {
+                        'home_id': h.get('id'),
+                        'room_id': r.get('id'),
+                        'home_name': h.get('name'),
+                        'room_name': r.get('name'),
+                    }
+        return rdt
 
     async def async_get_devices(self, renew=False):
         if not self.user_id:
@@ -202,9 +221,17 @@ class MiotCloud(micloud.MiCloud):
         if not dvs:
             dvs = await self.hass.async_add_executor_job(self.get_device_list)
             if dvs:
+                hls = await self.hass.async_add_executor_job(self.get_home_devices)
+                if hls:
+                    hds = hls.get('devices') or {}
+                    dvs = [
+                        {**d, **(hds.get(d.get('did')) or {})}
+                        for d in dvs
+                    ]
                 dat = {
                     'update_time': now,
                     'devices': dvs,
+                    'homes': hls.get('homelist', []),
                 }
                 await store.async_save(dat)
                 _LOGGER.info('Got %s devices from xiaomi cloud', len(dvs))

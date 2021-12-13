@@ -1,6 +1,7 @@
 import logging
 import requests
 import platform
+import random
 import time
 import re
 
@@ -230,7 +231,7 @@ class MiotSpec(MiotSpecInstance):
             try:
                 res = await hass.async_add_executor_job(requests.get, url)
                 dat = res.json() or {}
-            except ValueError:
+            except (TypeError, ValueError):
                 dat = {}
             if dat:
                 sdt = {
@@ -270,13 +271,23 @@ class MiotSpec(MiotSpecInstance):
             fnm = fnm.replace(':', '_')
         store = Store(hass, 1, fnm)
         dat = await store.async_load() or {}
+        ptm = dat.pop('_updated_time', 0)
+        now = int(time.time())
+        day = 2
+        if dat.get('services'):
+            day = random.randint(30, 50)
+        if dat and now - ptm > 86400 * day:
+            dat = {}
         if not dat.get('type'):
             try:
                 res = await hass.async_add_executor_job(requests.get, url)
                 dat = res.json() or {}
-                await store.async_save(dat)
-            except ValueError:
-                dat = {}
+            except (TypeError, ValueError):
+                dat = {
+                    'type': typ or 'unknown',
+                }
+            dat['_updated_time'] = now
+            await store.async_save(dat)
         return MiotSpec(dat)
 
     @staticmethod
@@ -609,6 +620,8 @@ class MiotProperty(MiotSpecInstance):
             'p/m3': CONCENTRATION_PARTS_PER_CUBIC_METER,
         }
         names = {
+            'current_step_count': 'steps',
+            'heart_rate': 'bpm',
             'power_consumption': ENERGY_WATT_HOUR,
             'pm2_5_density': CONCENTRATION_MICROGRAMS_PER_CUBIC_METER,
             'tds_in': CONCENTRATION_PARTS_PER_MILLION,
@@ -679,20 +692,22 @@ class MiotProperty(MiotSpecInstance):
         icon = None
         name = self.name
         icons = {
-            'on': 'mdi:power',
+            'co2_density': 'mdi:molecule-co2',
+            'current_step_count': 'mdi:walk',
+            'drying_level': 'mdi:tumble-dryer',
+            'filter_used_flow': 'mdi:water-percent',
+            'filter_used_time': 'mdi:clock',
+            'heart_rate': 'mdi:heart-pulse',
             'mode': 'mdi:menu',
-            'washing_strength': 'mdi:waves',
             'nozzle_position': 'mdi:spray',
+            'on': 'mdi:power',
+            'smoke_concentration': 'mdi:smoking',
             'spin_speed': 'mdi:speedometer',
             'target_temperature': 'mdi:coolant-temperature',
             'target_water_level': 'mdi:water-plus',
-            'drying_level': 'mdi:tumble-dryer',
-            'co2_density': 'mdi:molecule-co2',
-            'smoke_concentration': 'mdi:smoking',
             'tds_in': 'mdi:water',
             'tds_out': 'mdi:water-check',
-            'filter_used_time': 'mdi:clock',
-            'filter_used_flow': 'mdi:water-percent',
+            'washing_strength': 'mdi:waves',
         }
         if name in ['heat_level']:
             icon = 'mdi:radiator'
@@ -712,6 +727,7 @@ class MiotProperty(MiotSpecInstance):
         name = self.name
         names = {
             'battery_level': ENTITY_CATEGORY_DIAGNOSTIC,
+            'countdown_time': ENTITY_CATEGORY_CONFIG,
             'fan_init_power_opt': ENTITY_CATEGORY_CONFIG,
             'init_power_opt': ENTITY_CATEGORY_CONFIG,
             'off_delay_time': ENTITY_CATEGORY_CONFIG,

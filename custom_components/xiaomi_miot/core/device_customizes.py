@@ -138,6 +138,9 @@ DEVICE_CUSTOMIZES = {
     'deerma.humidifier.jsq3': {
         'chunk_properties': 6,
     },
+    'hmpace.bracelet.*': {
+        'sensor_properties': 'current_step_count,current_distance',
+    },
     'hyd.airer.*': {
         'disable_target_position': True,
         'cover_position_mapping': {
@@ -228,6 +231,20 @@ DEVICE_CUSTOMIZES = {
     'lumi.switch.*': {
         'cloud_delay_update': 10,
     },
+    'mmgg.feeder.petfeeder': {
+        'sensor_attributes': 'feed_today',
+        'miio_commands': {
+            'getprops': [
+                'food_status', 'feed_plan', 'door_result', 'feed_today', 'clean_days', 'outlet_status',
+                'dryer_days', 'weight_level', 'wifi_led', 'key_lock', 'country_code',
+            ],
+            # 'getfeedplan1': [],
+            # 'getfeedplan2': [],
+        },
+        'miot_local_mapping': {
+            'feeding.measure': {'siid': 2, 'piid': 1},
+        },
+    },
     'miaomiaoce.sensor_ht.t1': {
         'miot_mapping': {
             'temperature-2-1': {'siid': 2, 'piid': 1},
@@ -304,6 +321,9 @@ DEVICE_CUSTOMIZES = {
     'xiaomi.tv.*': {
         'number_properties': 'speaker.volume',
     },
+    'xiaomi.watch.*': {
+        'sensor_properties': 'current_step_count,current_distance',
+    },
     'yeelink.light.nl1': {
         'interval_seconds': 15,
     },
@@ -374,6 +394,9 @@ DEVICE_CUSTOMIZES = {
         'switch_properties': 'dryer,uv',
         'fan_properties': 'drying_level',
     },
+    '*.airrtc.*': {
+        'switch_properties': 'air_conditioner.on',
+    },
     '*.airpurifier.*': {
         'switch_properties': 'air_purifier.on',
     },
@@ -391,6 +414,10 @@ DEVICE_CUSTOMIZES = {
     '*.fan.*': {
         'number_properties': 'off_delay_time',
         'switch_properties': 'fan_init_power_opt',
+    },
+    '*.heater.*': {
+        'switch_properties': 'heater.on',
+        'number_properties': 'countdown_time',
     },
     '*.light.*': {
         'number_properties': 'off_delay_time',

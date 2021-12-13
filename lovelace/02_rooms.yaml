@@ -25,13 +25,13 @@ cards:
              - entity: switch.philips_wwol
              - entity: switch.sven_volume
              - entity: alarm_control_panel.0x842e14fffe54c44d_alarm
-             - entity: switch.0x04cf8cdf3c764d02
-               type: custom:multiple-entity-row
-               name: 'Телевизор Розетка'
-               toggle: true
-               entities:
-                - entity: sensor.0x04cf8cdf3c764d02_power
-                  name: потребление
+            #  - entity: switch.0x04cf8cdf3c764d02
+            #   type: custom:multiple-entity-row
+            #   name: 'Телевизор Розетка'
+            #   toggle: true
+            #   entities:
+            #     - entity: sensor.0x04cf8cdf3c764d02_power
+            #       name: потребление
              - entity: switch.0x04cf8cdf3c777c79
                type: custom:multiple-entity-row
                name: 'Альтрон розетка'
@@ -166,9 +166,16 @@ cards:
             entities:
               - sensor.rm4_mini_temperature
               - sensor.rm4_mini_humidity
-        #   - type: entities
-        #     entities: 
-            #   - entity: switch.philips_humidifier
+          - type: entities
+            entities: 
+             - entity: switch.philips_humidifier
+             - entity: switch.0x04cf8cdf3c764d02
+               type: custom:multiple-entity-row
+               name: 'Увлажнитель Розетка'
+               toggle: true
+               entities:
+                - entity: sensor.0x04cf8cdf3c764d02_power
+                  name: потребление
       - type: horizontal-stack
         cards:
 #######   Детская   #######
