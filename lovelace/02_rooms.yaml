@@ -20,11 +20,11 @@ cards:
             entities:
              - entity: fan.air_purifier
             #  - entity: media_player.android_tv
-             - entity: binary_sensor.philips_tv_screen
+            #  - entity: binary_sensor.philips_tv_screen
              - entity: switch.philips_wol
-             - entity: switch.philips_wwol
-             - entity: switch.sven_volume
-             - entity: alarm_control_panel.0x842e14fffe54c44d_alarm
+            #  - entity: switch.philips_wwol
+            #  - entity: switch.sven_volume
+            #  - entity: alarm_control_panel.0x842e14fffe54c44d_alarm
             #  - entity: switch.0x04cf8cdf3c764d02
             #   type: custom:multiple-entity-row
             #   name: 'Телевизор Розетка'
@@ -90,8 +90,8 @@ cards:
             entities:
               - binary_sensor.azat_at_home
               - binary_sensor.elia_at_home
-              - binary_sensor.tapo_camera_c110_motion
-            camera_image: camera.tapo_camera_c110_hd
+              - binary_sensor.tapo_camera_0069_motion
+            camera_image: camera.tapo_camera_0069_hd
             camera_view: live
             double_tap_action :
                 action: call-service
@@ -189,6 +189,19 @@ cards:
                   - sensor.0x00158d000586695c_humidity
               - type: entities
                 entities:
+                 - entity: humidifier.air_humidifier
+                   name: 'Увлажнитель'
+                 - entity: sensor.air_humidifier_actual_speed
+                   name: 'Мощность увлажнителя'
+                   type: custom:multiple-entity-row
+                   secondary_info:
+                     entity: sensor.air_humidifier_actual_speed
+                     name: ' '
+                     unit: 'rpm'
+                   show_state: false
+                   entities:
+                    - entity: sensor.air_humidifier_water_level
+                      name: Уровень воды
                  - entity: media_player.mi_box
       - type: horizontal-stack
         cards:

@@ -19,6 +19,8 @@
         room: 'Гостиная'
     sensor.0x00158d000586695c_humidity:
         room: 'Детская'
+    sensor.air_humidifier_humidity:
+        room: 'Детская 2'
     sensor.rm4_mini_humidity:
         room: 'Спальня'
         

@@ -7,6 +7,10 @@
 '0x00158d0005800735':
   friendly_name: aqara_sensor_balcony
 '0x04cf8cdf3c764d02':
-  friendly_name: smart_plug_tv
+  friendly_name: smart_plug_humidifier
 '0x04cf8cdf3c777c79':
   friendly_name: smart_plug_server
+'0x04cf8cdf3c8eb0f3':
+  friendly_name: light_entrance
+'0x00158d0006bed661':
+  friendly_name: motion_sensor_entrance

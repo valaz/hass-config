@@ -4,7 +4,7 @@
         data:
           privacy_mode: 'on'
         target:
-          entity_id: camera.tapo_camera_c110_sd
+          entity_id: camera.tapo_camera_0069_sd
           
   tapo_c110_privacy_off:
     sequence:
@@ -12,14 +12,14 @@
         data:
           privacy_mode: 'off'
         target:
-          entity_id: camera.tapo_camera_c110_sd
+          entity_id: camera.tapo_camera_0069_sd
           
   photo_tapo_c110_telegram:
     alias: Фотография Tapo C110 и отправка в телеграм
     sequence:
        - service: camera.snapshot
          data:
-              entity_id: camera.tapo_camera_c110_sd
+              entity_id: camera.tapo_camera_0069_sd
               filename: "/config/www/cam_captures/c110.jpg"
        - delay: 00:00:15
        - service: telegram_bot.send_photo
@@ -33,7 +33,7 @@
     sequence:
        - service: camera.record
          data:
-              entity_id: camera.tapo_camera_c110_hd
+              entity_id: camera.tapo_camera_0069_hd
               filename: "/config/www/cam_captures/c110.mp4"
               duration: 10
        - delay: 00:00:45
