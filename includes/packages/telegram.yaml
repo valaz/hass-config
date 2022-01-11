@@ -435,7 +435,7 @@ telegram:
           alias: door_movements
           trigger:
             platform: state
-            entity_id: binary_sensor.tapo_camera_0069_motion
+            entity_id: binary_sensor.0x00158d0006bed661_occupancy
             to: "on"
           action:
             - service: script.turn_on
@@ -444,7 +444,7 @@ telegram:
                 
         - id: Видеокарат не работает
           alias: ultron_gpu_is_idle 
-          initial_state: true
+          initial_state: false
           trigger:   
              - platform: state
                entity_id: binary_sensor.ultron_gpu_on_load

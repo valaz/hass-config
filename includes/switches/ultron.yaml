@@ -73,3 +73,11 @@
         command_off: "ssh -i /config/ultron.key -o StrictHostKeyChecking=no root@192.168.1.11 docker stop telegraf"
         command_state: "ssh -i /config/ultron.key -o StrictHostKeyChecking=no root@192.168.1.11 docker inspect telegraf | jq '.[0].State.Status' -r "
         value_template: '{{ value == "running" }}'
+        
+      docker_android_debug_bridge:
+        friendly_name: "Docker AndroidDebugBridge"
+        command_on: "ssh -i /config/ultron.key -o StrictHostKeyChecking=no root@192.168.1.11 docker start AndroidDebugBridge"
+        command_off: "ssh -i /config/ultron.key -o StrictHostKeyChecking=no root@192.168.1.11 docker stop AndroidDebugBridge"
+        command_state: "ssh -i /config/ultron.key -o StrictHostKeyChecking=no root@192.168.1.11 docker inspect AndroidDebugBridge | jq '.[0].State.Status' -r "
+        value_template: '{{ value == "running" }}'
+        

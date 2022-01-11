@@ -101,3 +101,6 @@
     sensor.ultron_swap_usage:
         icon: 'mdi:memory'
         
+    switch.0x04cf8cdf3c8eb0f3:
+        icon: 'mdi:ceiling-light-multiple'
+        

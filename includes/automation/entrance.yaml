@@ -1,0 +1,63 @@
+- alias: "Turn on entrance light when there is movement"
+  trigger:
+  - platform: state
+    entity_id: binary_sensor.0x00158d0006bed661_occupancy
+    to: "on"
+  action:
+  - service: timer.cancel
+    target:
+        entity_id: timer.entrance_light
+  - service: switch.turn_on
+    target:
+      entity_id: switch.0x04cf8cdf3c8eb0f3
+
+- alias: "Turn off entrance light 1 minute after last movement"
+  trigger:
+  - platform: state
+    entity_id: binary_sensor.0x00158d0006bed661_occupancy
+    to: "off"
+    for:
+      seconds: 60
+  action:
+    service: switch.turn_off
+    target:
+      entity_id: switch.0x04cf8cdf3c8eb0f3
+      
+- alias: "Start entrance timer if entrance light turned on manually"
+  trigger: 
+  - platform: state
+    entity_id: switch.0x04cf8cdf3c8eb0f3
+    to: "on"
+  condition:
+    condition: state
+    entity_id: binary_sensor.0x00158d0006bed661_occupancy
+    state: "off"
+  action:
+  - service: timer.cancel
+    target:
+        entity_id: timer.entrance_light
+  - service: timer.start
+    target:
+        entity_id: timer.entrance_light
+        
+- alias: "Cancel entrance timer if entrance light turned off"
+  trigger: 
+  - platform: state
+    entity_id: switch.0x04cf8cdf3c8eb0f3
+    to: "off"
+  action:
+  - service: timer.cancel
+    target:
+        entity_id: timer.entrance_light
+
+- alias: "Turn off entrance light when entrance timer finished"
+  trigger:
+    platform: event
+    event_type: timer.finished
+    event_data:
+      entity_id: timer.entrance_light
+  action:
+    service: switch.turn_off
+    target:
+      entity_id:
+        - switch.0x04cf8cdf3c8eb0f3

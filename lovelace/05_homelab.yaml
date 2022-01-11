@@ -47,31 +47,31 @@ cards:
                 update_interval: 10
                 entities:
                   - entity: sensor.asuswrt_upload_speed
-      - type: glance
-        columns: 4
-        title: 'Устройства в сети'
-        entities:
-          - entity: sensor.asuswrt_devices_connected
-            name: 'Количество'
-            icon: mdi:account-multiple
-          - entity: device_tracker.iphone_12_az
-            name: 'iPhone Азат'
-            icon: mdi:cellphone
-          - entity: device_tracker.ipad_6_az
-            name: 'Планшет Азат'
-            icon: mdi:tablet
-          - entity: device_tracker.deskmini
-            name: 'Deskmini'
-            icon: mdi:desktop-tower
-          - entity: device_tracker.mbp15
-            name: 'Макбук'
-            icon: mdi:laptop
-          - entity: device_tracker.iphone_elia
-            name: 'iPhone Эля'
-            icon: mdi:cellphone
-          - entity: device_tracker.huawei_mediapad_m5_lite_9
-            name: 'Планшет Эля'
-            icon: mdi:tablet
+    #   - type: glance
+    #     columns: 4
+    #     title: 'Устройства в сети'
+    #     entities:
+    #       - entity: sensor.asuswrt_devices_connected
+    #         name: 'Количество'
+    #         icon: mdi:account-multiple
+    #       - entity: device_tracker.iphone_12_az
+    #         name: 'iPhone Азат'
+    #         icon: mdi:cellphone
+    #       - entity: device_tracker.ipad_6_az
+    #         name: 'Планшет Азат'
+    #         icon: mdi:tablet
+    #       - entity: device_tracker.deskmini
+    #         name: 'Deskmini'
+    #         icon: mdi:desktop-tower
+    #       - entity: device_tracker.mbp15
+    #         name: 'Макбук'
+    #         icon: mdi:laptop
+    #       - entity: device_tracker.iphone_elia
+    #         name: 'iPhone Эля'
+    #         icon: mdi:cellphone
+    #       - entity: device_tracker.huawei_mediapad_m5_lite_9
+    #         name: 'Планшет Эля'
+    #         icon: mdi:tablet
       - type: custom:vertical-stack-in-card
         title: 'Pi-hole'
         cards:
@@ -134,6 +134,9 @@ cards:
           - entity: switch.docker_telegraf
             icon: mdi:docker
             name: telegraf
+          - entity: switch.docker_android_debug_bridge
+            icon: mdi:docker
+            name: AndroidDebugBridge
           - type: divider
       - type: custom:mini-graph-card
         name: 'Потребление сервера'

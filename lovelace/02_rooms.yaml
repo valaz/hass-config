@@ -86,6 +86,22 @@ cards:
       - type: custom:vertical-stack-in-card
         title: Коридор
         cards:
+          - type: glance
+            show_name: false
+            entities:
+             - entity: switch.0x04cf8cdf3c8eb0f3
+               name: Свет
+               double_tap_action:
+                 action: toggle
+             - entity: sensor.0x00158d0006bed661_illuminance_lux
+               name: Освещение
+             - entity: binary_sensor.0x00158d0006bed661_occupancy
+               name: Движение
+          - type: entities
+            entities:
+             - entity: timer.entrance_light
+               name: Таймер
+               
           - type: picture-glance
             entities:
               - binary_sensor.azat_at_home
