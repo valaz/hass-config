@@ -1,31 +1,31 @@
 {
     "0x00158d00052b3ad9": {
         "state": "OFF",
-        "brightness": 51,
-        "color_temp": 500,
+        "brightness": 203,
+        "color_temp": 153,
         "color_mode": "color_temp"
     },
     "0x04cf8cdf3c764d02": {
         "state": "ON",
-        "temperature": 30,
-        "power": 5.8,
-        "energy": 93.68,
-        "consumption": 93.68,
-        "voltage": 217,
-        "current": 0.0267,
+        "temperature": 31,
+        "power": 6.18,
+        "energy": 93.77,
+        "consumption": 93.77,
+        "voltage": 224,
+        "current": 0.0276,
         "consumer_connected": true
     },
     "0x00158d000586695c": {
-        "temperature": 23.81,
-        "humidity": 34.66,
-        "pressure": 1007.1,
+        "temperature": 24.58,
+        "humidity": 31.01,
+        "pressure": 1004.2,
         "voltage": 3045,
         "battery": 100
     },
     "0x00158d0005800735": {
-        "temperature": 11.05,
-        "humidity": 47.69,
-        "pressure": 1006.1,
+        "temperature": 11.47,
+        "humidity": 46.32,
+        "pressure": 1003.4,
         "voltage": 2985,
         "battery": 91
     },
@@ -40,24 +40,24 @@
     "0x04cf8cdf3c777c79": {
         "state": "ON",
         "temperature": 28,
-        "power": 81.39,
-        "energy": 815.95,
-        "consumption": 815.95,
-        "voltage": 210,
-        "current": 0.4261,
+        "power": 104.03,
+        "energy": 817.5,
+        "consumption": 817.5,
+        "voltage": 222,
+        "current": 0.4492,
         "consumer_connected": false
     },
     "0x04cf8cdf3c8eb0f3": {
-        "device_temperature": 26,
+        "device_temperature": 29,
         "state": "OFF",
         "power": 0,
-        "energy": 0.25,
+        "energy": 0.26,
         "power_outage_memory": true
     },
     "0x00158d0006bed661": {
         "occupancy": false,
-        "illuminance": 1,
-        "illuminance_lux": 1,
+        "illuminance": 3,
+        "illuminance_lux": 3,
         "voltage": 3165,
         "battery": 100,
         "temperature": 27

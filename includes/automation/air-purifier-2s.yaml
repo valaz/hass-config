@@ -60,7 +60,7 @@
   initial_state: true
   trigger:
     platform: state
-    entity_id: sensor.xiaomi_air_purifier_2s_pm2_5
+    entity_id: fan.air_purifier
   condition:
     - condition: and
       conditions:
@@ -68,7 +68,7 @@
           entity_id: fan.air_purifier
           state: 'on'
         - condition: numeric_state
-          entity_id: sensor.xiaomi_air_purifier_2s_pm2_5
+          entity_id: sensor.air_purifier_pm2_5
           below: 2
   action:
     - service: system_log.write
@@ -89,7 +89,7 @@
   initial_state: true
   trigger:
     platform: state
-    entity_id: sensor.xiaomi_air_purifier_2s_pm2_5
+    entity_id: fan.air_purifier
   condition:
     - condition: and
       conditions:
@@ -97,7 +97,7 @@
           entity_id: fan.air_purifier
           state: 'off'
         - condition: numeric_state
-          entity_id: sensor.xiaomi_air_purifier_2s_pm2_5
+          entity_id: sensor.air_purifier_pm2_5
           above: 5
   action:
     - service: system_log.write

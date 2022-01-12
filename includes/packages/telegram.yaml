@@ -172,12 +172,22 @@ telegram:
         - id: Увлажнитель выключился
           alias: humidifier_turned_off 
           initial_state: true
-          trigger:   
+          trigger:
              - platform: state
                entity_id: switch.philips_humidifier
                from: "on"
                to: "off"
                for: "00:00:20"
+             - platform: state
+               entity_id: switch.philips_humidifier
+               from: "on"
+               to: "off"
+               for: "00:05:00"
+             - platform: state
+               entity_id: switch.philips_humidifier
+               from: "on"
+               to: "off"
+               for: "01:00:00"
           condition:
             - condition: and
               conditions:
@@ -217,6 +227,12 @@ telegram:
              - platform: numeric_state
                entity_id: sensor.air_humidifier_water_level
                below: 11
+             - platform: numeric_state
+               entity_id: sensor.air_humidifier_water_level
+               below: 21
+             - platform: numeric_state
+               entity_id: sensor.air_humidifier_water_level
+               below: 31
           condition:
             - condition: and
               conditions:
@@ -227,7 +243,7 @@ telegram:
              - service: notify.tg_valaz
                data:
                  message: | 
-                     {{"\U0001F4A7"}} В детском увлажнителе заканчивается вода.
+                     {{"\U0001F4A7"}} В детском увлажнителе заканчивается вода - {{ states('sensor.air_humidifier_water_level') }} %
                      
         - id: Лампа недоступна
           alias: light_is_offline 
@@ -437,6 +453,12 @@ telegram:
             platform: state
             entity_id: binary_sensor.0x00158d0006bed661_occupancy
             to: "on"
+          condition:
+            - condition: and
+              conditions:
+                - condition: state
+                  entity_id: binary_sensor.people_at_home
+                  state: 'off'
           action:
             - service: script.turn_on
               entity_id: 
