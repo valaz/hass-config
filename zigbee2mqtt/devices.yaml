@@ -14,3 +14,7 @@
   friendly_name: light_entrance
 '0x00158d0006bed661':
   friendly_name: motion_sensor_entrance
+'0x00158d0006ed6b85':
+  friendly_name: aqara_sensor_bedroom
+'0x00158d0006e4e280':
+  friendly_name: door_entrance

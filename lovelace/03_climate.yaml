@@ -46,7 +46,7 @@ cards:
           - type: custom:mini-graph-card
             name: Спальня
             entities:
-              - sensor.rm4_mini_temperature
+              - sensor.0x00158d0006ed6b85_temperature
             hour24: true
             show:
               graph: false
@@ -111,7 +111,7 @@ cards:
           - type: custom:mini-graph-card
             name: Спальня
             entities:
-              - sensor.rm4_mini_humidity
+              - sensor.0x00158d0006ed6b85_humidity
             hour24: true
             show:
               graph: false

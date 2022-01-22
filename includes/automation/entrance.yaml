@@ -3,6 +3,9 @@
   - platform: state
     entity_id: binary_sensor.0x00158d0006bed661_occupancy
     to: "on"
+  - platform: state
+    entity_id: binary_sensor.0x00158d0006e4e280_contact
+    to: "on"
   action:
   - service: timer.cancel
     target:
@@ -11,13 +14,17 @@
     target:
       entity_id: switch.0x04cf8cdf3c8eb0f3
 
-- alias: "Turn off entrance light 1 minute after last movement"
+- alias: "Turn off entrance light 1 minute after last movement or entrance timer finished"
   trigger:
   - platform: state
     entity_id: binary_sensor.0x00158d0006bed661_occupancy
     to: "off"
     for:
       seconds: 60
+  - platform: event
+    event_type: timer.finished
+    event_data:
+      entity_id: timer.entrance_light
   action:
     service: switch.turn_off
     target:
@@ -27,6 +34,9 @@
   trigger: 
   - platform: state
     entity_id: switch.0x04cf8cdf3c8eb0f3
+    to: "on"
+  - platform: state
+    entity_id: binary_sensor.0x00158d0006e4e280_contact
     to: "on"
   condition:
     condition: state
@@ -49,15 +59,3 @@
   - service: timer.cancel
     target:
         entity_id: timer.entrance_light
-
-- alias: "Turn off entrance light when entrance timer finished"
-  trigger:
-    platform: event
-    event_type: timer.finished
-    event_data:
-      entity_id: timer.entrance_light
-  action:
-    service: switch.turn_off
-    target:
-      entity_id:
-        - switch.0x04cf8cdf3c8eb0f3

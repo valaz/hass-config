@@ -447,6 +447,17 @@ telegram:
                 message: |
                     {{"\U00002796"}} {{trigger.event.data.name}}
                      
+        - id: Door is Opened
+          alias: door_is_opened
+          trigger:
+            platform: state
+            entity_id: binary_sensor.0x00158d0006e4e280_contact
+            to: "on"
+          action:
+            - service: script.turn_on
+              entity_id: 
+                - script.photo_tapo_c110_telegram
+                     
         - id: Door Movements
           alias: door_movements
           trigger:

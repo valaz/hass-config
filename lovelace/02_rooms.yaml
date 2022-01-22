@@ -19,19 +19,7 @@ cards:
           - type: entities
             entities:
              - entity: fan.air_purifier
-            #  - entity: media_player.android_tv
-            #  - entity: binary_sensor.philips_tv_screen
-             - entity: switch.philips_wol
-            #  - entity: switch.philips_wwol
-            #  - entity: switch.sven_volume
-            #  - entity: alarm_control_panel.0x842e14fffe54c44d_alarm
-            #  - entity: switch.0x04cf8cdf3c764d02
-            #   type: custom:multiple-entity-row
-            #   name: 'Телевизор Розетка'
-            #   toggle: true
-            #   entities:
-            #     - entity: sensor.0x04cf8cdf3c764d02_power
-            #       name: потребление
+             - entity: media_player.televizor_v_gostinoi
              - entity: switch.0x04cf8cdf3c777c79
                type: custom:multiple-entity-row
                name: 'Альтрон розетка'
@@ -39,47 +27,7 @@ cards:
                entities:
                 - entity: sensor.0x04cf8cdf3c777c79_power
                   name: потребление
-
-              
-        #   - type: glance
-        #     show_name: false
-        #     show_state: false
-        #     entities:
-        #       - entity: remote.xiaomi_ir_remote
-        #         icon: mdi:volume-low
-        #         tap_action:
-        #           action: call-service
-        #           service: script.call_sven_vol_down_32
-        #       - entity: remote.xiaomi_ir_remote
-        #         icon: mdi:volume-minus
-        #         tap_action:
-        #           action: call-service
-        #           service: script.call_sven_vol_down
-        #       - entity: remote.xiaomi_ir_remote
-        #         icon: mdi:volume-mute
-        #         tap_action:
-        #           action: call-service
-        #           service: script.call_sven_mute
-        #       - entity: remote.xiaomi_ir_remote
-        #         name: Тищина
-        #         icon: mdi:volume-plus
-        #         tap_action:
-        #           action: call-service
-        #           service: script.call_sven_vol_up
-        #       - entity: remote.xiaomi_ir_remote
-        #         icon: mdi:volume-high
-        #         name: Громкость
-        #         tap_action:
-        #           action: call-service
-        #           service: script.call_sven_vol_up_32
-        #   - type: button
-        #     name: 'Сканировать сигнал'
-        #     tap_action:
-        #       action: call-service
-        #       service: xiaomi_miio.remote_learn_command
-        #       service_data:
-        #         entity_id: remote.xiaomi_ir_remote
-        
+                  
   - type: vertical-stack
     cards:
 #######   Коридор   #######
@@ -101,6 +49,8 @@ cards:
             entities:
              - entity: timer.entrance_light
                name: Таймер
+             - entity: binary_sensor.0x00158d0006e4e280_contact
+               name: Входная дверь
                
           - type: picture-glance
             entities:
@@ -180,8 +130,8 @@ cards:
           - type: glance
             show_name: false
             entities:
-              - sensor.rm4_mini_temperature
-              - sensor.rm4_mini_humidity
+              - sensor.0x00158d0006ed6b85_temperature
+              - sensor.0x00158d0006ed6b85_humidity
           - type: entities
             entities: 
              - entity: switch.philips_humidifier

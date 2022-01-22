@@ -59,8 +59,10 @@
 - alias: air_putifier_auto_off
   initial_state: true
   trigger:
-    platform: state
-    entity_id: fan.air_purifier
+    - platform: state
+      entity_id: fan.air_purifier
+    - platform: state
+      entity_id: sensor.air_purifier_pm2_5
   condition:
     - condition: and
       conditions:
@@ -88,8 +90,10 @@
 - alias: air_putifier_auto_on
   initial_state: true
   trigger:
-    platform: state
-    entity_id: fan.air_purifier
+    - platform: state
+      entity_id: fan.air_purifier
+    - platform: state
+      entity_id: sensor.air_purifier_pm2_5
   condition:
     - condition: and
       conditions:

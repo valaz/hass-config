@@ -21,7 +21,7 @@
          data:
               entity_id: camera.tapo_camera_0069_sd
               filename: "/config/www/cam_captures/c110.jpg"
-       - delay: 00:00:15
+       - delay: 00:00:10
        - service: telegram_bot.send_photo
          data_template:
            target:
