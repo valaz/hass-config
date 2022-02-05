@@ -1,0 +1,25 @@
+ultron:
+    
+    shell_command:
+        ultron_docker_restart_adb: 'ssh -i /config/ultron.key -o StrictHostKeyChecking=no root@192.168.1.11 docker restart AndroidDebugBridge'
+        
+    script:
+        ultron_docker_restart_adb:
+            alias: 'Ultron: перегезагрузка ADB'
+            sequence:
+                service:
+                    shell_command.ultron_docker_restart_adb
+                    
+    automation:
+      - id: 'adb_restart_if_mibox_is_online'
+        alias: 'ADB рестарт при появлении в сети Mi Box'
+        trigger:
+          - platform: state
+            entity_id: binary_sensor.mi_box_ping
+            to: 'on'
+        condition:
+            condition: state
+            entity_id: media_player.mi_box
+            state: unknown
+        action:
+          - service: script.ultron_docker_restart_adb

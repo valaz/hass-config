@@ -1,4 +1,0 @@
-info  2022-01-11 22:34:20: Logging to console and directory: '/config/zigbee2mqtt/log/2022-01-11.22-34-20' filename: log.txt
-info  2022-01-11 22:34:20: Starting Zigbee2MQTT version 1.22.1 (commit #unknown)
-info  2022-01-11 22:34:20: Starting zigbee-herdsman (0.13.176)
-error 2022-01-11 22:34:40: Error while starting zigbee-herdsman

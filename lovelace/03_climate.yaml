@@ -133,7 +133,7 @@ cards:
       - type: custom:mini-graph-card
         name: Уровень PM2.5
         entities:
-          - sensor.xiaomi_air_purifier_2s_pm2_5
+          - sensor.air_purifier_pm2_5
         hour24: true
         show:
           graph: true

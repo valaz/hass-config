@@ -1,6 +1,195 @@
 title: Homelab
 icon: mdi:server-network
 cards:
+                 
+  - type: vertical-stack
+    cards: 
+      - type: custom:vertical-stack-in-card
+        title: Ultron
+        cards:
+          - type: entities
+            entities:
+              - type: weblink
+                name: 'Ultron Admin Panel'
+                url: http://192.168.1.11/
+                icon: mdi:database
+              - type: divider
+              
+            #   - entity: light.living_room
+            #     type: custom:multiple-entity-row
+            #     name: Gaming Center
+            #     secondary_info: 
+            #       - entity: switch.vm_gaming_center
+            #     entities:
+            #       - entity: switch.vm_gaming_center
+            #         icon: mdi:palette
+              
+              - type: divider
+              - entity: switch.vm_gaming_center
+                icon: mdi:microsoft-windows
+              - entity: switch.vm_htpc
+                icon: mdi:youtube-tv
+              - entity: switch.vm_pop_os
+                icon: mdi:ubuntu
+              - entity: switch.vm_hive_os
+                icon: mdi:expansion-card
+              - type: divider
+                
+          - type: glance
+            columns: 2
+            entities:
+              - entity: sensor.ultron_glances_containers_cpu_used
+                name: 'CPU'
+              - entity: sensor.ultron_glances_containers_ram_used
+                name: 'RAM'
+                
+          - type: entities
+            entities:
+              - entity: switch.docker_transmission
+                icon: mdi:docker
+                name: transmission
+              - entity: switch.docker_transmission_telegram
+                icon: mdi:docker
+                name: transmission_telegram
+              - entity: switch.docker_homebridge
+                icon: mdi:docker
+                name: homebridge
+              - entity: switch.docker_telegraf
+                icon: mdi:docker
+                name: telegraf
+              - entity: switch.docker_android_debug_bridge
+                icon: mdi:docker
+                name: AndroidDebugBridge
+              - type: divider
+          - type: custom:mini-graph-card
+            name: 'Потребление сервера'
+            animate: true
+            hour24: true
+            line_color: "#f39c12"
+            hours_to_show: 24
+            points_per_hour: 12
+            update_interval: 300
+            line_width: 3
+            entities:
+              - entity: sensor.0x04cf8cdf3c777c79_power
+            
+  - type: vertical-stack
+    cards: 
+      - type: custom:vertical-stack-in-card
+        title: Ultron Metrics
+        cards:
+          - type: custom:mini-graph-card
+            entities:
+              - entity: sensor.ultron_glances_package_id_0_temperature
+            name: 'Температура процессора'
+            animate: true
+            hour24: true
+            color_thresholds:
+              - value: 60
+                color: "#539652"
+              - value: 80
+                color: "#f39c12"
+              - value: 90
+                color: "#c0392b"
+            hours_to_show: 1
+            points_per_hour: 60
+            update_interval: 10
+          - type: horizontal-stack
+            cards:
+              - type: custom:mini-graph-card
+                name: 'CPU'
+                animate: true
+                hour24: true
+                color_thresholds:
+                  - value: 35
+                    color: "#539652"
+                  - value: 70
+                    color: "#f39c12"
+                  - value: 90
+                    color: "#c0392b"
+                hours_to_show: 24
+                points_per_hour: 12
+                update_interval: 30
+                entities:
+                  - entity: sensor.ultron_glances_cpu_used
+              - type: custom:mini-graph-card
+                name: 'RAM'
+                animate: true
+                hour24: true
+                color_thresholds:
+                  - value: 35
+                    color: "#539652"
+                  - value: 80
+                    color: "#f39c12"
+                  - value: 90
+                    color: "#c0392b"
+                hours_to_show: 24
+                points_per_hour: 12
+                update_interval: 30
+                entities:
+                  - entity: sensor.ultron_glances_ram_used_percent
+              
+          - type: horizontal-stack
+            cards:
+              - type: custom:mini-graph-card
+                name: Parity
+                entities:
+                  - sensor.ultron_parity_disk_temperature
+                hour24: true
+                show:
+                  graph: false
+                  icon: true
+                  extrema: true
+                  fill: false
+                align_state: center
+              - type: custom:mini-graph-card
+                name: Disk 1
+                entities:
+                  - sensor.ultron_disk_1_temperature
+                hour24: true
+                show:
+                  graph: false
+                  icon: true
+                  extrema: true
+                  fill: false
+                align_state: center
+              - type: custom:mini-graph-card
+                name: Disk 2
+                entities:
+                  - sensor.ultron_disk_2_temperature
+                hour24: true
+                show:
+                  graph: false
+                  icon: true
+                  extrema: true
+                  fill: false
+                align_state: center
+                
+          - type: horizontal-stack
+            cards:
+              - type: custom:mini-graph-card
+                name: Cache
+                entities:
+                  - sensor.ultron_cache_temperature
+                hour24: true
+                show:
+                  graph: false
+                  icon: true
+                  extrema: true
+                  fill: false
+                align_state: center
+              - type: custom:mini-graph-card
+                name: 970 EVO
+                entities:
+                  - sensor.ultron_970_evo_temperature
+                hour24: true
+                show:
+                  graph: false
+                  icon: true
+                  extrema: true
+                  fill: false
+                align_state: center
+                
   - type: vertical-stack
     cards:
       - type: custom:vertical-stack-in-card
@@ -102,237 +291,75 @@ cards:
             name: 'Всего клиентов'
           - entity: sensor.pi_hole_dns_unique_clients
             name: 'Уникальных клиентов'
-                  
-  - type: custom:vertical-stack-in-card
-    title: Ultron
-    cards:
-      - type: entities
-        entities:
-          - type: weblink
-            name: 'Ultron Admin Panel'
-            url: http://192.168.1.11/
-            icon: mdi:database
-          - type: divider
-          - entity: switch.vm_gaming_center
-            icon: mdi:microsoft-windows
-          - entity: switch.vm_htpc
-            icon: mdi:youtube-tv
-          - entity: switch.vm_pop_os
-            icon: mdi:ubuntu
-          - entity: switch.vm_hive_os
-            icon: mdi:expansion-card
-          - type: divider
-          - entity: switch.docker_transmission
-            icon: mdi:docker
-            name: transmission
-          - entity: switch.docker_transmission_telegram
-            icon: mdi:docker
-            name: transmission_telegram
-          - entity: switch.docker_homebridge
-            icon: mdi:docker
-            name: homebridge
-          - entity: switch.docker_telegraf
-            icon: mdi:docker
-            name: telegraf
-          - entity: switch.docker_android_debug_bridge
-            icon: mdi:docker
-            name: AndroidDebugBridge
-          - type: divider
-      - type: custom:mini-graph-card
-        name: 'Потребление сервера'
-        animate: true
-        hour24: true
-        line_color: "#f39c12"
-        hours_to_show: 24
-        points_per_hour: 12
-        update_interval: 300
-        line_width: 3
-        entities:
-          - entity: sensor.0x04cf8cdf3c777c79_power
-          
-  - type: custom:vertical-stack-in-card
-    title: Ultron Metrics
-    cards:
-      - type: custom:mini-graph-card
-        entities:
-          - entity: sensor.ultron_cpu_temperature
-        name: 'Температура процессора'
-        animate: true
-        hour24: true
-        color_thresholds:
-          - value: 60
-            color: "#539652"
-          - value: 80
-            color: "#f39c12"
-          - value: 90
-            color: "#c0392b"
-        hours_to_show: 1
-        points_per_hour: 60
-        update_interval: 10
-      - type: horizontal-stack
-        cards:
-          - type: custom:mini-graph-card
-            name: 'CPU'
-            animate: true
-            hour24: true
-            color_thresholds:
-              - value: 35
-                color: "#539652"
-              - value: 50
-                color: "#f39c12"
-              - value: 80
-                color: "#c0392b"
-            hours_to_show: 24
-            points_per_hour: 12
-            update_interval: 30
-            entities:
-              - entity: sensor.ultron_cpu_usage
-          - type: custom:mini-graph-card
-            name: 'RAM'
-            animate: true
-            hour24: true
-            color_thresholds:
-              - value: 35
-                color: "#539652"
-              - value: 50
-                color: "#f39c12"
-              - value: 80
-                color: "#c0392b"
-            hours_to_show: 24
-            points_per_hour: 12
-            update_interval: 30
-            entities:
-              - entity: sensor.ultron_ram_usage
-          
-      - type: horizontal-stack
-        cards:
-          - type: custom:mini-graph-card
-            name: Parity
-            entities:
-              - sensor.ultron_parity_disk_temperature
-            hour24: true
-            show:
-              graph: false
-              icon: true
-              extrema: true
-              fill: false
-            align_state: center
-          - type: custom:mini-graph-card
-            name: Disk 1
-            entities:
-              - sensor.ultron_disk_1_temperature
-            hour24: true
-            show:
-              graph: false
-              icon: true
-              extrema: true
-              fill: false
-            align_state: center
-          - type: custom:mini-graph-card
-            name: Disk 2
-            entities:
-              - sensor.ultron_disk_2_temperature
-            hour24: true
-            show:
-              graph: false
-              icon: true
-              extrema: true
-              fill: false
-            align_state: center
-            
-      - type: horizontal-stack
-        cards:
-          - type: custom:mini-graph-card
-            name: Cache
-            entities:
-              - sensor.ultron_cache_temperature
-            hour24: true
-            show:
-              graph: false
-              icon: true
-              extrema: true
-              fill: false
-            align_state: center
-          - type: custom:mini-graph-card
-            name: 970 EVO
-            entities:
-              - sensor.ultron_970_evo_temperature
-            hour24: true
-            show:
-              graph: false
-              icon: true
-              extrema: true
-              fill: false
-            align_state: center
+                 
 
-          
-  - type: custom:vertical-stack-in-card
-    title: 'Transmission'
-    cards:
-      - type: entities
-        entities:
-          - type: weblink
-            name: 'Transmission Panel'
-            url: http://192.168.1.11:9091/transmission/web/
-            icon: mdi:download-box
-          - entity: switch.transmission_switch
-            name: Вкл/Выкл
-          - entity: switch.transmission_turtle_mode
-            name: Замедленный режим
-      - type: divider
-      - type: horizontal-stack
+      - type: custom:vertical-stack-in-card
+        title: 'Transmission'
         cards:
-          - type: custom:mini-graph-card
-            name: 'Скорость загрузки'
-            animate: true
-            hour24: true
-            color_thresholds:
-              - value: 4
-                color: "#95d5b2"
-              - value: 7
-                color: "#52b788"
-              - value: 10
-                color: "#1b4332"
-            hours_to_show: 1
-            points_per_hour: 60
-            update_interval: 10
+          - type: entities
             entities:
-              - entity: sensor.transmission_down_speed
-          - type: custom:mini-graph-card
-            name: 'Скорость выгрузки'
-            animate: true
-            hour24: true
-            color_thresholds:
-              - value: 4
-                color: "#ffba08"
-              - value: 7
-                color: "#f48c06"
-              - value: 10
-                color: "#d00000"
-            hours_to_show: 1
-            points_per_hour: 60
-            update_interval: 10
+              - type: weblink
+                name: 'Transmission Panel'
+                url: http://192.168.1.11:9091/transmission/web/
+                icon: mdi:download-box
+              - entity: switch.transmission_switch
+                name: Вкл/Выкл
+              - entity: switch.transmission_turtle_mode
+                name: Замедленный режим
+          - type: divider
+          - type: horizontal-stack
+            cards:
+              - type: custom:mini-graph-card
+                name: 'Скорость загрузки'
+                animate: true
+                hour24: true
+                color_thresholds:
+                  - value: 4
+                    color: "#95d5b2"
+                  - value: 7
+                    color: "#52b788"
+                  - value: 10
+                    color: "#1b4332"
+                hours_to_show: 1
+                points_per_hour: 60
+                update_interval: 10
+                entities:
+                  - entity: sensor.transmission_down_speed
+              - type: custom:mini-graph-card
+                name: 'Скорость выгрузки'
+                animate: true
+                hour24: true
+                color_thresholds:
+                  - value: 4
+                    color: "#ffba08"
+                  - value: 7
+                    color: "#f48c06"
+                  - value: 10
+                    color: "#d00000"
+                hours_to_show: 1
+                points_per_hour: 60
+                update_interval: 10
+                entities:
+                  - entity: sensor.transmission_up_speed
+          - type: divider
+          - type: glance
+            columns: 5
             entities:
-              - entity: sensor.transmission_up_speed
-      - type: divider
-      - type: glance
-        columns: 5
-        entities:
-          - entity: sensor.transmission_total_torrents
-            name: 'Всего'
-            # icon: mdi:download-multiple
-          - entity: sensor.transmission_active_torrents
-            name: 'Активно'
-            # icon: mdi:progress-download
-          - entity: sensor.transmission_completed_torrents
-            name: 'Завершено'
-            # icon: mdi:download-circle
-          - entity: sensor.transmission_started_torrents
-            name: 'Начато'
-            # icon: mdi:play
-          - entity: sensor.transmission_paused_torrents
-            name: 'На паузе'
-            # icon: mdi:pause
+              - entity: sensor.transmission_total_torrents
+                name: 'Всего'
+                # icon: mdi:download-multiple
+              - entity: sensor.transmission_active_torrents
+                name: 'Активно'
+                # icon: mdi:progress-download
+              - entity: sensor.transmission_completed_torrents
+                name: 'Завершено'
+                # icon: mdi:download-circle
+              - entity: sensor.transmission_started_torrents
+                name: 'Начато'
+                # icon: mdi:play
+              - entity: sensor.transmission_paused_torrents
+                name: 'На паузе'
+                # icon: mdi:pause
 
                 
                 
