@@ -13,7 +13,6 @@ cards:
                 name: 'Ultron Admin Panel'
                 url: http://192.168.1.11/
                 icon: mdi:database
-              - type: divider
               
             #   - entity: light.living_room
             #     type: custom:multiple-entity-row
@@ -60,18 +59,18 @@ cards:
               - entity: switch.docker_android_debug_bridge
                 icon: mdi:docker
                 name: AndroidDebugBridge
-              - type: divider
-          - type: custom:mini-graph-card
-            name: 'Потребление сервера'
-            animate: true
-            hour24: true
-            line_color: "#f39c12"
-            hours_to_show: 24
-            points_per_hour: 12
-            update_interval: 300
-            line_width: 3
-            entities:
-              - entity: sensor.0x04cf8cdf3c777c79_power
+              
+      - type: custom:mini-graph-card
+        name: 'Потребление сервера'
+        animate: true
+        hour24: true
+        line_color: "#f39c12"
+        hours_to_show: 24
+        points_per_hour: 12
+        update_interval: 300
+        line_width: 3
+        entities:
+          - entity: sensor.0x04cf8cdf3c777c79_power
             
   - type: vertical-stack
     cards: 
@@ -128,7 +127,10 @@ cards:
                 update_interval: 30
                 entities:
                   - entity: sensor.ultron_glances_ram_used_percent
-              
+          
+      - type: custom:vertical-stack-in-card
+        title: Ultron Disks
+        cards:
           - type: horizontal-stack
             cards:
               - type: custom:mini-graph-card
@@ -274,24 +276,24 @@ cards:
                 name: Вкл/Выкл
               - entity: timer.pihole
                 name: Таймер
-      - type: glance
-        columns: 4
-        title: 'Статистика'
-        show_name: false
-        entities:
-          - entity: sensor.pi_hole_dns_queries_today
-            name: 'Всего запросов'
-          - entity: sensor.pi_hole_ads_blocked_today
-            name: 'Заблокированых запросов'
-          - entity: sensor.pi_hole_ads_percentage_blocked_today
-            name: 'Процент блокировки'
-          - entity: sensor.pi_hole_domains_blocked
-            name: 'Заблокированных доменов'
-          - entity: sensor.pi_hole_seen_clients
-            name: 'Всего клиентов'
-          - entity: sensor.pi_hole_dns_unique_clients
-            name: 'Уникальных клиентов'
-                 
+          - type: glance
+            columns: 4
+            title: 'Статистика'
+            show_name: false
+            entities:
+              - entity: sensor.pi_hole_dns_queries_today
+                name: 'Всего запросов'
+              - entity: sensor.pi_hole_ads_blocked_today
+                name: 'Заблокированых запросов'
+              - entity: sensor.pi_hole_ads_percentage_blocked_today
+                name: 'Процент блокировки'
+              - entity: sensor.pi_hole_domains_blocked
+                name: 'Заблокированных доменов'
+              - entity: sensor.pi_hole_seen_clients
+                name: 'Всего клиентов'
+              - entity: sensor.pi_hole_dns_unique_clients
+                name: 'Уникальных клиентов'
+                     
 
       - type: custom:vertical-stack-in-card
         title: 'Transmission'

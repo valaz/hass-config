@@ -62,10 +62,10 @@ cards:
               unit: hours
               subtitle: Sensors
           cleaning:
-            - entity_id: sensor.roborock_s5_last_clean_area
+            - entity_id: sensor.roborock_s5_current_clean_area
               unit: m2
               subtitle: Cleaning area
-            - entity_id: sensor.roborock_last_clean_duration
+            - entity_id: sensor.roborock_s5_current_clean_duration_min
               unit: minutes
               subtitle: Cleaning time
 

@@ -26,9 +26,15 @@
       roborock_last_clean_duration:
         icon_template: mdi:texture-box
         unit_of_measurement: "мин"
-        friendly_name: "Площадь последней уборки"
+        friendly_name: "Продолжительность последней уборки"
         value_template: >
             {{ (states('sensor.roborock_s5_last_clean_duration') | float / 60) | round(2) }}
+      roborock_s5_current_clean_duration_min:
+        icon_template: mdi:timer-sand
+        unit_of_measurement: "мин"
+        friendly_name: "Продолжительность текущей уборки"
+        value_template: >
+            {{ (states('sensor.roborock_s5_current_clean_duration') | float / 60) | round(2) }}
             
 # Время с последней уборки
       last_clean_custom:
