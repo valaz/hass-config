@@ -1,1 +1,0 @@
-info  2022-01-30 23:35:21: Logging to console and directory: '/config/zigbee2mqtt/log/2022-01-30.23-35-20' filename: log.txt

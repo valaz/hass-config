@@ -30,8 +30,6 @@ cards:
                 icon: mdi:youtube-tv
               - entity: switch.vm_pop_os
                 icon: mdi:ubuntu
-              - entity: switch.vm_hive_os
-                icon: mdi:expansion-card
               - type: divider
                 
           - type: glance

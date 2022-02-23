@@ -1,0 +1,33 @@
+- alias: "Humidifier Report When Azat came home"
+  trigger:
+      - platform: state
+        entity_id: binary_sensor.azat_at_home
+        to: "on"
+        for: "00:02:00"
+  condition:
+        condition: state
+        entity_id: switch.philips_humidifier
+        state: "off"
+  action:
+    - service: notify.tg_valaz
+      data:
+        title: "Азат привет!"
+        message: |
+             {{"\U0001F30A"}} Нужно набрать воду в увлажнитель в спальне.
+             
+- alias: "Kids Humidifier Report When Azat came home"
+  trigger:
+      - platform: state
+        entity_id: binary_sensor.azat_at_home
+        to: "on"
+        for: "00:02:00"
+  condition:
+        condition: numeric_state
+        entity_id: sensor.air_humidifier_water_level
+        below: 31
+  action:
+    - service: notify.tg_valaz
+      data:
+        title: "Азат привет!"
+        message: |
+             {{"\U0001F30A"}} Нужно набрать воду в Детский увлажнитель. Там осталось {{ states('sensor.air_humidifier_water_level') }} %

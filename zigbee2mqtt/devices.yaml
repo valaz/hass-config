@@ -18,3 +18,5 @@
   friendly_name: aqara_sensor_bedroom
 '0x00158d0006e4e280':
   friendly_name: door_entrance
+'0x00158d00052fa079':
+  friendly_name: aqara_cube

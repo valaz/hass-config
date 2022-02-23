@@ -14,3 +14,4 @@ cards:
           - entity: sensor.0x00158d0006bed661_battery
           - entity: sensor.0x00158d0006ed6b85_battery
           - entity: sensor.0x00158d0006e4e280_battery
+          - entity: sensor.0x00158d00052fa079_battery

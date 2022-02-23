@@ -20,6 +20,8 @@ ultron:
         condition:
             condition: state
             entity_id: media_player.mi_box
-            state: unknown
+            state: 
+              - unknown
+              - unavailable
         action:
           - service: script.ultron_docker_restart_adb

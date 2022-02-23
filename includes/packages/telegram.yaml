@@ -69,6 +69,10 @@ telegram:
                  {{"\U00002699"}} Homelab
                  {{"\U0001F567"}} Отчет за {{ states('sensor.time_date') }}
                  {{"\U00002600"}} Ultron CPU - {{ states('sensor.ultron_cpu_temperature') }} °C
+                 {{"\U0001F5B4"}} Ultron Parity Disk - {{ states('sensor.ultron_parity_disk_temperature') }} °C
+                 {{"\U0001F5B4"}} Ultron Disk 1 - {{ states('sensor.ultron_disk_1_temperature') }} °C
+                 {{"\U0001F5B4"}} Ultron Disk 2 - {{ states('sensor.ultron_disk_2_temperature') }} °C
+                 {{"\U0001F4BD"}} Ultron Cache Disk - {{ states('sensor.ultron_cache_temperature') }} °C
                  
       people_report:
         alias: Отправка отчета о состоянии people
@@ -334,6 +338,22 @@ telegram:
                entity_id: sensor.ultron_parity_disk_temperature
                above: 44
                for: "00:05:00"
+             - platform: numeric_state
+               entity_id: sensor.ultron_parity_disk_temperature
+               above: 45
+               for: "00:05:00"
+             - platform: numeric_state
+               entity_id: sensor.ultron_parity_disk_temperature
+               above: 46
+               for: "00:01:00"
+             - platform: numeric_state
+               entity_id: sensor.ultron_parity_disk_temperature
+               above: 47
+               for: "00:01:00"
+             - platform: numeric_state
+               entity_id: sensor.ultron_parity_disk_temperature
+               above: 48
+               for: "00:01:00"
           action:
              - service: notify.tg_valaz
                data:
@@ -362,6 +382,22 @@ telegram:
                entity_id: sensor.ultron_disk_1_temperature
                above: 44
                for: "00:05:00"
+             - platform: numeric_state
+               entity_id: sensor.ultron_disk_1_temperature
+               above: 45
+               for: "00:05:00"
+             - platform: numeric_state
+               entity_id: sensor.ultron_disk_1_temperature
+               above: 46
+               for: "00:01:00"
+             - platform: numeric_state
+               entity_id: sensor.ultron_disk_1_temperature
+               above: 47
+               for: "00:01:00"
+             - platform: numeric_state
+               entity_id: sensor.ultron_disk_1_temperature
+               above: 48
+               for: "00:01:00"
           action:
              - service: notify.tg_valaz
                data:
