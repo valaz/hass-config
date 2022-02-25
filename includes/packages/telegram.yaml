@@ -55,7 +55,7 @@ telegram:
                  {{"\U0001F333"}} Климат в квартире
                  {{"\U0001F567"}} Отчет за {{ states('sensor.time_date') }}
                  {{"\U0001F4FA"}} Гостиная - {{ states('sensor.air_purifier_temperature') }} °C, {{ states('sensor.air_purifier_humidity') }} %
-                 {{"\U0001F468"}} Спальня - {{ states('sensor.rm4_mini_temperature') }} °C, {{ states('sensor.rm4_mini_humidity') }} %
+                 {{"\U0001F468"}} Спальня - {{ states('sensor.0x00158d0006ed6b85_temperature') }} °C, {{ states('sensor.0x00158d0006ed6b85_humidity') }} %
                  {{"\U0001F476"}} Детская - {{ states('sensor.0x00158d000586695c_temperature') }} °C, {{ states('sensor.0x00158d000586695c_humidity') }} %
                  {{"\U0001F487"}} Лоджия - {{ states('sensor.0x00158d0005800735_temperature') }} °C, {{ states('sensor.0x00158d0005800735_humidity') }} %
                  {{"\U0001F52A"}} Кухня - {{ states('sensor.e72e01500c8f_temperature') }} °C, {{ states('sensor.e72e01500c8f_humidity') }} %
@@ -269,6 +269,7 @@ telegram:
                   entity_id: humidifier.air_humidifier
                   state: 'on'
           action:
+             - delay: 00:00:10
              - service: notify.tg_valaz
                data:
                  message: | 
