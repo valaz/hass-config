@@ -8,23 +8,23 @@
     "0x04cf8cdf3c764d02": {
         "state": "ON",
         "temperature": 29,
-        "power": 5.8,
+        "power": 5.67,
         "energy": 99.56,
         "consumption": 99.56,
         "voltage": 220,
-        "current": 0.0264,
+        "current": 0.0258,
         "consumer_connected": true
     },
     "0x00158d000586695c": {
-        "temperature": 24.21,
-        "humidity": 46.73,
-        "pressure": 1004.6,
+        "temperature": 24.08,
+        "humidity": 50.08,
+        "pressure": 1004.8,
         "voltage": 3045,
         "battery": 100
     },
     "0x00158d0005800735": {
-        "temperature": 16.56,
-        "humidity": 47.29,
+        "temperature": 16.28,
+        "humidity": 43.07,
         "pressure": 1003.9,
         "voltage": 2985,
         "battery": 91
@@ -40,15 +40,15 @@
     "0x04cf8cdf3c777c79": {
         "state": "ON",
         "temperature": 29,
-        "power": 265.73,
-        "energy": 964.84,
-        "consumption": 964.84,
+        "power": 312.08,
+        "energy": 965.16,
+        "consumption": 965.16,
         "voltage": 218,
-        "current": 1.2189,
+        "current": 1.3969,
         "consumer_connected": false
     },
     "0x04cf8cdf3c8eb0f3": {
-        "device_temperature": 28,
+        "device_temperature": 26,
         "state": "OFF",
         "power": 0,
         "energy": 1.62,
@@ -60,12 +60,12 @@
         "illuminance_lux": 0,
         "voltage": 3085,
         "battery": 100,
-        "temperature": 28
+        "temperature": 27
     },
     "0x00158d0006ed6b85": {
-        "temperature": 24.63,
-        "humidity": 29.6,
-        "pressure": 1002.8,
+        "temperature": 24.62,
+        "humidity": 29.18,
+        "pressure": 1003,
         "voltage": 2995,
         "battery": 97
     },
@@ -81,5 +81,9 @@
         "voltage": 2955,
         "battery": 74
     },
-    "0x00158d0007bf1dd5": {}
+    "0x00158d0007bf1dd5": {
+        "water_leak": false,
+        "tamper": false,
+        "battery_low": false
+    }
 }
