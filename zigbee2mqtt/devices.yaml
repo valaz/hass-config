@@ -20,3 +20,5 @@
   friendly_name: door_entrance
 '0x00158d00052fa079':
   friendly_name: aqara_cube
+'0x00158d0007bf1dd5':
+  friendly_name: leak_sensor
