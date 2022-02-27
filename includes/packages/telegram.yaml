@@ -337,10 +337,6 @@ telegram:
           trigger:   
              - platform: numeric_state
                entity_id: sensor.ultron_parity_disk_temperature
-               above: 44
-               for: "00:05:00"
-             - platform: numeric_state
-               entity_id: sensor.ultron_parity_disk_temperature
                above: 45
                for: "00:05:00"
              - platform: numeric_state
@@ -367,7 +363,7 @@ telegram:
           trigger:   
              - platform: numeric_state
                entity_id: sensor.ultron_parity_disk_temperature
-               below: 45
+               below: 46
                for: "00:05:00"
           action:
              - service: notify.tg_valaz
@@ -379,10 +375,6 @@ telegram:
           alias: wd_elements_is_hot 
           initial_state: true
           trigger:   
-             - platform: numeric_state
-               entity_id: sensor.ultron_disk_1_temperature
-               above: 44
-               for: "00:05:00"
              - platform: numeric_state
                entity_id: sensor.ultron_disk_1_temperature
                above: 45
@@ -411,7 +403,7 @@ telegram:
           trigger:   
              - platform: numeric_state
                entity_id: sensor.ultron_disk_1_temperature
-               below: 45
+               below: 46
                for: "00:05:00"
           action:
              - service: notify.tg_valaz

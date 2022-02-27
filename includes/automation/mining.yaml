@@ -1,0 +1,36 @@
+- alias: "Mining Off if Disks are hot"
+  trigger:
+  - platform: state
+    entity_id: binary_sensor.ultron_disks_are_hot
+    to: "on"
+  condition:
+    - condition: and
+      conditions:
+        - condition: state
+          entity_id: switch.nh_gaming_power
+          state: "on"
+  action:
+  - service: switch.turn_off
+    target:
+        entity_id: switch.nh_gaming_power
+        
+        
+- alias: "Mining On if Disks are NOT hot"
+  trigger:
+  - platform: state
+    entity_id: binary_sensor.ultron_disks_are_hot
+    to: "off"
+    for: "00:01:00"
+  condition:
+    - condition: and
+      conditions:
+        - condition: state
+          entity_id: switch.nh_gaming_power
+          state: "off"
+        - condition: state
+          entity_id: switch.vm_gaming_center
+          state: "on"
+  action:
+  - service: switch.turn_on
+    target:
+        entity_id: switch.nh_gaming_power

@@ -1,0 +1,15 @@
+  start_miner:
+    url: "https://api2.nicehash.com/main/api/v2/mining/rigs/status2"
+    method: POST
+    headers:
+        X-Organization-Id: !secret nicehash_org_id
+        X-Auth: !secret nicehash_auth
+    payload: '{"action": "START", "rigId": "0-ODJj9aRl8lGw8N0aez3B2Q"}'
+    
+  stop_miner:
+    url: "https://api2.nicehash.com/main/api/v2/mining/rigs/status2"
+    method: POST
+    headers:
+        X-Organization-Id: !secret nicehash_org_id
+        X-Auth: !secret nicehash_auth
+    payload: '{"action": "STOP", "rigId": "0-ODJj9aRl8lGw8N0aez3B2Q"}'

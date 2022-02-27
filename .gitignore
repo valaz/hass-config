@@ -26,3 +26,4 @@ ultron.key
 
 www/cam_captures/**
 zigbee2mqtt/log/**
+zigbee2mqtt/state.json

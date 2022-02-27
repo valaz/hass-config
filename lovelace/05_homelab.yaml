@@ -13,6 +13,18 @@ cards:
                 name: 'Ultron Admin Panel'
                 url: http://192.168.1.11/
                 icon: mdi:database
+                
+              - type: divider
+              - entity: switch.nh_gaming_power
+                type: custom:multiple-entity-row
+                name: 'Майнинг'
+                toggle: true
+                entities:
+                 - entity: sensor.nh_nicehash_totalbalance_usd
+                   name: баланс
+                 - entity: sensor.nh_gaming_localprofitability_usd
+                   name: прибыльность
+                  
               
             #   - entity: light.living_room
             #     type: custom:multiple-entity-row
