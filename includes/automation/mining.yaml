@@ -2,10 +2,20 @@
   trigger:
   - platform: state
     entity_id: binary_sensor.ultron_disks_are_hot
-    to: "on"
+  - platform: state
+    entity_id: switch.nh_gaming_power
+  - platform: state
+    entity_id: sensor.ultron_parity_disk_temperature
+  - platform: state
+    entity_id: sensor.ultron_disk_1_temperature
+  - platform: state
+    entity_id: sensor.ultron_disk_2_temperature
   condition:
     - condition: and
       conditions:
+        - condition: state
+          entity_id: binary_sensor.ultron_disks_are_hot
+          state: "on"
         - condition: state
           entity_id: switch.nh_gaming_power
           state: "on"
@@ -19,11 +29,20 @@
   trigger:
   - platform: state
     entity_id: binary_sensor.ultron_disks_are_hot
-    to: "off"
-    for: "00:01:00"
+  - platform: state
+    entity_id: switch.nh_gaming_power
+  - platform: state
+    entity_id: sensor.ultron_parity_disk_temperature
+  - platform: state
+    entity_id: sensor.ultron_disk_1_temperature
+  - platform: state
+    entity_id: sensor.ultron_disk_2_temperature
   condition:
     - condition: and
       conditions:
+        - condition: state
+          entity_id: binary_sensor.ultron_disks_are_hot
+          state: "off"
         - condition: state
           entity_id: switch.nh_gaming_power
           state: "off"
