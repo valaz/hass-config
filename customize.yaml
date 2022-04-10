@@ -103,4 +103,10 @@
         
     switch.0x04cf8cdf3c8eb0f3:
         icon: 'mdi:ceiling-light-multiple'
+    light.light_entrance:
+        icon: 'mdi:ceiling-light-multiple'
+        
+        
+        
+        
         

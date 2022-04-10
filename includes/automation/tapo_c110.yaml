@@ -26,3 +26,22 @@
         message: |
              {{"\U0001F4F9"}} Камера включается.
     - service: script.tapo_c110_privacy_off
+    
+- alias: "Camera Shot When Door is opened"
+  trigger:
+  - platform: state
+    entity_id: binary_sensor.0x00158d0006e4e280_contact
+    to: "on"
+  condition:
+  - condition: and
+    conditions:
+      - condition: state
+        entity_id: binary_sensor.people_at_home
+        state: 'on'
+  action:
+    - service: notify.tg_valaz
+      data:
+        message: '{{"\U0001F6AA"}} Кто-то открыл дверь. Щас посмотрим.'
+    - service: script.tapo_c110_privacy_off
+    - service: script.photo_video_tapo_c110_telegram
+    - service: script.tapo_c110_privacy_on

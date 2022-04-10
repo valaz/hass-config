@@ -3,7 +3,7 @@
   - platform: state
     entity_id: binary_sensor.ultron_disks_are_hot
   - platform: state
-    entity_id: switch.nh_gaming_power
+    entity_id: switch.nh_niceos_power
   - platform: state
     entity_id: sensor.ultron_parity_disk_temperature
   - platform: state
@@ -17,12 +17,12 @@
           entity_id: binary_sensor.ultron_disks_are_hot
           state: "on"
         - condition: state
-          entity_id: switch.nh_gaming_power
+          entity_id: switch.nh_niceos_power
           state: "on"
   action:
   - service: switch.turn_off
     target:
-        entity_id: switch.nh_gaming_power
+        entity_id: switch.nh_niceos_power
         
         
 - alias: "Mining On if Disks are NOT hot"
@@ -30,7 +30,7 @@
   - platform: state
     entity_id: binary_sensor.ultron_disks_are_hot
   - platform: state
-    entity_id: switch.nh_gaming_power
+    entity_id: switch.nh_niceos_power
   - platform: state
     entity_id: sensor.ultron_parity_disk_temperature
   - platform: state
@@ -44,12 +44,22 @@
           entity_id: binary_sensor.ultron_disks_are_hot
           state: "off"
         - condition: state
-          entity_id: switch.nh_gaming_power
+          entity_id: switch.nh_niceos_power
           state: "off"
-        - condition: state
-          entity_id: switch.vm_gaming_center
-          state: "on"
   action:
   - service: switch.turn_on
     target:
-        entity_id: switch.nh_gaming_power
+        entity_id: switch.nh_niceos_power
+        
+        
+- alias: "Mining: start NiceOS automatically"
+  trigger:
+  - platform: state
+    entity_id: switch.vm_groot
+    from: "on"
+    to: "off"
+    for: "00:01:00"
+  action:
+  - service: switch.turn_on
+    target:
+        entity_id: switch.vm_nice_os

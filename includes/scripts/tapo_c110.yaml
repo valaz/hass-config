@@ -19,7 +19,7 @@
     sequence:
        - service: camera.snapshot
          data:
-              entity_id: camera.tapo_camera_0069_sd
+              entity_id: camera.tapo_camera_0069_hd
               filename: "/config/www/cam_captures/c110.jpg"
        - delay: 00:00:10
        - service: telegram_bot.send_photo
@@ -37,6 +37,31 @@
               filename: "/config/www/cam_captures/c110.mp4"
               duration: 10
        - delay: 00:00:45
+       - service: telegram_bot.send_video
+         data_template:
+           target:
+            - !secret tg_valaz_id
+           file: "/config/www/cam_captures/c110.mp4" 
+          
+  photo_video_tapo_c110_telegram:
+    alias: Фотография и Видео Tapo C110 и отправка в телеграм
+    sequence:
+       - service: camera.snapshot
+         data:
+              entity_id: camera.tapo_camera_0069_hd
+              filename: "/config/www/cam_captures/c110.jpg"
+       - service: camera.record
+         data:
+              entity_id: camera.tapo_camera_0069_hd
+              filename: "/config/www/cam_captures/c110.mp4"
+              duration: 10
+       - delay: 00:00:10
+       - service: telegram_bot.send_photo
+         data_template:
+           target:
+            - !secret tg_valaz_id
+           file: "/config/www/cam_captures/c110.jpg" 
+       - delay: 00:00:30
        - service: telegram_bot.send_video
          data_template:
            target:

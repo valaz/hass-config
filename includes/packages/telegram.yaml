@@ -532,6 +532,9 @@ telegram:
                   entity_id: binary_sensor.people_at_home
                   state: 'off'
           action:
+            - service: notify.tg_valaz
+              data:
+                message: '{{"\U0001F6AA"}} Кто-то пришел.'
             - service: script.turn_on
               entity_id: 
                 - script.video_tapo_c110_telegram

@@ -1,19 +1,18 @@
 
-  #ultron_disks_are_hot:
- #   name: 'Перегрев дисков'
-    # message: '{{"\U0001F4C0"}} Обнаружен перегрев дисков. Parity: {{ states.sensor.ultron_parity_disk_temperature }}, Disk 1: {{ states.sensor.ultron_disk_1_temperature }}, Disk 2: {{ states.sensor.ultron_disk_2_temperature }}'
- #   done_message: '{{"\U0001F4BF"}} Диски вернулись к нормальным темепературам'
- #   entity_id: binary_sensor.ultron_disks_are_hot
-  #  state: "on"
- #   repeat: 10
- #   can_acknowledge: true
- #   skip_first: false
-  #  message: | 
- #        {{"\U0001F4C0"}} Обнаружен перегрев дисков
-#         {{"\U0001F5B4"}} Ultron Parity Disk - {{ states('sensor.ultron_parity_disk_temperature') }} °C
- #        {{"\U0001F5B4"}} Ultron Disk 1 - {{ states('sensor.ultron_disk_1_temperature') }} °C
- #        {{"\U0001F5B4"}} Ultron Disk 2 - {{ states('sensor.ultron_disk_2_temperature') }} °C
-#    notifiers:
- #     - tg_valaz
- #     - mobile_app_iphone_12_az
+  ultron_disks_are_hot:
+    name: 'Перегрев дисков'
+    done_message: '{{"\U0001F4BF"}} Диски вернулись к нормальным темепературам'
+    entity_id: binary_sensor.ultron_disks_are_very_hot
+    state: "on"
+    repeat: 10
+    can_acknowledge: true
+    skip_first: false
+    message: | 
+         {{"\U0001F4C0"}} Обнаружен перегрев дисков
+         {{"\U0001F5B4"}} Ultron Parity Disk - {{ states('sensor.ultron_parity_disk_temperature') }} °C
+         {{"\U0001F5B4"}} Ultron Disk 1 - {{ states('sensor.ultron_disk_1_temperature') }} °C
+         {{"\U0001F5B4"}} Ultron Disk 2 - {{ states('sensor.ultron_disk_2_temperature') }} °C
+    notifiers:
+      - tg_valaz
+      - mobile_app_iphone_12_az
       

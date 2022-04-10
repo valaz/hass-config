@@ -32,6 +32,20 @@
         command_state: "ssh -i /config/ultron.key -o StrictHostKeyChecking=no root@192.168.1.11 virsh list --all | grep GamingCenter | awk '{print $3$4}' "
         value_template: '{{ value == "running" }}'
         
+      vm_groot:
+        friendly_name: "VM Groot"
+        command_on: "ssh -i /config/ultron.key -o StrictHostKeyChecking=no root@192.168.1.11 virsh start Groot"
+        command_off: "ssh -i /config/ultron.key -o StrictHostKeyChecking=no root@192.168.1.11 virsh shutdown Groot"
+        command_state: "ssh -i /config/ultron.key -o StrictHostKeyChecking=no root@192.168.1.11 virsh list --all | grep Groot | awk '{print $3$4}' "
+        value_template: '{{ value == "running" }}'
+        
+      vm_nice_os:
+        friendly_name: "VM NiceOS"
+        command_on: "ssh -i /config/ultron.key -o StrictHostKeyChecking=no root@192.168.1.11 virsh start NiceOS"
+        command_off: "ssh -i /config/ultron.key -o StrictHostKeyChecking=no root@192.168.1.11 virsh shutdown NiceOS"
+        command_state: "ssh -i /config/ultron.key -o StrictHostKeyChecking=no root@192.168.1.11 virsh list --all | grep NiceOS | awk '{print $3$4}' "
+        value_template: '{{ value == "running" }}'
+        
       vm_pop_os:
         friendly_name: "VM Pop OS"
         command_on: "ssh -i /config/ultron.key -o StrictHostKeyChecking=no root@192.168.1.11 virsh start PopOs"

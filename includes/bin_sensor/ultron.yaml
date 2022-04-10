@@ -30,3 +30,8 @@
         friendly_name: "Диски горячие"
         value_template: >-
           {{ is_state('binary_sensor.ultron_disk_parity_is_hot', 'on') or is_state('binary_sensor.ultron_disk_1_is_hot', 'on') or is_state('binary_sensor.ultron_disk_2_is_hot', 'on') }}
+          
+      ultron_disks_are_very_hot:
+        friendly_name: "Диски горячие"
+        value_template: >-
+          {{ (states('sensor.ultron_parity_disk_temperature') | float > 45) or (states('sensor.ultron_disk_1_temperature') | float > 45) or (states('sensor.ultron_disk_2_temperature') | float > 45)}}

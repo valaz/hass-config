@@ -15,14 +15,23 @@ cards:
                 icon: mdi:database
                 
               - type: divider
-              - entity: switch.nh_gaming_power
+              - type: custom:auto-entities
+                card:
+                  type: glance
+                  title: Miners
+                  show_header_toggle: false
+                filter:
+                  include:
+                    - entity_id: "/sensor.nh_.*_minerstatus/"
+                        
+              - entity: switch.nh_niceos_power
                 type: custom:multiple-entity-row
-                name: 'Майнинг'
+                name: 'NiceOS'
                 toggle: true
                 entities:
                  - entity: sensor.nh_nicehash_totalbalance_usd
                    name: баланс
-                 - entity: sensor.nh_gaming_localprofitability_usd
+                 - entity: sensor.nh_niceos_localprofitability_usd
                    name: прибыльность
                   
               
@@ -36,12 +45,16 @@ cards:
             #         icon: mdi:palette
               
               - type: divider
-              - entity: switch.vm_gaming_center
+              - entity: switch.vm_groot
                 icon: mdi:microsoft-windows
-              - entity: switch.vm_htpc
-                icon: mdi:youtube-tv
-              - entity: switch.vm_pop_os
-                icon: mdi:ubuntu
+              - entity: switch.vm_nice_os
+                icon: mdi:bitcoin
+            #   - entity: switch.vm_gaming_center
+            #     icon: mdi:microsoft-windows
+            #   - entity: switch.vm_htpc
+            #     icon: mdi:youtube-tv
+            #   - entity: switch.vm_pop_os
+            #     icon: mdi:ubuntu
               - type: divider
                 
           - type: glance
