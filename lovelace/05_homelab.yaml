@@ -204,9 +204,9 @@ cards:
                   fill: false
                 align_state: center
               - type: custom:mini-graph-card
-                name: 970 EVO
+                name: Cache 2
                 entities:
-                  - sensor.ultron_970_evo_temperature
+                  - sensor.ultron_cache_2_temperature
                 hour24: true
                 show:
                   graph: false
@@ -214,6 +214,37 @@ cards:
                   extrema: true
                   fill: false
                 align_state: center
+              - type: custom:mini-graph-card
+                name: 870 EVO
+                entities:
+                  - sensor.ultron_870_evo_temperature
+                hour24: true
+                show:
+                  graph: false
+                  icon: true
+                  extrema: true
+                  fill: false
+                align_state: center
+                
+          - type: conditional
+            conditions:
+              - entity: binary_sensor.ultron_parity_check_in_progress
+                state: 'on'
+            card:
+              type: horizontal-stack
+              cards:
+                  - type: entities
+                    show_header_toggle: false
+                    entities:
+                      - entity: sensor.ultron_parity_status
+                      - entity: sensor.ultron_parity_progress
+                        name: 'Current position:'
+                      - entity: sensor.ultron_parity_speed
+                        name: 'Estimated speed:'
+                      - entity: sensor.ultron_parity_finish
+                        name: 'Estimated finish:'
+                    theme: default
+                    title: Parity Check
                 
   - type: vertical-stack
     cards:

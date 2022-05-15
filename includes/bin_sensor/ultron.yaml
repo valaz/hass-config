@@ -35,3 +35,8 @@
         friendly_name: "Диски горячие"
         value_template: >-
           {{ (states('sensor.ultron_parity_disk_temperature') | float > 45) or (states('sensor.ultron_disk_1_temperature') | float > 45) or (states('sensor.ultron_disk_2_temperature') | float > 45)}}
+          
+      ultron_parity_check_in_progress:
+        friendly_name: "Parity-Check in progress"
+        value_template: >-
+          {{ states('sensor.ultron_parity_progress') | float > 0 }}

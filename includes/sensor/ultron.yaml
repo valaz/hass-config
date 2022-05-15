@@ -76,11 +76,105 @@
       field: temp_c
       database: homelab_telegraf
       
-    - name: Ultron 970 Evo Temperature
+    - name: Ultron Cache 2 Temperature
       unit_of_measurement: °C
       value_template: '{{ value | round(2) }}'
       group_function: last
-      where: '"serial_no" = ''S465NX0K957169H'' AND "host" = ''ultron'''
+      where: '"serial_no" = ''S6PXNM0T202704D'' AND "host" = ''ultron'''
       measurement: '"smart_device"'
       field: temp_c
       database: homelab_telegraf
+      
+    - name: Ultron 870 Evo Temperature
+      unit_of_measurement: °C
+      value_template: '{{ value | round(2) }}'
+      group_function: last
+      where: '"serial_no" = ''S6PNNJ0RB02641R'' AND "host" = ''ultron'''
+      measurement: '"smart_device"'
+      field: temp_c
+      database: homelab_telegraf
+      
+  - platform: command_line
+    unique_id: ultron_parity_status
+    name: Ultron Parity Status
+    command: "ssh -i /config/ultron.key -o StrictHostKeyChecking=no root@192.168.1.11 /root/mdcmd status | sed -n 's/mdState=//p'"
+      
+  - platform: command_line
+    unique_id: ultron_parity_size_raw
+    name: Ultron Parity Size Raw
+    command: "ssh -i /config/ultron.key -o StrictHostKeyChecking=no root@192.168.1.11 /root/mdcmd status | sed -n 's/mdResync=//p'"
+      
+  - platform: command_line
+    unique_id: ultron_parity_pos_row
+    name: Ultron Parity Pos Raw
+    command: "ssh -i /config/ultron.key -o StrictHostKeyChecking=no root@192.168.1.11 /root/mdcmd status | sed -n 's/mdResyncPos=//p'"
+      
+  - platform: command_line
+    unique_id: ultron_parity_dt_raw
+    name: Ultron Parity Dt Raw
+    command: "ssh -i /config/ultron.key -o StrictHostKeyChecking=no root@192.168.1.11 /root/mdcmd status | sed -n 's/mdResyncDt=//p'"
+     
+  - platform: command_line 
+    unique_id: ultron_parity_db_raw
+    name: Ultron Parity Db Raw
+    command: "ssh -i /config/ultron.key -o StrictHostKeyChecking=no root@192.168.1.11 /root/mdcmd status | sed -n 's/mdResyncDb=//p'"
+  
+  
+    
+  - platform: template
+    sensors:
+      ultron_parity_gbsize:
+        unit_of_measurement: "GB"
+        value_template: "{{ (states('sensor.ultron_parity_size_raw') | int * 1024 | int / 1_000_000_000) | round (0) }}"
+      ultron_parity_gbpos:
+        unit_of_measurement: "GB"
+        value_template: "{{ (states('sensor.ultron_parity_pos_raw') | int * 1024 | int / 1_000_000_000) | round(0) }}"
+      ultron_parity_progress:
+        unit_of_measurement: "%"
+        value_template: "{{ (states('sensor.ultron_parity_pos_raw') | int / states('sensor.ultron_parity_size_raw') | int * 100) | round(1) }}"
+      ultron_parity_speed:
+        unit_of_measurement: "MB/sec"
+        value_template: "{{ (states('sensor.ultron_parity_db_raw') | int / states('sensor.ultron_parity_dt_raw') | int * 1024 | int / 1_000_000) | round(1) }}"
+      ultron_parity_finish_hours:
+        unit_of_measurement: "hours"
+        value_template: "{{ ((states('sensor.ultron_parity_dt_raw') | int ) * (((states('sensor.ultron_parity_size_raw') | float ) - (states('sensor.ultron_parity_pos_raw') | float )) / (states('sensor.ultron_parity_db_raw') | float /100 | float + 1)) / 100 / 60 / 60) | round(1) }}"
+      ultron_parity_finish_mins:
+        unit_of_measurement: "minutes"
+        value_template: "{{ ((states('sensor.ultron_parity_dt_raw') | int ) * (((states('sensor.ultron_parity_size_raw') | float ) - (states('sensor.ultron_parity_pos_raw') | float )) / (states('sensor.ultron_parity_db_raw') | float /100 | float + 1)) / 100 / 60 ) | round(0) }}"
+      ultron_parity_finish:
+        friendly_name: "Финиш"
+        value_template: >
+               {% set xtime = states('sensor.ultron_parity_finish_mins') | int %}
+               {% set minutes = (xtime % 60)  %}
+               {% set hours = ((xtime % 1440) / 60) | int %}
+               {% set days = (xtime / 1440) | int %}
+                 {% if minutes < 1 and hours < 1 %}
+                   Меньше минуты
+                 {% else %}
+                   {% if days > 0 %}
+                     {{ days }} д.
+                   {% endif %}
+                   {% if hours > 0 %}
+                     {% if days > 0 %}
+                       {{ ' ' }}
+                     {% endif %}
+                     {{ hours }} ч.
+                   {% endif %}
+                   {% if minutes > 0 %}
+                     {% if days > 0 or hours > 0 %}
+                       {{ ' ' }}
+                     {% endif %}
+                       {{ minutes }} мин.
+                   {% endif %}
+                 {% endif %}
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
