@@ -45,6 +45,8 @@ cards:
             #         icon: mdi:palette
               
               - type: divider
+              - entity: switch.vm_heimdall
+                icon: mdi:microsoft-windows
               - entity: switch.vm_groot
                 icon: mdi:microsoft-windows
               - entity: switch.vm_nice_os
